@@ -1,5 +1,5 @@
 import bgImg from '../../../assets/bg-home.jpg'
-import { CardWelcome } from '../CardWelcome'
+import { CardWelcome } from '../CardHeader'
 
 export function HeaderHome() {
     return (

@@ -3,7 +3,7 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { CiMail } from "react-icons/ci";
 import { Button } from "../Button";
 
-export function Form() {
+export function FormLogin() {
     return (
         <>
             <form class="w-full mt-4 space-y-2">
