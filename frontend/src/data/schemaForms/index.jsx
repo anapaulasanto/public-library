@@ -11,16 +11,16 @@ export const userRegisterSchema = z.object({
         .email({ message: "Email inválido." }),
     phone: z
         .string()
-        .min(10, { message: "O telefone é obrigatório" })
+        .min(10, { message: "O telefone é obrigatório." })
         .regex(/^\(\d{2}\) \d{4,5}-\d{4}$/, { message: "Telefone inválido." }),
     password: z
         .string()
-        .min(8, { message: "A senha deve ter no mínimo 8 caracteres" })
+        .min(8, { message: "A senha deve ter no mínimo 8 caracteres e possuir letras maiúsculas e minúsculas." })
         .regex(/[A-Z]/, { message: "A senha deve conter pelo menos uma letra maiúscula." })
         .regex(/[a-z]/, { message: "A senha deve conter pelo menos uma letra minúscula." }),
     confirmPassword: z
         .string()
-        .min(8, { message: "A confirmação de senha deve ter no mínimo 8 caracteres." })
+        .min(8, { message: "A confirmação de senha é obrigatória." })
 }).refine((data) => {
     return data.password === data.confirmPassword
 }, {
@@ -30,8 +30,9 @@ export const userRegisterSchema = z.object({
 
 export const userLoginSchema = z.object({
     email: z
-        .string().
-        min(1,{ message: "Campo obrigatório." }),
+        .string()
+        .min(1,{ message: "Campo obrigatório." })
+        .email({ message: "Email inválido." }),
     password: z
         .string()
         .min(1, { message: "Campo obrigatório." })

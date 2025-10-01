@@ -7,7 +7,7 @@ import { FaEyeSlash } from "react-icons/fa";
 import { CiPhone } from "react-icons/ci";
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { userRegisterSchema } from "../../../data/schema";
+import { userRegisterSchema } from "../../../data/schemaForms";
 import { useHookFormMask } from 'use-mask-input';
 import { useState } from "react";
 
@@ -22,7 +22,7 @@ export function FormSignUp() {
 
     return (
         <>
-            <form class="w-full mt-4 " onSubmit={handleSubmit(formSubmit)}>
+            <form class="w-full " onSubmit={handleSubmit(formSubmit)}>
                 <Fieldset
                     htmlFor="nome" label="Nome completo"
                     placeholder="Seu nome completo"
@@ -59,9 +59,12 @@ export function FormSignUp() {
                     <RiLockPasswordLine class="absolute left-2 top-4" />
                     <button
                         type="button"
-                        class="absolute right-5 top-4 text-gray-500"
-                        onClick={() => setIsPasswordVisible(!isPasswordVisible)}>
-                        {isPasswordVisible ? <FaRegEye /> : <FaEyeSlash />}
+                        class="absolute right-5 top-4 text-gray-500">
+                        {isPasswordVisible ? (
+                            <FaRegEye class="text-gray-400" onClick={() => setIsPasswordVisible(false)} />
+                        ) : (
+                            <FaEyeSlash class="text-gray-400" onClick={() => setIsPasswordVisible(true)} />
+                        )}
                     </button>
                 </Fieldset>
                 <p className="text-red-600 text-sm">{errors.password?.message}</p>
@@ -74,9 +77,12 @@ export function FormSignUp() {
                     <RiLockPasswordLine class="absolute left-2 top-4" />
                     <button
                         type="button"
-                        class="absolute right-5 top-4 text-gray-500"
-                        onClick={() => setIsPasswordVisible(!isPasswordVisible)}>
-                        {isPasswordVisible ? <FaRegEye /> : <FaEyeSlash />}
+                        class="absolute right-5 top-4 text-gray-500">
+                        {isPasswordVisible ? (
+                            <FaRegEye class="text-gray-400" onClick={() => setIsPasswordVisible(false)} />
+                        ) : (
+                            <FaEyeSlash class="text-gray-400" onClick={() => setIsPasswordVisible(true)} />
+                        )}
                     </button>
                 </Fieldset>
                 <p className="text-red-600 text-sm">{errors.confirmPassword?.message}</p>

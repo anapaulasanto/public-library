@@ -2,14 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/src/assets/Icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/src/assets/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="app.css">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <title>Biblioteca pública</title>
+    <style type="text/tailwindcss">
+      @layer utilities {
+        .text-gradient {
+          @apply bg-gradient-to-r from-sky-900 to-emerald-700 bg-clip-text text-transparent;
+        }
+
+        .bg-gradient {
+          @apply bg-gradient-to-r from-sky-900 to-emerald-700
+        }
+      }
+        </style>
+    <title>BiblioTech</title>
   </head>
   <body>
     <div id="root"></div>

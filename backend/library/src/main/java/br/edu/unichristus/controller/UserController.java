@@ -34,8 +34,8 @@ public class UserController {
 
     @Operation(summary = "Cadastra os dados de um usuário | role: [ADMIN]", tags = "User")
     @PostMapping
-    public UserLowDTO save(@RequestBody UserDTO user){
-return service.save(user);
+    public UserLowDTO save(@RequestBody UserDTO user) {
+        return service.save(user);
     }
 
     @Operation(summary = "Atualiza os dados de um usuário | role: [ADMIN]", tags = "User")
@@ -46,7 +46,7 @@ return service.save(user);
 
     @Operation(summary = "Retorna a lista de todos os usuários | role: [ADMIN]", tags = "User")
     @GetMapping("/all")
-    public List<UserLowDTO> findAll(){
+    public List<UserLowDTO> findAll() {
         return service.findAll();
     }
 
@@ -57,18 +57,19 @@ return service.save(user);
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
     @GetMapping("/{id}")
-    public User findById(@PathVariable Long id){
+    public User findById(@PathVariable Long id) {
         return service.findById(id);
     }
 
     @Operation(summary = "Exclui um usuário pelo ID | role: [ADMIN]", tags = "User")
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable Long id) {
         service.delete(id);
     }
 
     @Autowired
     private ReviewService reviewService;
+
     @Operation(summary = "Retorna as avaliações feitas por um usuário | role: [ADMIN]", tags = "User")
     @GetMapping("/{id}/reviews")
     public List<ReviewDTO> getReviewsByUser(@PathVariable Long id) {
@@ -77,6 +78,7 @@ return service.save(user);
 
     @Autowired
     private RentalService rentalService;
+
     @Operation(summary = "Retorna os aluguéis feitos por um usuário | role: [ADMIN]", tags = "User")
     @GetMapping("/{userId}/rentals")
     public List<RentalDTO> getRentalsByUserId(@PathVariable Long userId) {

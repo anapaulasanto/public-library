@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export function SectionReady() {
     return (
-        <section class="bg-gradient-to-r from-blue-600 to-purple-600 w-full h-70 flex flex-col items-center justify-center text-white space-y-4 p-4">
+        <section class="bg-gradient w-full h-70 flex flex-col items-center justify-center text-white space-y-4">
             <p class="text-xl font-semibold">Pronto para começar sua jornada literária?</p>
             <p>Junte-se a milhares de leitores que já descobriram a conveniência da nossa biblioteca digital.</p>
             <div>
