@@ -1,9 +1,9 @@
-import iconLib from "../../../assets/Icon.png"
+import favicon from '../../../assets/favicon.png'
 
 export function FormHeader({ title, subtitle }) {
     return (
-        <header class="flex flex-col items-center pt-1">
-            <img src={iconLib} alt="icone de biblioteca" />
+        <header class="flex flex-col items-center pt-3">
+            <img src={favicon} alt="Logo da biblioteca" />
             <h1 class="text-2xl text-gradient font-semibold">{title}</h1>
             <p class="text-gray-500 text-base text-base text-center">{subtitle}</p>
         </header>

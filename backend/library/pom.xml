@@ -70,6 +70,10 @@
 			<artifactId>postgresql</artifactId>
 			<version>42.7.2</version> <!-- Você pode usar a versão mais recente disponível -->
 		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-database-postgresql</artifactId>
+		</dependency>
 
 	</dependencies>
 

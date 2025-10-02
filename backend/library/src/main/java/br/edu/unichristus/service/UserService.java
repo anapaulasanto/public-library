@@ -21,10 +21,10 @@ public class UserService {
     private UserRepository repository;
 
     public UserLowDTO save(UserDTO user){
-        if(repository.findByLogin(user.getLogin()).isPresent()){
+        if(repository.findByEmail(user.getEmail()).isPresent()){
             throw new CommonsException(HttpStatus.CONFLICT,
-                    "unichristus.user.login.conflict",
-                    "Usuario já existe!");
+                    "unichristus.user.email.conflict",
+                    "Email já cadastrado!");
         }
 
         if (user.getName() == null) {
@@ -54,17 +54,16 @@ public class UserService {
 
         var userEntity = existingUser.get();
 
-        var userWithSameLogin = repository.findByLogin(userDTO.getLogin());
-        if (userWithSameLogin.isPresent() && !userWithSameLogin.get().getId().equals(id)) {
+        var userWithSameEmail = repository.findByEmail(userDTO.getEmail());
+        if (userWithSameEmail.isPresent() && !userWithSameEmail.get().getId().equals(id)) {
             throw new CommonsException(HttpStatus.CONFLICT,
-                    "unichristus.user.login.conflict",
-                    "Login já está em uso por outro usuário!");
+                    "unichristus.user.email.conflict",
+                    "Esse email já está em uso por outro usuário!");
         }
 
 
         userEntity.setName(userDTO.getName());
         userEntity.setEmail(userDTO.getEmail());
-        userEntity.setLogin(userDTO.getLogin());
         userEntity.setPassword(userDTO.getPassword());
 
         var updatedUser = repository.save(userEntity);

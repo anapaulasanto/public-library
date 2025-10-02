@@ -18,10 +18,9 @@ public class User {
 
     @Column(length = 150, nullable = false)
     private String name;
-    private String email;
 
     @Column(unique = true)
-    private String login;
+    private String email;
     private String password;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
@@ -34,11 +33,10 @@ public class User {
 
     }
 
-    public User(Long id, String name, String email, String login, String password, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public User(Long id, String name, String email, String password, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.login = login;
         this.password = password;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -66,14 +64,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getPassword() {
@@ -110,12 +100,12 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof User user)) return false;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(login, user.login) && Objects.equals(password, user.password);
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, login, password);
+        return Objects.hash(id, name, email, password);
     }
 
     @Override
@@ -124,7 +114,6 @@ public class User {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +

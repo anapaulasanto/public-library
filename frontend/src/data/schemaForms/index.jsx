@@ -9,10 +9,6 @@ export const userRegisterSchema = z.object({
         .string()
         .min(1, { message: "O email é obrigatório." })
         .email({ message: "Email inválido." }),
-    phone: z
-        .string()
-        .min(10, { message: "O telefone é obrigatório." })
-        .regex(/^\(\d{2}\) \d{4,5}-\d{4}$/, { message: "Telefone inválido." }),
     password: z
         .string()
         .min(8, { message: "A senha deve ter no mínimo 8 caracteres e possuir letras maiúsculas e minúsculas." })
