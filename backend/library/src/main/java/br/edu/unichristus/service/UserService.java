@@ -87,6 +87,16 @@ public class UserService {
         return repository.findById(id).get();
     }
 
+    public User findByEmail(String email) {    //método para o login
+        var userEntity = repository.findByEmail(email);
+        if(userEntity.isEmpty()) {
+            throw new CommonsException(HttpStatus.NOT_FOUND,
+                    "unichristus.user.findbyemail.notfound",
+                    "Email ou senha inválidos.");
+        }
+        return repository.findByEmail(email).get();
+    }
+
     public void delete(Long id){
         var userEntity = repository.findById(id);
 
