@@ -22,8 +22,7 @@ export function FormLogin() {
 
         if (data.email && data.password) {
             try {
-                const req = await axios.get(`/user?email=${data.email}`)
-                console.log('Login com sucesso', req.data);
+                await axios.get(`/user?email=${data.email}`);
                 navigate('/');
 
             } catch (error) {

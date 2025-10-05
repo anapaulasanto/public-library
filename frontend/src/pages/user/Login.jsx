@@ -1,7 +1,7 @@
 import React from "react";
-import { CardLogin } from "../components/CardLogin";
+import { CardLogin } from "../../components/CardLogin";
 
-function Login() {
+export function Login() {
     return (
         <CardLogin />
     )

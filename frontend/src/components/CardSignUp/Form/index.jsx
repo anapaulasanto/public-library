@@ -33,7 +33,7 @@ export function FormSignUp() {
 
             } catch (error) {
                 console.log('Erro no cadastro', error);
-                setErro("Email já cadastrado.")
+                setErro(error.response.data.message)
             }
             
         }

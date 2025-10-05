@@ -4,3 +4,7 @@ import "tailwindcss";
     box-sizing: border-box;
     overflow-x: hidden;
 }
+
+html {
+    background-color: #f1f1f1;
+}
