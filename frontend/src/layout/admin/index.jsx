@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
-import { Container } from "../../components/AdminDashboard/Container";
-import { SectionStatus } from "../../components/AdminDashboard/SectionStatus";
-import { Nav } from "../../components/AdminDashboard/NavAdmin"
-import { Menu } from "../../components/AdminDashboard/MenuBarDesktop";
+import { Container } from "../../components/admin/Container";
+import { SectionStatus } from "../../components/admin/main/sectionDashboard/SectionStatus";
+import { Nav } from "../../components/admin/nav/NavAdmin"
+import { Menu } from "../../components/admin/aside/MenuBarDesktop";
 
 export function AdminLayout() {
     return (

@@ -1,4 +1,4 @@
-import { CardSignUp } from "../../components/CardSignUp";
+import { CardSignUp } from "../../components/user/CardSignUp";
 
 export function SignUp() {
     return (
