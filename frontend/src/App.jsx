@@ -1,15 +1,15 @@
 import axios from 'axios'
 import { AppRouter } from './router'
-import { AppContextProvider } from './context'
+import { BookContextProvider } from './context'
 
 axios.defaults.baseURL = import.meta.env.VITE_AXIOS_BASE_URL
 
 function App() {
   return (
     <>
-      <AppContextProvider>
+      <BookContextProvider>
         <AppRouter />
-      </AppContextProvider>
+      </BookContextProvider>
     </>
   )
 }

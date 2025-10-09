@@ -1,49 +1,36 @@
 import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
+import { useContext } from "react";
+import { BookContext } from "../../../../../context";
 
 export function TableBooks() {
+    const { books } = useContext(BookContext);
+
     return (
-        <div className="overflow-x-auto rounded-box border border-neutral-200 bg-base-50 mt-10">
+        <div className="overflow-x-auto mt-10">
             <table className="table">
-                {/* head */}
                 <thead>
                     <tr className="text-black">
                         <th>Livro</th>
                         <th>Categoria</th>
+                        <th>Ano</th>
                         <th>Autor</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {/* row 1 */}
-                    <tr>
-                        <td>Cy Ganderton</td>
-                        <td>Quality Control Specialist</td>
-                        <td>Blue</td>
-                        <td className="flex gap-3">
-                            <button className="hover:bg-blue-200 p-2 rounded-lg cursor-pointer"><FaPencilAlt /></button>
-                            <button className="hover:bg-blue-200 p-2 rounded-lg cursor-pointer"><FaTrashAlt /></button>
-                        </td>
-                    </tr>
-                    {/* row 2 */}
-                    <tr>
-                        <td>Hart Hagerty</td>
-                        <td>Desktop Support Technician</td>
-                        <td>Purple</td>
-                        <td className="flex gap-3">
-                            <button className="hover:bg-blue-200 p-2 rounded-lg cursor-pointer"><FaPencilAlt /></button>
-                            <button className="hover:bg-blue-200 p-2 rounded-lg cursor-pointer"><FaTrashAlt /></button>
-                        </td>
-                    </tr>
-                    {/* row 3 */}
-                    <tr>
-                        <td>Brice Swyre</td>
-                        <td>Tax Accountant</td>
-                        <td>Red</td>
-                        <td className="flex gap-3">
-                            <button className="hover:bg-blue-200 p-2 rounded-lg cursor-pointer"><FaPencilAlt /></button>
-                            <button className="hover:bg-blue-200 p-2 rounded-lg cursor-pointer"><FaTrashAlt /></button>
-                        </td>
-                    </tr>
+                    {books.map((book) => (
+                        <tr key={book.id}>
+                            <td>{book.title}</td>
+                            <td>{book.categoryName}</td>
+                            <td>{book.year}</td>
+                            <td>{book.author}</td>
+                            <td>
+                                <button className="hover:bg-blue-200 p-2 rounded-lg cursor-pointer"><FaTrashAlt /></button>
+                                <button className="hover:bg-blue-200 p-2 rounded-lg cursor-pointer"><FaPencilAlt /></button>
+                            </td>
+
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>

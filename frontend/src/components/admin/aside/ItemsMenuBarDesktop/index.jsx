@@ -1,9 +1,9 @@
 import { MenuItems } from "../../../../data/MenuBar";
-import { AppContext } from "../../../../context";
+import { BookContext } from "../../../../context";
 import { useContext } from "react";
 
 export function ItemsMenuBar() {
-    const { activeTab, onTabChange } = useContext(AppContext);
+    const { activeTab, onTabChange } = useContext(BookContext);
 
     return (
         <>

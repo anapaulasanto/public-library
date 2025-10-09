@@ -1,11 +1,11 @@
 import { LuBookA } from "react-icons/lu";
 import { LuUsers } from "react-icons/lu";
 import { IoPricetagsOutline } from "react-icons/io5";
-import { AppContext } from "../../../../context";
+import { BookContext } from "../../../../context";
 import { useContext } from "react";
 
 export function MenuPages() {
-    const { activeTab, onTabChange } = useContext(AppContext);
+    const { activeTab, onTabChange } = useContext(BookContext);
 
     const pages = [
         {

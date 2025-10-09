@@ -1,12 +1,12 @@
 import { MenuPages } from "../main/MenuPages"
 import { useContext } from "react";
-import { AppContext } from "../../../context";
+import { BookContext } from "../../../context";
 import { SectionTableBooks } from "../main/sectionAdmin/SectionTableBooks";
 import { SectionTableUsers } from "../main/sectionAdmin/SectionTableUsers";
 import { SectionTableCategory } from "../main/sectionAdmin/SectionTableCategory";
 
 export function AdminDashboard() {
-    const {activeTab} = useContext(AppContext);
+    const {activeTab} = useContext(BookContext);
     
     return (
         <>

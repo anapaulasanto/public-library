@@ -47,7 +47,7 @@ public class BookController {
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
     @GetMapping("/{id}")
-    public Book findById(@PathVariable Long id){
+    public BookDTO findById(@PathVariable Long id){
         return service.findById(id);
     }
 

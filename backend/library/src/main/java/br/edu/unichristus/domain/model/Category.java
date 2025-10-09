@@ -1,4 +1,5 @@
 package br.edu.unichristus.domain.model;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -24,6 +25,10 @@ public class Category {
     @Min(value = 1, message = "A popularidade deve ser no mínimo 1")
     @Max(value = 10, message = "A popularidade deve ser no máximo 10")
     private int categoryPopularity;
+
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference // Lado "pai"
+    private List<Book> books = new ArrayList<>();
 
 
     public Category(Long id, String categoryName, String description, int categoryCode, int categoryPopularity) {
@@ -75,6 +80,14 @@ public class Category {
 
     public void setCategoryPopularity(int categoryPopularity) {
         this.categoryPopularity = categoryPopularity;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 
     @Override

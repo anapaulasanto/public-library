@@ -1,4 +1,5 @@
 package br.edu.unichristus.domain.model;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class Book {
     // Relacionamento N livros : 1 categoria
     @ManyToOne
     @JoinColumn(name = "category_id")
+    @JsonBackReference
     private Category category;
 
 
