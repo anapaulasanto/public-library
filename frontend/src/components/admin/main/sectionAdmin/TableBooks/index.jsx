@@ -1,9 +1,11 @@
 import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
 import { useContext } from "react";
-import { BookContext } from "../../../../../context";
+import { BookContext } from "../../../../../context/bookContext";
+import { ModalDelete } from "../ModalDelete";
+import { ModalEdit } from "../ModalEdit";
 
 export function TableBooks() {
-    const { books } = useContext(BookContext);
+    const { books, deleteBook } = useContext(BookContext);
 
     return (
         <div className="overflow-x-auto mt-10">
@@ -24,11 +26,19 @@ export function TableBooks() {
                             <td>{book.categoryName}</td>
                             <td>{book.year}</td>
                             <td>{book.author}</td>
-                            <td>
-                                <button className="hover:bg-blue-200 p-2 rounded-lg cursor-pointer"><FaTrashAlt /></button>
-                                <button className="hover:bg-blue-200 p-2 rounded-lg cursor-pointer"><FaPencilAlt /></button>
+                            <td className="flex">
+                                <ModalDelete
+                                    h1="Tem certeza que deseja excluir esse livro?"
+                                    p="Essa ação é irreversível"
+                                    acao={() => deleteBook(book.id)}
+                                    modalId={`modal_delete_${book.id}`}
+                                />
+                                <ModalEdit
+                                    h1="Editar livro"
+                                    p="Edite informações do livro"
+                                    modalId={`modal_edit_${book.id}`}
+                                />
                             </td>
-
                         </tr>
                     ))}
                 </tbody>

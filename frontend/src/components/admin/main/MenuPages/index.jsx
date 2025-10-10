@@ -1,7 +1,7 @@
 import { LuBookA } from "react-icons/lu";
 import { LuUsers } from "react-icons/lu";
 import { IoPricetagsOutline } from "react-icons/io5";
-import { BookContext } from "../../../../context";
+import { BookContext } from "../../../../context/bookContext";
 import { useContext } from "react";
 
 export function MenuPages() {
