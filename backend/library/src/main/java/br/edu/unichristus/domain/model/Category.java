@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Min;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
+// Teste 3 livia
 @Entity
 @Table(name = "tb_category")
 public class Category {
