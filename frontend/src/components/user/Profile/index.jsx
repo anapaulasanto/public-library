@@ -3,6 +3,7 @@ import { MenuPages } from "../../admin/main/MenuPages";
 import { LuBookA, LuHeart, LuStar } from "react-icons/lu";
 import { BookContext } from "../../../context/bookContext";
 import { SectionTableRental } from "./Main/SectionTableRental";
+import { SectionRecomended } from "./Main/SectionRecomended";
 
 export function DashboardUser() {
     // const { activeTabBooks } = useContext(BookContext)
@@ -27,6 +28,7 @@ export function DashboardUser() {
         <div className="w-full">
             {/* <MenuPages page={pages} activeTab={activeTabBooks} /> */}
             <SectionTableRental />
+            <SectionRecomended />
         </div>
     )
 }

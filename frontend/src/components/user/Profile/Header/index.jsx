@@ -1,7 +1,7 @@
 import { ContentTitle } from "../../../admin/AdminDashboard/ContentTitle";
 import profileIcon from '../../../../assets/icons/profile-icon.png'
 import { CardHeader } from "../CardHeader";
-import { CiSearch } from "react-icons/ci";
+import { CiSearch, CiSettings } from "react-icons/ci";
 import { Link } from "react-router-dom"
 
 export function Header() {
@@ -9,9 +9,8 @@ export function Header() {
         <section className="flex flex-col items-center gap-20 py-12 bg-gradient border border-gray-200 text-white w-full lg:flex-row justify-around">
             <div className="flex flex-col gap-10">
                 <div className="flex flex-col lg:flex-row">
-                    <Link
+                    <div
                         className="flex items-center gap-3 w-full"
-                        to="/user/account"
                     >
                         <div className="w-16 rounded-full border-2 border-white">
                             <img
@@ -24,14 +23,17 @@ export function Header() {
                             h1="Ana Paula"
                             p="ana.paula@gmail.com"
                         />
-                    </Link>
+                    </div>
                 </div>
                 <CardHeader />
             </div>
-            <button className="bg-slate-100/90 text-blue-800 font-semibold shadow rounded-xl px-1 w-40 h-10 flex items-center justify-center  gap-2 text-sm hover:cursor-pointer hover:bg-gray-50/80">
-                <CiSearch size={18} />
-                Explorar catálogo
-            </button>
+            <Link
+                to="/user/account"
+                className="bg-slate-100 text-blue-800 font-semibold shadow rounded-xl w-32 h-10 flex items-center justify-center  gap-2 text-sm hover:cursor-pointer hover:bg-gray-50/80"
+            >
+                <CiSettings size={18} />
+                Editar conta
+            </Link>
         </section>
     )
 }

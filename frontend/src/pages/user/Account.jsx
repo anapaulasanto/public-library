@@ -1,5 +1,7 @@
+import { UserAccount } from "../../components/user/Account";
+
 export function Account() {
     return (
-        <h1>account</h1>
+        <UserAccount />
     )
 }
