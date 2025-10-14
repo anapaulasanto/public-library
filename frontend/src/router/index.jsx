@@ -5,6 +5,9 @@ import { SignUp } from "../pages/user/SignUp";
 import { Dashboard } from "../pages/admin/Dashboard"
 import { AuthLayout } from "../layout/auth";
 import { AdminLayout } from "../layout/admin";
+import { Profile } from "../pages/user/Profile";
+import { UserProfileLayout } from "../layout/user";
+import { Account } from "../pages/user/Account";
 
 export function AppRouter() {
     return(
@@ -19,6 +22,10 @@ export function AppRouter() {
                 </Route>
                 <Route path="/admin" element={<AdminLayout />}>
                     <Route path="dashboard" element={<Dashboard />} />
+                </Route>
+                <Route path="/user" element={<UserProfileLayout />}>
+                    <Route path="profile" element={<Profile />} />
+                    <Route path="account" element={<Account />} />
                 </Route>
             </Routes>
         </BrowserRouter>

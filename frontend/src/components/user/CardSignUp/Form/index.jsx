@@ -10,11 +10,13 @@ import { userRegisterSchema } from "../../../../data/schemaForms";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Toast } from "../../../Toast";
 
 export function FormSignUp() {
     const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm({ resolver: zodResolver(userRegisterSchema) });
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [erro, setErro] = useState(null);
+    const [toast, setToast] = useState({ visible: false })
     const navigate = useNavigate();
 
     async function formSubmit(data) {
@@ -23,24 +25,27 @@ export function FormSignUp() {
 
         if (data.name && data.email && data.password) {
             try {
-                const req = await axios.post("/user", {
+                await axios.post("/user", {
                     name: data.name,
                     email: data.email,
                     password: data.password
                 })
-                console.log('cadastrado', req);
-                navigate('/')
+                setToast({visible: true})
+                setTimeout(() => {
+                    navigate('/')
+                }, 2000);
 
             } catch (error) {
                 console.log('Erro no cadastro', error);
                 setErro(error.response.data.message)
             }
-            
+
         }
     }
 
     return (
         <>
+        {toast.visible && <Toast message="Cadastro realizado com sucesso!" />}
             <form class="w-full " onSubmit={handleSubmit(formSubmit)}>
                 <Fieldset
                     htmlFor="nome" label="Nome completo"

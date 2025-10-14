@@ -12,7 +12,7 @@ export function Nav() {
                     <p class="text-sm font-light">Biblioteca digital</p>
                 </div>
             </div>
-            <Link to="/login">
+            <Link to="/auth/user/login">
                 <button class="flex items-center bg-sky-700 gap-2 p-3 px-4 rounded-xl text-white font-semibold hover:bg-sky-600 cursor-pointer">
                     <CiUser />
                     Entrar

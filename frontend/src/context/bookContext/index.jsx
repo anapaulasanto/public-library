@@ -1,15 +1,16 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react"
-import { Toast } from "../../components/admin/main/Toast";
 
 export const BookContext = createContext(null)
 
 export const BookContextProvider = ({ children }) => {
     const [activeTab, setActiveTab] = useState('livros');
+    const [activeTabBooks, setActiveTabBooks] = useState('alugueis');
     const [books, setBooks] = useState([]);
 
     const onTabChange = (tabId) => {
         setActiveTab(tabId);
+        setActiveTabBooks(tabId)
     }
 
     const deleteBook = async (idBook) => {
@@ -17,7 +18,6 @@ export const BookContextProvider = ({ children }) => {
             await axios.delete(`/book/${idBook}`);
             console.log("Livro deletado", idBook);
             setBooks(prevBooks => prevBooks.filter(book => book.id !== idBook));
-            <Toast message="Livro excluído com sucesso!" />
 
         } catch (error) {
             console.log("Erro ao deletar livro", error.message);
@@ -43,6 +43,7 @@ export const BookContextProvider = ({ children }) => {
         <BookContext.Provider value={{
             activeTab,
             setActiveTab,
+            activeTabBooks,
             onTabChange,
             books,
             deleteBook

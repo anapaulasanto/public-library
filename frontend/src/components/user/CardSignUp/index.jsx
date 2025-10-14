@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 export function CardSignUp() {
     return (
-            <section class="z-10 bg-white w-7/8 rounded-xl px-6 shadow-md lg:w-1/3 flex flex-col">
+            <section class="z-10 bg-white w-7/8 rounded-xl px-6 pb-3 shadow-md lg:w-1/3 flex flex-col">
                 <FormHeader title="Criar Conta" />
                 <FormSignUp />
                 <p class="text-[1rem] text-gray-500 text-center py-2">Já tem uma conta?

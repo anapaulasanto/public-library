@@ -1,6 +1,6 @@
 export function Container({ children }) {
     return (
-        <div className="p-6 ">
+        <div className="flex flex-col items-center w-full">
             {children}
         </div>
     )
