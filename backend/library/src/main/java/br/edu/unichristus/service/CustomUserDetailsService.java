@@ -23,7 +23,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user = userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado: " + username));
 
-        // authorities vazias por enquanto
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),
                 user.getPassword(),
@@ -33,8 +32,23 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     // ==================== REGISTER ====================
     public User save(User user) {
+        // valida senha antes de salvar
+        if (!isValidPassword(user.getPassword())) {
+            throw new IllegalArgumentException(
+                    "A senha deve ter no mínimo 8 caracteres, incluindo letras maiúsculas e minúsculas."
+            );
+        }
+
         // criptografa a senha antes de salvar
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         return userRepository.save(user);
+    }
+
+    // ==================== VALIDAÇÃO DA SENHA ====================
+    private boolean isValidPassword(String password) {
+        if (password == null) return false;
+        // Pelo menos 8 caracteres, 1 minúscula e 1 maiúscula
+        String pattern = "^(?=.*[a-z])(?=.*[A-Z]).{8,}$";
+        return password.matches(pattern);
     }
 }

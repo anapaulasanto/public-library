@@ -13,6 +13,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
+
 import java.time.LocalDateTime;
 
 @RestController
@@ -30,20 +33,30 @@ public class AuthController {
 
     // ==================== REGISTER ====================
     @PostMapping("/register")
-    public ResponseEntity<User> registerUser(@RequestBody User user) {
-        // seta datas
+    public ResponseEntity<User> registerUser(@RequestBody User user, HttpServletResponse response) {
         user.setCreatedAt(LocalDateTime.now());
         user.setUpdatedAt(LocalDateTime.now());
 
-        // salva no banco, service já criptografa a senha
+        // salva no banco (senha validada e criptografada no service)
         User savedUser = userDetailsService.save(user);
+
+        // gera token após cadastro
+        final String jwt = jwtUtil.generateToken(savedUser.getEmail());
+
+        // cria cookie com JWTd
+        Cookie cookie = new Cookie("JWT_TOKEN", jwt);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(24 * 60 * 60); // 1 dia
+        response.addCookie(cookie);
 
         return ResponseEntity.ok(savedUser);
     }
 
     // ==================== LOGIN ====================
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> createAuthenticationToken(@RequestBody AuthRequest authRequest) throws Exception {
+    public ResponseEntity<AuthResponse> createAuthenticationToken(@RequestBody AuthRequest authRequest,
+                                                                  HttpServletResponse response) throws Exception {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())
@@ -55,6 +68,26 @@ public class AuthController {
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUsername());
         final String jwt = jwtUtil.generateToken(userDetails);
 
+        // cria cookie com JWT
+        Cookie cookie = new Cookie("JWT_TOKEN", jwt);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(24 * 60 * 60); // 1 dia
+        response.addCookie(cookie);
+
         return ResponseEntity.ok(new AuthResponse(jwt));
+    }
+
+    // ==================== LOGOUT ====================
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(HttpServletResponse response) {
+        // cria cookie vazio para limpar o existente
+        Cookie cookie = new Cookie("JWT_TOKEN", null);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(0); // expira imediatamente
+        response.addCookie(cookie);
+
+        return ResponseEntity.ok("Logout realizado com sucesso. Sessão encerrada.");
     }
 }
