@@ -11,7 +11,7 @@ export function SectionRecomended() {
                 p="Livros em alta"
             />
             <CardsBook />
-            <button className="bg-gradient text-white font-semibold shadow rounded-xl w-1/3 h-10 flex items-center mx-auto justify-center mt-10 gap-2 text-sm hover:cursor-pointer hover:shadow-xl">
+            <button className="bg-gradient text-white font-semibold shadow rounded-xl w-full h-12 flex items-center mx-auto justify-center mt-10 gap-2 text-sm hover:cursor-pointer hover:shadow-xl lg:w-1/3">
                 <CiSearch size={18} />
                 Explorar catálogo
             </button>

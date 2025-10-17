@@ -1,6 +1,5 @@
-import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
 import { useContext } from "react";
-import { BookContext } from "../../../../../context/bookContext";
+import { BookContext } from "../../../../../context/BookContext";
 import { ModalDelete } from "../ModalDelete";
 import { ModalEdit } from "../ModalEdit";
 

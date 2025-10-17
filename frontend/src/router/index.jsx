@@ -25,7 +25,7 @@ export function AppRouter() {
                 </Route>
                 <Route path="/user" element={<UserProfileLayout />}>
                     <Route path="profile" element={<Profile />} />
-                    <Route path="account" element={<Account />} />
+                    <Route path="profile/account" element={<Account />} />
                 </Route>
             </Routes>
         </BrowserRouter>

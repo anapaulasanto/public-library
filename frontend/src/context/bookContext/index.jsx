@@ -5,12 +5,12 @@ export const BookContext = createContext(null)
 
 export const BookContextProvider = ({ children }) => {
     const [activeTab, setActiveTab] = useState('livros');
-    const [activeTabBooks, setActiveTabBooks] = useState('alugueis');
+    const [activeTabRental, setActiveTabRental] = useState('alugueis');
     const [books, setBooks] = useState([]);
 
     const onTabChange = (tabId) => {
         setActiveTab(tabId);
-        setActiveTabBooks(tabId)
+        setActiveTabRental(tabId)
     }
 
     const deleteBook = async (idBook) => {
@@ -29,7 +29,6 @@ export const BookContextProvider = ({ children }) => {
         const searchBooks = async () => {
             try {
                 const { data } = await axios.get("/book/all");
-                console.log("resposta: ", data);
                 setBooks(data);
             } catch (error) {
                 console.log("erro ao buscar livros", error);
@@ -43,7 +42,7 @@ export const BookContextProvider = ({ children }) => {
         <BookContext.Provider value={{
             activeTab,
             setActiveTab,
-            activeTabBooks,
+            activeTabRental,
             onTabChange,
             books,
             deleteBook

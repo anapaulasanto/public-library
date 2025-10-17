@@ -1,33 +1,31 @@
 import { useContext } from "react";
 import { MenuPages } from "../../admin/main/MenuPages";
-import { LuBookA, LuHeart, LuStar } from "react-icons/lu";
-import { BookContext } from "../../../context/bookContext";
+import { LuBookA, LuStar } from "react-icons/lu";
+import { BookContext } from "../../../context/BookContext";
 import { SectionTableRental } from "./Main/SectionTableRental";
 import { SectionRecomended } from "./Main/SectionRecomended";
+import { SectionTableReview } from "./Main/SectionTableReview";
 
 export function DashboardUser() {
-    // const { activeTabBooks } = useContext(BookContext)
+    const { activeTabRental } = useContext(BookContext)
 
-    // const pages = [
-    //     {
-    //         id: "alugueis",
-    //         page: "Aluguéis",
-    //         icon: <LuBookA />
-    //     }, {
-    //         id: "avaliações",
-    //         page: "Avaliações",
-    //         icon: <LuStar />
-    //     }, {
-    //         id: "favoritos",
-    //         page: "Favoritos",
-    //         icon: <LuHeart />
-    //     }
-    // ]
+    const pages = [
+        {
+            id: "alugueis",
+            page: "Aluguéis",
+            icon: <LuBookA />
+        }, {
+            id: "avaliacoes",
+            page: "Avaliações",
+            icon: <LuStar />
+        }
+    ]
 
     return (
-        <div className="w-full">
-            {/* <MenuPages page={pages} activeTab={activeTabBooks} /> */}
-            <SectionTableRental />
+        <div className="w-full 2xl:w-[80%]">
+            <MenuPages page={pages} activeTab={activeTabRental} />
+            {activeTabRental === 'alugueis' && <SectionTableRental /> }
+            {activeTabRental === 'avaliacoes' && <SectionTableReview /> }
             <SectionRecomended />
         </div>
     )
