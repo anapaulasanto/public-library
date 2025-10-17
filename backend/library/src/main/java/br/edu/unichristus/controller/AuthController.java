@@ -43,12 +43,15 @@ public class AuthController {
         // gera token após cadastro
         final String jwt = jwtUtil.generateToken(savedUser.getEmail());
 
-        // cria cookie com JWTd
+        // cria cookie com JWT
         Cookie cookie = new Cookie("JWT_TOKEN", jwt);
         cookie.setHttpOnly(true);
         cookie.setPath("/");
         cookie.setMaxAge(24 * 60 * 60); // 1 dia
         response.addCookie(cookie);
+
+        // remover senha da resposta
+        savedUser.setPassword(null);
 
         return ResponseEntity.ok(savedUser);
     }
@@ -59,14 +62,15 @@ public class AuthController {
                                                                   HttpServletResponse response) throws Exception {
         try {
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())
+                    new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword())
             );
         } catch (BadCredentialsException e) {
             throw new Exception("Usuário ou senha inválidos", e);
         }
 
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUsername());
-        final String jwt = jwtUtil.generateToken(userDetails);
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getEmail());
+
+        final String jwt = jwtUtil.generateToken(userDetails.getUsername());
 
         // cria cookie com JWT
         Cookie cookie = new Cookie("JWT_TOKEN", jwt);
@@ -81,7 +85,6 @@ public class AuthController {
     // ==================== LOGOUT ====================
     @PostMapping("/logout")
     public ResponseEntity<String> logout(HttpServletResponse response) {
-        // cria cookie vazio para limpar o existente
         Cookie cookie = new Cookie("JWT_TOKEN", null);
         cookie.setHttpOnly(true);
         cookie.setPath("/");

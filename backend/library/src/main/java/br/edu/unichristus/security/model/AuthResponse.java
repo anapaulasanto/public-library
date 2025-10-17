@@ -1,17 +1,19 @@
 package br.edu.unichristus.security.model;
 
 public class AuthResponse {
-    private String jwt;
+    private String token;
 
-    public AuthResponse(String jwt) {
-        this.jwt = jwt;
+    // Construtor
+    public AuthResponse(String token) {
+        this.token = token;
     }
 
-    public String getJwt() {
-        return jwt;
+    // Getter e Setter
+    public String getToken() {
+        return token;
     }
 
-    public void setJwt(String jwt) {
-        this.jwt = jwt;
+    public void setToken(String token) {
+        this.token = token;
     }
 }

@@ -1,12 +1,8 @@
 package br.edu.unichristus.security.jwt;
 
 import br.edu.unichristus.service.CustomUserDetailsService;
-import io.jsonwebtoken.ExpiredJwtException;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,51 +10,52 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 
-    @Autowired
-    private CustomUserDetailsService userDetailsService;
+    private final CustomUserDetailsService userDetailsService;
+    private final JwtUtil jwtUtil;
 
     @Autowired
-    private JwtUtil jwtUtil;
+    public JwtRequestFilter(@Lazy CustomUserDetailsService userDetailsService, JwtUtil jwtUtil) {
+        this.userDetailsService = userDetailsService;
+        this.jwtUtil = jwtUtil;
+    }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-            throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    FilterChain filterChain) throws ServletException, IOException {
 
         final String authorizationHeader = request.getHeader("Authorization");
-
         String username = null;
         String jwt = null;
 
-        // O token deve vir como: "Bearer <token>"
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             jwt = authorizationHeader.substring(7);
-            try {
-                username = jwtUtil.extractUsername(jwt);
-            } catch (ExpiredJwtException e) {
-                System.out.println("Token expirado!");
-            } catch (Exception e) {
-                System.out.println("Erro ao extrair o token: " + e.getMessage());
-            }
+            username = jwtUtil.extractUsername(jwt);
         }
 
-        // Se pegou usuário e o contexto ainda não tem autenticação
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-            if (jwtUtil.validateToken(jwt, userDetails)) {
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities());
-                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
-                SecurityContextHolder.getContext().setAuthentication(authToken);
+            // ✅ PASSAR SÓ O username para validar o token
+            if (jwtUtil.validateToken(jwt, userDetails.getUsername())) {
+                UsernamePasswordAuthenticationToken token =
+                        new UsernamePasswordAuthenticationToken(
+                                userDetails, null, userDetails.getAuthorities()
+                        );
+                token.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(token);
             }
         }
 
-        chain.doFilter(request, response);
+        filterChain.doFilter(request, response);
     }
 }

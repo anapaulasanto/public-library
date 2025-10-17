@@ -3,10 +3,11 @@ package br.edu.unichristus.service;
 import br.edu.unichristus.domain.model.User;
 import br.edu.unichristus.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,11 +18,14 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     // ==================== LOGIN ====================
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado: " + username));
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado: " + email));
 
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),
@@ -32,22 +36,25 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     // ==================== REGISTER ====================
     public User save(User user) {
-        // valida senha antes de salvar
         if (!isValidPassword(user.getPassword())) {
             throw new IllegalArgumentException(
                     "A senha deve ter no mínimo 8 caracteres, incluindo letras maiúsculas e minúsculas."
             );
         }
 
-        // criptografa a senha antes de salvar
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
+    }
+
+    // ==================== MÉTODO ADICIONAL PARA LOGIN ====================
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado: " + email));
     }
 
     // ==================== VALIDAÇÃO DA SENHA ====================
     private boolean isValidPassword(String password) {
         if (password == null) return false;
-        // Pelo menos 8 caracteres, 1 minúscula e 1 maiúscula
         String pattern = "^(?=.*[a-z])(?=.*[A-Z]).{8,}$";
         return password.matches(pattern);
     }

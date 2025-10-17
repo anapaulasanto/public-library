@@ -3,78 +3,55 @@ package br.edu.unichristus.security.jwt;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.security.core.userdetails.UserDetails;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+import java.security.Key;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Function;
 
 @Component
 public class JwtUtil {
 
-    // 🔒 Chave secreta usada para assinar o token (ideal usar variável de ambiente depois)
-    private final String SECRET_KEY = "minha_chave_secreta_super_segura";
+    private static final String SECRET_KEY = "MINHA_CHAVE_SECRETA_PARA_TOKEN_QUE_TEM_PELO_MENOS_32_CARACTERES";
 
-    // Tempo de expiração do token: 10 horas
-    private final long JWT_EXPIRATION = 10 * 60 * 60 * 1000;
+    private final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
 
-    // Extrai o username (subject) do token
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
-    // Extrai a data de expiração
     public Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    // Método genérico para extrair qualquer "claim"
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
-    // Decodifica o token e retorna os claims
     private Claims extractAllClaims(String token) {
         return Jwts.parser()
-                .setSigningKey(SECRET_KEY)
+                .setSigningKey(key)  // aqui usa Key direto
                 .parseClaimsJws(token)
                 .getBody();
     }
 
-    // Verifica se o token expirou
     private Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
 
-    // Gera o token com username
-    public String generateToken(UserDetails userDetails) {
-        Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, userDetails.getUsername());
-    }
     public String generateToken(String username) {
-        return generateToken(
-                new org.springframework.security.core.userdetails.User(username, "", new ArrayList<>())
-        );
-    }
-
-    // Cria o token com assinatura e tempo de expiração
-    private String createToken(Map<String, Object> claims, String subject) {
         return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(subject)
+                .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + JWT_EXPIRATION))
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 horas
+                .signWith(SignatureAlgorithm.HS256, key) // chave aqui
                 .compact();
     }
 
-    // Valida se o token é do usuário certo e ainda é válido
-    public Boolean validateToken(String token, UserDetails userDetails) {
-        final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    public Boolean validateToken(String token, String username) {
+        final String extractedUsername = extractUsername(token);
+        return (extractedUsername.equals(username) && !isTokenExpired(token));
     }
 }
