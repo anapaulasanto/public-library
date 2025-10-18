@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findByCategoryId(Long categoryId);
     Optional<Book> findByIsbn(String isbn);
+    List<Book> findByTitleContainingIgnoreCaseOrAuthorContainingIgnoreCaseOrCategory_Id(String title, String author, Long categoryId);
 }
