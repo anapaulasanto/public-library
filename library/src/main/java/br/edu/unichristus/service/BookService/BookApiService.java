@@ -44,8 +44,11 @@ public class BookApiService {
                     volumeInfo.getPublishedDate(),
                     volumeInfo.getDescription(),
                     volumeInfo.getCategories(),
-                    linkPdf
+                    linkPdf,
+                    volumeInfo.getAverageRating(),
+                    volumeInfo.getRatingsCount()
             );
+
         }).collect(Collectors.toList()); // transforma em uma lista
     }
 
@@ -74,7 +77,9 @@ public class BookApiService {
                     volumeInfo.getPublishedDate(),
                     volumeInfo.getDescription(),
                     volumeInfo.getCategories(),
-                    linkPdf
+                    linkPdf,
+                    volumeInfo.getAverageRating(),
+                    volumeInfo.getRatingsCount()
             );
         }).collect(Collectors.toList());
     }
@@ -104,7 +109,9 @@ public class BookApiService {
                     volumeInfo.getPublishedDate(),
                     volumeInfo.getDescription(),
                     volumeInfo.getCategories(),
-                    linkPdf
+                    linkPdf,
+                    volumeInfo.getAverageRating(),
+                    volumeInfo.getRatingsCount()
             );
         }).collect(Collectors.toList());
     }
@@ -134,8 +141,65 @@ public class BookApiService {
                     volumeInfo.getPublishedDate(),
                     volumeInfo.getDescription(),
                     volumeInfo.getCategories(),
-                    linkPdf
+                    linkPdf,
+                    volumeInfo.getAverageRating(),
+                    volumeInfo.getRatingsCount()
             );
         }).collect(Collectors.toList());
     }
+
+    public List<BookLowDTO> search(String title, String author, String subject) {
+        StringBuilder query = new StringBuilder();
+
+        if (title != null && !title.isBlank()) {
+            query.append("intitle:").append(title).append("+");
+        }
+        if (author != null && !author.isBlank()) {
+            query.append("inauthor:").append(author).append("+");
+        }
+        if (subject != null && !subject.isBlank()) {
+            query.append("subject:").append(subject);
+        }
+
+        if (query.length() == 0) {
+            query.append("book");
+        }
+
+        String url = endpoint + query + "&key=" + apiKey;
+        GoogleResponse response = restTemplate.getForObject(url, GoogleResponse.class);
+
+        if (response == null || response.getItems() == null) {
+            throw new CommonsException(HttpStatus.NOT_FOUND,
+                    "unichristus.book.findbysubject.apiresponse.null",
+                    "Nenhum livro encontrado na API do Google");
+        }
+
+        return mapResponseToDTO(response);
+    }
+
+    private List<BookLowDTO> mapResponseToDTO(GoogleResponse response) {
+        return response.getItems().stream().map(items -> {
+            VolumeInfo volumeInfo = items.getVolumeInfo();
+            AccessInfo accessInfo = items.getAccessInfo();
+
+            String linkPdf = null;
+            if (accessInfo != null && accessInfo.getPdf() != null && accessInfo.getPdf().isAvailable()) {
+                linkPdf = accessInfo.getPdf().getAcsTokenLink();
+            }
+
+            return new BookLowDTO(
+                    volumeInfo.getTitle(),
+                    volumeInfo.getAuthors(),
+                    volumeInfo.getPublishedDate(),
+                    volumeInfo.getDescription(),
+                    volumeInfo.getCategories(),
+                    linkPdf,
+                    volumeInfo.getAverageRating(),
+                    volumeInfo.getRatingsCount()
+            );
+        }).collect(Collectors.toList());
+    }
+
+
+
 }
