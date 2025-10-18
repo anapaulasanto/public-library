@@ -107,6 +107,15 @@ public class BookService {
         return MapperUtil.parseListObjects(listBooks, BookDTO.class);
     }
 
+    public List<BookDTO> search(String title, String author, Long categoryId) {
+        var books = repository.findByTitleContainingIgnoreCaseOrAuthorContainingIgnoreCaseOrCategory_Id(
+                title != null ? title : "",
+                author != null ? author : "",
+                categoryId
+        );
+        return MapperUtil.parseListObjects(books, BookDTO.class);
+    }
+
 
     public Book findById(Long id) {
         var bookEntity = repository.findById(id);

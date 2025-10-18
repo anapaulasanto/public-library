@@ -40,6 +40,17 @@ public class BookController {
         return service.findAll();
     }
 
+    @Operation(summary = "Busca livros por título, autor e/ou categoria | role: [ADMIN, USER]", tags = "Book")
+    @GetMapping("/search")
+    public List<BookDTO> search(
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) String author,
+            @RequestParam(required = false) Long categoryId
+    ) {
+        return service.search(title, author, categoryId);
+    }
+
+
     @Operation(summary = "Retorna um livro por ID | role: [ADMIN, USER]", tags = "Book")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Livro encontrado com sucesso"),
