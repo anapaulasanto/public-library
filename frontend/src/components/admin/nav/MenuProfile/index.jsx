@@ -3,7 +3,7 @@ import profileIcon from '../../../../assets/icons/profile-icon.png'
 import { FaRegUser } from 'react-icons/fa'
 import { IoExitOutline } from 'react-icons/io5'
 
-export function MenuProfile() {
+export const MenuProfile = () => {
     return (
         <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn border-none shadow-none bg-transparent hover:shadow-none">

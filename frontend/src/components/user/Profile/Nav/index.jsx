@@ -5,7 +5,7 @@ import { IoExitOutline } from 'react-icons/io5'
 import profileIcon from '../../../../assets/icons/profile-icon.png'
 import { Link } from "react-router-dom"
 
-export function Nav() {
+export const Nav = () => {
     return (
         <div className="navbar bg-base-50 shadow-sm flex justify-between px-10">
             <Link to='/'>

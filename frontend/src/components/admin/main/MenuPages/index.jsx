@@ -1,7 +1,7 @@
 import { BookContext } from "../../../../context/BookContext";
 import { useContext } from "react";
 
-export function MenuPages({ page, activeTab }) {
+export const MenuPages = ({ page, activeTab }) => {
     const { onTabChange } = useContext(BookContext);
 
     return (

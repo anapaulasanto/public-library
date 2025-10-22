@@ -1,4 +1,4 @@
-export function Toast({ message }) {
+export const Toast = ({ message }) => {
     return (
         <div className="toast">
             <div className="alert alert-info bg-gradient text-white">

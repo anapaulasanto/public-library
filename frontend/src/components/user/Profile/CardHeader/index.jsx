@@ -1,7 +1,7 @@
 import { FaBookOpen, FaCalendar, FaStar } from "react-icons/fa";
 import { useUserProfile } from "../../../../hooks/index.jsx";
 
-export function CardHeader() {
+export const CardHeader = () => {
     const { data: user} = useUserProfile(9)
 
     const createdAtString = user?.createdAt

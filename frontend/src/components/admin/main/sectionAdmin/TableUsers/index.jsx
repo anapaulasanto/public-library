@@ -1,6 +1,6 @@
 import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
 
-export function TableUsers() {
+export const TableUsers = () => {
     return (
         <div className="overflow-x-auto rounded-box border border-neutral-200 bg-base-50 mt-10">
             <table className="table">

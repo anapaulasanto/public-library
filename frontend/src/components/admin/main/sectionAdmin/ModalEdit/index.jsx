@@ -1,6 +1,6 @@
 import { FaPencilAlt } from "react-icons/fa";
 
-export function ModalEdit({ modalId, h1, p }) {
+export const ModalEdit = ({ modalId, h1, p }) => {
     return (
         <div>
             <button className="btn border-none hover:bg-blue-200 hover:cursor-pointer" onClick={() => document.getElementById(modalId).showModal()}><FaPencilAlt /></button>

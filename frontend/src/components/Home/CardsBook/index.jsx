@@ -3,7 +3,7 @@ import { CiUser } from "react-icons/ci";
 import { CiCalendar } from "react-icons/ci";
 import { FaEye } from "react-icons/fa";
 
-export function CardsBook() {
+export const CardsBook = () => {
     return (
         <div class="w-full mt-5 flex flex-col items-center justify-center gap-6 lg:flex-row hover:cursor-pointer">
             {books.map((book, index) => (

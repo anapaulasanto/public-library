@@ -12,7 +12,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Toast } from "../../../Toast";
 
-export function FormLogin() {
+export const FormLogin = () => {
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(userLoginSchema) });
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [erro, setErro] = useState(null);
@@ -32,7 +32,7 @@ export function FormLogin() {
                 
             } catch (error) {
                 console.log('Erro ao logar usuario', error);
-                setErro(error.response.data.message)
+                setErro(error.message)
             }
         }
     }
@@ -40,7 +40,7 @@ export function FormLogin() {
     return (
         <>
             {toast.visible && <Toast message="Login realizado com sucesso!" />}
-            <form class="w-full mt-4 space-y-2" onSubmit={handleSubmit(formSubmit)}>
+            <form className="w-full mt-4 space-y-2" onSubmit={handleSubmit(formSubmit)}>
                 <Fieldset
                     htmlFor="email"
                     label="Email"
@@ -48,7 +48,7 @@ export function FormLogin() {
                     type="email"
                     props={{ ...register("email", { required: true }) }}
                 >
-                    <CiMail class="absolute left-2 top-4" />
+                    <CiMail className="absolute left-2 top-4" />
                 </Fieldset>
                 <p className="text-red-600 text-sm">{errors.email?.message}</p>
 
@@ -59,12 +59,12 @@ export function FormLogin() {
                     type={isPasswordVisible ? "text" : "password"}
                     props={{ ...register("password", { required: true }) }}
                 >
-                    <RiLockPasswordLine class="absolute left-2 top-4" />
-                    <button type="button" class="absolute right-4 top-4">
+                    <RiLockPasswordLine className="absolute left-2 top-4" />
+                    <button type="button" className="absolute right-4 top-4">
                         {isPasswordVisible ? (
-                            <FaRegEye class="text-gray-400" onClick={() => setIsPasswordVisible(false)} />
+                            <FaRegEye className="text-gray-400" onClick={() => setIsPasswordVisible(false)} />
                         ) : (
-                            <FaEyeSlash class="text-gray-400" onClick={() => setIsPasswordVisible(true)} />
+                            <FaEyeSlash className="text-gray-400" onClick={() => setIsPasswordVisible(true)} />
                         )}
                     </button>
                 </Fieldset>

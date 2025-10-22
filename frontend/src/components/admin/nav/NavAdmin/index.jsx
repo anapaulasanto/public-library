@@ -1,6 +1,6 @@
 import { MenuProfile } from '../MenuProfile'
 
-export function Nav() {
+export const Nav = () => {
     return (
         <nav className='bg-slate-50 border border-slate-100 shadow-xs'>
             <div className='flex justify-between items-center p-5'>

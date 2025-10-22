@@ -1,4 +1,4 @@
-export function ContentTitle({ h1, p }) {
+export const ContentTitle = ({ h1, p }) =>{
     return (
         <div>
             <h1 className="font-bold text-3xl">{h1}</h1>

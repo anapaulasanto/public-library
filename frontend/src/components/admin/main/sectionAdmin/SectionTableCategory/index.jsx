@@ -1,7 +1,7 @@
 import { ContentTitle } from "../../../AdminDashboard/ContentTitle";
 import { TableCategory } from "../TableCategory";
 
-export function SectionTableCategory() {
+export const SectionTableCategory = () => {
     return (
         <section className="p-8 mt-12 bg-neutral-50/40 mt-15 rounded-xl border border-gray-200">
             <div className="flex justify-between items-center">

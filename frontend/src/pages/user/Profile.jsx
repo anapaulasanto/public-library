@@ -1,6 +1,6 @@
 import { DashboardUser } from "../../components/user/Profile";
 
-export function Profile() {
+export const Profile = () => {
     return (
         <DashboardUser />
     )

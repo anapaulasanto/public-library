@@ -8,8 +8,10 @@ import { AdminLayout } from "../layout/admin";
 import { Profile } from "../pages/user/Profile";
 import { UserProfileLayout } from "../layout/user";
 import { Account } from "../pages/user/Account";
+import { Catalog } from "../pages/catalog";
+import { LayoutCatalog } from "../layout/catalog";
 
-export function AppRouter() {
+export const AppRouter = () => {
     return(
         <BrowserRouter>
             <Routes>
@@ -26,6 +28,9 @@ export function AppRouter() {
                 <Route path="/user" element={<UserProfileLayout />}>
                     <Route path="profile" element={<Profile />} />
                     <Route path="profile/account" element={<Account />} />
+                </Route>
+                <Route path="/catalog" element={<LayoutCatalog />}>
+                    <Route path="books" element={<Catalog />} />
                 </Route>
             </Routes>
         </BrowserRouter>

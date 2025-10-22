@@ -6,7 +6,7 @@ import { SectionTableRental } from "./Main/SectionTableRental";
 import { SectionRecomended } from "./Main/SectionRecomended";
 import { SectionTableReview } from "./Main/SectionTableReview";
 
-export function DashboardUser() {
+export const DashboardUser = () => {
     const { activeTabRental } = useContext(BookContext)
 
     const pages = [

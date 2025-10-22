@@ -1,6 +1,6 @@
 import { LuBadgeAlert } from "react-icons/lu";
 
-export function Modal({ tittleBtn, h1, p, modalId, txtBtn1, txtBtn2, props }) {
+export const Modal = ({ tittleBtn, h1, p, modalId, txtBtn1, txtBtn2, props }) => {
     return (
         <div>
             < button className={`btn btn rounded-xl px-8 ${props}`} onClick={() => document.getElementById(modalId).showModal()}>{tittleBtn}</button >

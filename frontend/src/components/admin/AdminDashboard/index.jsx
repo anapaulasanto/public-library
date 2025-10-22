@@ -8,7 +8,7 @@ import { LuBookA } from "react-icons/lu";
 import { LuUsers } from "react-icons/lu";
 import { IoPricetagsOutline } from "react-icons/io5";
 
-export function AdminDashboard() {
+export const AdminDashboard = () => {
     const {activeTab} = useContext(BookContext);
 
     const pages = [

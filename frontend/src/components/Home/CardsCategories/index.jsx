@@ -1,6 +1,6 @@
 import { card } from "../../../data/cardHome"
 
-export function CardsCategories() {
+export const CardsCategories = () => {
     return (
         <div className="grid grid-cols-1 gap-3 w-full max-w-4xl mb-10 sm:grid sm:grid-cols-2">
             {card.map((item) => (

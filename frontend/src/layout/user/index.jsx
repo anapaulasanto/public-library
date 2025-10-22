@@ -1,10 +1,9 @@
 import { Outlet } from "react-router-dom";
 import { Container } from "../../components/admin/Container";
-import { SectionStatus } from "../../components/admin/main/sectionDashboard/SectionStatus";
 import { Nav } from "../../components/user/Profile/Nav";
 import { Header } from "../../components/user/Profile/Header";
 
-export function UserProfileLayout() {
+export const UserProfileLayout = () => {
     return (
         <div>
             <Nav />

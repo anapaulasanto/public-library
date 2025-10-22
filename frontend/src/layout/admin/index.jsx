@@ -4,7 +4,7 @@ import { SectionStatus } from "../../components/admin/main/sectionDashboard/Sect
 import { Nav } from "../../components/admin/nav/NavAdmin"
 import { Menu } from "../../components/admin/aside/MenuBarDesktop";
 
-export function AdminLayout() {
+export const AdminLayout = () => {
     return (
         <div>
             <Nav />

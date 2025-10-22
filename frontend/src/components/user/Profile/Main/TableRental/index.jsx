@@ -4,7 +4,7 @@ import { Modal } from "../../ModalSure"
 import { useUserRentals } from "../../../../../hooks/index.jsx"
 import { Loading } from "../../../../Loading/index.jsx";
 
-export function TableRental() {
+export const TableRental = () => {
     const { data: rental, isLoading, isError } = useUserRentals(9);
 
     if (isLoading) {
@@ -15,8 +15,8 @@ export function TableRental() {
 
     if (isError) {
         return (
-            <section className="flex items-center justify-center h-40 border-gray-200 text-red-300">
-                <p>Erro ao carregar alugueis</p>
+            <section className="flex items-center justify-center h-40  border-gray-200 font-bold ">
+                <p>Ops... Não consegui carregar os alugueis desse usuário</p>
             </section>
         );
     }

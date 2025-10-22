@@ -3,7 +3,7 @@ import { BookContext } from "../../../../../context/BookContext";
 import { ModalDelete } from "../ModalDelete";
 import { ModalEdit } from "../ModalEdit";
 
-export function TableBooks() {
+export const TableBooks = () => {
     const { books, deleteBook } = useContext(BookContext);
 
     return (

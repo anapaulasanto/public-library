@@ -1,6 +1,6 @@
 import { CardSignUp } from "../../components/user/CardSignUp";
 
-export function SignUp() {
+export const SignUp = () => {
     return (
         <CardSignUp />
     )

@@ -1,6 +1,6 @@
 import { itemsCard } from "../../../../../data/cardDashboard"
 
-export function Card() {
+export const Card = () => {
     return (
         <div className="flex gap-4 max-md:hidden">
             {itemsCard.map((item, index) => (

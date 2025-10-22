@@ -1,33 +1,7 @@
 
 
-export function MenuBar() {
+export const MenuBar = () => {
     return (
-        // <div className="drawer lg:drawer-open">
-        //     <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        //     <div className="drawer-content flex flex-col items-center justify-center">
-        //         <label htmlFor="my-drawer-2" className='drawer-button max-2xl:hidden '>
-        //             <IoMenu size={30} />
-        //         </label>
-        //     </div>
-        //     <div className="drawer-side ">
-        //         <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-        //         <ul className="menu bg-base-200 text-base-content min-h-full w-70 py-4">
-        //             <div className="flex items-center gap-2 border-b border-gray-200 px-3 pb-2">
-        //                 <p className="text-xl text-gradient font-semibold">BiblioTech</p>
-        //             </div>
-        //             <div className="p-3 flex items-center gap-2 border-b border-gray-200">
-        //                 <p className="bg-blue-300 w-7 h-7 text-center text-lg rounded-full font-bold text-white">A</p>
-        //                 <div className="flex flex-col">
-        //                     <p className="font-semibold text-base">Amanda Alves</p>
-        //                     <p className="text-xs">Administrador</p>
-        //                 </div>
-        //             </div>
-        //             <li><a>Sidebar Item 1</a></li>
-        //             <li><a>Sidebar Item 2</a></li>
-        //         </ul>
-        //     </div>
-        // </div>
-
         <ul className="menu menu-horizontal bg-base-200 rounded-box lg:hidden flex justify-center mx-auto ">
             <li>
                 <a>

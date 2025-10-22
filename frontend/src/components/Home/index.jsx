@@ -4,7 +4,7 @@ import { MainHome } from "./Main";
 import { Nav } from "./Nav";
 
 
-export function HomePage() {
+export const HomePage = () => {
     return (
         <div class="bg-zinc-100">
             <Nav />

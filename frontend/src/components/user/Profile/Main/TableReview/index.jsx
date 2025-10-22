@@ -1,6 +1,6 @@
 import { FaRegCalendar } from "react-icons/fa";
 
-export function TableReview() {
+export const TableReview = () => {
     return(
         <div className="flex flex-col gap-3 border border-gray-300 bg-neutral-200/50 p-5 rounded-xl mt-10">
             <h1 className="font-semibold text-xl">Pollyana</h1>

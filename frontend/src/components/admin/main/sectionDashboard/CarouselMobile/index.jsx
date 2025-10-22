@@ -1,6 +1,6 @@
 import { itemsCard } from "../../../../../data/cardDashboard"
 
-export function Carousel() {
+export const Carousel = () => {
     return (
         <div className="carousel rounded-box max-w-md space-x-7 p-4 flex mx-auto md:hidden">
             <div className="carousel-item space-x-5">

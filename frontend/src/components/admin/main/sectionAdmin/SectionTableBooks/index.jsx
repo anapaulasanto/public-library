@@ -1,7 +1,7 @@
 import { ContentTitle } from "../../../AdminDashboard/ContentTitle";
 import { TableBooks } from "../TableBooks";
 
-export function SectionTableBooks() {
+export const SectionTableBooks = () => {
     
 
     return (

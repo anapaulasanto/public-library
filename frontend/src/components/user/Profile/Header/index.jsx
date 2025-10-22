@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"
 import { useUserProfile } from "../../../../hooks/index.jsx";
 import { Skeleton } from "../../../Skeleton/index.jsx";
 
-export function Header() {
+export const Header = () => {
     const { data: user, isLoading, isError } = useUserProfile(9)
     console.log(user);
 
@@ -18,8 +18,8 @@ export function Header() {
 
     if (isError) {
         return (
-            <section className="flex items-center justify-center h-40 bg-gradient border-gray-200 text-red-300">
-                <p>Erro ao carregar o perfil.</p>
+            <section className="flex items-center justify-center h-40  border-gray-200 font-bold ">
+                <p>Ops... Não consegui carregar informaçõs desse usuário</p>
             </section>
         );
     }    

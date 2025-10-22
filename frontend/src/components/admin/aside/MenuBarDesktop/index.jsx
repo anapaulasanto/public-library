@@ -1,6 +1,6 @@
 import { ItemsMenuBar } from "../ItemsMenuBarDesktop";
 
-export function Menu() {
+export const Menu = () => {
     return (
         <aside className="hidden lg:block">
             <ul className="menu bg-slate-50 h-full w-70">

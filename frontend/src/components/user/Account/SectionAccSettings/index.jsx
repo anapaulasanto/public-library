@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useUserProfile } from "../../../../hooks";
 import { Loading } from "../../../Loading";
 
-export function SectionSettings() {
+export const SectionSettings = () => {
     const { data: user, isLoading } = useUserProfile(9);
 
     if (isLoading) {
@@ -25,27 +25,29 @@ export function SectionSettings() {
                     p="Gerencie suas informações pessoais"
                 />
             </div>
-            <fieldset className="fieldset gri grid-cols-2 gap-10 bg-base-200 border-base-300 rounded-box w-full 2xl:w-[80%] mx-auto border p-4 my-10">
-                <fieldset>
-                    <legend className="fieldset-legend text-base">Nome completo</legend>
-                    <input type="text" className="input w-full" defaultValue={user.name} />
+            <form action="">
+                <fieldset className="fieldset gri grid-cols-2 gap-10 bg-base-200 border-base-300 rounded-box w-full 2xl:w-[80%] mx-auto border p-4 my-10">
+                    <fieldset>
+                        <legend className="fieldset-legend text-base">Nome completo</legend>
+                        <input type="text" className="input w-full" defaultValue={user.name} />
+                    </fieldset>
+                    <fieldset>
+                        <legend className="fieldset-legend text-base">Email</legend>
+                        <input type="email" className="input w-full" defaultValue={user.email} />
+                    </fieldset>
+                    <fieldset>
+                        <legend className="fieldset-legend text-base">Telefone</legend>
+                        <input type="text" className="input w-full" defaultValue="(85)98705-2066" />
+                    </fieldset>
+                    <div className="flex gap-4 text-base justify-end mt-2">
+                        <button className="bg-white font-semibold w-30 h-10 rounded-lg border border-neutral-200 hover:bg-neutral-400 hover:cursor-pointer">Cancelar</button>
+                        <button className="flex items-center justify-around bg-sky-800 font-semibold text-white w-50 h-10 rounded-lg hover:bg-sky-700 hover:cursor-pointer">
+                            <FaRegSave />
+                            Salvar alterações
+                        </button>
+                    </div>
                 </fieldset>
-                <fieldset>
-                    <legend className="fieldset-legend text-base">Email</legend>
-                    <input type="text" className="input w-full" defaultValue={user.email} />
-                </fieldset>
-                <fieldset>
-                    <legend className="fieldset-legend text-base">Telefone</legend>
-                    <input type="text" className="input w-full" defaultValue="(85)98705-2066" />
-                </fieldset>
-                <div className="flex gap-4 text-base justify-end mt-2">
-                    <button className="bg-white font-semibold w-30 h-10 rounded-lg border border-neutral-200 hover:bg-neutral-400 hover:cursor-pointer">Cancelar</button>
-                    <button className="flex items-center justify-around bg-sky-800 font-semibold text-white w-50 h-10 rounded-lg hover:bg-sky-700 hover:cursor-pointer">
-                        <FaRegSave />
-                        Salvar alterações
-                    </button>
-                </div>
-            </fieldset>
+            </form>
         </section>
     )
 }
