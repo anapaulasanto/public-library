@@ -18,7 +18,6 @@ public class SecurityConfig {
 
     private final JwtRequestFilter jwtRequestFilter;
 
-    // Quebra o ciclo usando @Lazy
     public SecurityConfig(@Lazy JwtRequestFilter jwtRequestFilter) {
         this.jwtRequestFilter = jwtRequestFilter;
     }
@@ -28,11 +27,34 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        // 🔓 Rotas públicas (registro, login, logout)
                         .requestMatchers("/auth/**").permitAll()
+
+                        // 👥 Rotas de User — usuários e administradores
+                        .requestMatchers("/api/v1/user/**").hasAnyRole("USER", "ADMIN")
+
+                        // ✍️ Rotas de Review — apenas usuários
+                        .requestMatchers("/api/v1/review/**").hasRole("USER")
+
+                        // 📚 Rotas de livros (CRUD) — apenas administradores
+                        .requestMatchers("/api/v1/book/**").hasRole("ADMIN")
+
+                        // 🌐 Rotas de livros da API externa — apenas usuários
+                        .requestMatchers("/api/v1/book/external/**").hasRole("USER")
+
+                        // 🏷 Rotas de Category — apenas administradores
+                        .requestMatchers("/api/v1/category/**").hasRole("ADMIN")
+
+                        // 💾 Rotas de Rental — qualquer usuário autenticado
+                        .requestMatchers("/api/v1/rental/**").authenticated()
+
+                        // 🔒 Todas as outras rotas exigem autenticação
                         .anyRequest().authenticated()
                 )
+                // Stateless, sem sessão
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
+        // Filtro JWT antes do UsernamePasswordAuthenticationFilter
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
