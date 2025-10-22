@@ -5,15 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c18daa89-d018-4d01-9bb2-afbdf027f4a4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/security/config/WebConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/library/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/security/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/security/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/security/jwt/JwtRequestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/security/jwt/JwtRequestFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/security/jwt/JwtUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/security/jwt/JwtUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/security/model/AuthRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/security/model/AuthRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/security/model/AuthResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/security/model/AuthResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/service/CustomUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/service/CustomUserDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,11 +17,24 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;liviasydriao&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/anapaulasanto/public-library.git&quot;,
+    &quot;accountId&quot;: &quot;4ceff44a-a7a6-4ebe-a443-180352d3b9c4&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 0
 }</component>
   <component name="ProjectId" id="344IaFVGlJ3lTBRzlOOQhrSEayr" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -37,9 +44,9 @@
     "Application.LibraryApplication.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Rebasing livia",
+    "git-widget-placeholder": "livia",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Livia/public-library/public-library"
+    "last_opened_file_path": "C:/Arquivos/Documents/.pesquisa/public-library"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
