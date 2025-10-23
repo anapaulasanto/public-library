@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { fetchUserData, fetchUserRentals } from "../services"
+import { fetchAllUsers, fetchUserData, fetchUserRentals } from "../../services/user"
 
 export const useUserProfile = (userId) => {
     return useQuery({
@@ -14,5 +14,12 @@ export const useUserRentals = (userId) => {
         queryKey: ['rentals', userId],
         queryFn: () => fetchUserRentals(userId),
         enabled: !!userId,
+    });
+};
+
+export const useAllUsers = () => {
+    return useQuery({
+        queryKey: ['users'],
+        queryFn: fetchAllUsers,
     });
 };

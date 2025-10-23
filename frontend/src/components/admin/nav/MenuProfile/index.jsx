@@ -9,7 +9,7 @@ export const MenuProfile = () => {
             <div tabIndex={0} role="button" className="btn border-none shadow-none bg-transparent hover:shadow-none">
                 <img src={profileIcon}
                     alt="Icone de perfil do usuário"
-                    className='w-10 hover:w-11'
+                    className='w-10 hover:w-11 transition-all duration-200 '
                 />
             </div>
             <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-56 py-2 text-sm shadow-sm text-gray-700 mt-6">

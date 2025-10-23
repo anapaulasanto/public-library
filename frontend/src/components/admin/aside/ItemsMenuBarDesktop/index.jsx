@@ -1,9 +1,11 @@
 import { MenuItems } from "../../../../data/MenuBar";
 import { BookContext } from "../../../../context/bookContext";
 import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export const ItemsMenuBar = () => {
     const { activeTab, onTabChange } = useContext(BookContext);
+    const navigate = useNavigate()
 
     return (
         <>
@@ -15,6 +17,9 @@ export const ItemsMenuBar = () => {
                     >
                         <div>{item.icon}</div>
                         <p className="ml-2">{item.menu}</p>
+                        {activeTab === "catalogo" && (
+                            navigate("/catalog/books")
+                        )}
                     </button>
                 </li>
             ))

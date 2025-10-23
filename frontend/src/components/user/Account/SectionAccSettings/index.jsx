@@ -2,7 +2,7 @@ import { FaArrowAltCircleLeft } from "react-icons/fa";
 import { FaRegSave } from "react-icons/fa";
 import { ContentTitle } from "../../../admin/AdminDashboard/ContentTitle";
 import { Link } from "react-router-dom";
-import { useUserProfile } from "../../../../hooks";
+import { useUserProfile } from "../../../../hooks/user";
 import { Loading } from "../../../Loading";
 
 export const SectionSettings = () => {

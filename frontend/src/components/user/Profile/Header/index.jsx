@@ -3,7 +3,7 @@ import profileIcon from '../../../../assets/icons/profile-icon.png'
 import { CardHeader } from "../CardHeader";
 import { CiSettings } from "react-icons/ci";
 import { Link } from "react-router-dom"
-import { useUserProfile } from "../../../../hooks/index.jsx";
+import { useUserProfile } from "../../../../hooks/user/index.jsx";
 import { Skeleton } from "../../../Skeleton/index.jsx";
 
 export const Header = () => {

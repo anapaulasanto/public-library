@@ -1,5 +1,5 @@
 import { FaBookOpen, FaCalendar, FaStar } from "react-icons/fa";
-import { useUserProfile } from "../../../../hooks/index.jsx";
+import { useUserProfile } from "../../../../hooks/user/index.jsx";
 
 export const CardHeader = () => {
     const { data: user} = useUserProfile(9)

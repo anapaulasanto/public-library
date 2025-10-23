@@ -9,3 +9,10 @@ export const fetchUserRentals = async (userId) => {
     const { data } = await axios.get(`/rental/user/${userId}`);
     return data;
 };
+
+export const fetchAllUsers = async () => {
+    const { data } = await axios.get("user/all");
+    console.log(data);
+    
+    return data;
+};

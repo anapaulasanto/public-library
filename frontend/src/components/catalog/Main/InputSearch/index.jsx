@@ -12,7 +12,7 @@ export const InputSearch = () => {
                 />
                 <div className="w-[12%] p-3">
                     <select defaultValue="Livro" className="select rounded-xl border border-neutral-300 outline-none bg-neutral-100 shadow text-sm cursor-pointer">
-                        <option disabled={true}>Livro</option>
+                        <option>Livro</option>
                         <option>Autor</option>
                         <option>Palavra-chave</option>
                     </select>

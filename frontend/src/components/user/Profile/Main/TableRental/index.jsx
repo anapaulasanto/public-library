@@ -1,7 +1,7 @@
 import imgCard from "../../../../../assets/bg-auth.jfif"
 import { FaRegCalendarAlt, FaRegClock } from "react-icons/fa"
 import { Modal } from "../../ModalSure"
-import { useUserRentals } from "../../../../../hooks/index.jsx"
+import { useUserRentals } from "../../../../../hooks/user/index.jsx"
 import { Loading } from "../../../../Loading/index.jsx";
 
 export const TableRental = () => {

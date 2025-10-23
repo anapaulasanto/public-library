@@ -8,7 +8,7 @@ export const AdminLayout = () => {
     return (
         <div>
             <Nav />
-            <div className="flex 2xl:gap-[10%]">
+            <div className="flex">
                 <Menu />
                 <Container>
                     <SectionStatus />

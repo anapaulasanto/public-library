@@ -3,7 +3,7 @@ import { FaPencilAlt } from "react-icons/fa";
 export const ModalEdit = ({ modalId, h1, p }) => {
     return (
         <div>
-            <button className="btn border-none hover:bg-blue-200 hover:cursor-pointer" onClick={() => document.getElementById(modalId).showModal()}><FaPencilAlt /></button>
+            <button className="btn border-none bg-transparent hover:bg-blue-200 hover:cursor-pointer" onClick={() => document.getElementById(modalId).showModal()}><FaPencilAlt /></button>
             <dialog id={modalId} className="modal modal-bottom  sm:modal-middle">
                 <div className="modal-box">
                     <h3 className="font-semibold text-xl">{h1}</h3>

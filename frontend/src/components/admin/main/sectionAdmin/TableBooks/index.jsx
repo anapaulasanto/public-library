@@ -1,13 +1,21 @@
-import { useContext } from "react";
-import { BookContext } from "../../../../../context/BookContext";
 import { ModalDelete } from "../ModalDelete";
 import { ModalEdit } from "../ModalEdit";
+import { useBooksAdmin, useDeleteBook } from "../../../../../hooks/book";
 
 export const TableBooks = () => {
-    const { books, deleteBook } = useContext(BookContext);
+    const { data: books, isLoading, isError } = useBooksAdmin()
+    const { mutate: deleteBook} = useDeleteBook()
+
+    if (isLoading) {
+        return <div className="mt-10">Carregando livros...</div>;
+    }
+
+    if (isError) {
+        return <div className="mt-10 text-red-500">Erro ao carregar os livros.</div>;
+    }
 
     return (
-        <div className="overflow-x-auto mt-10">
+        <div className="overflow-x-auto mt-10 border border-neutral-200 bg-base-50">
             <table className="table">
                 <thead>
                     <tr className="text-black">
@@ -26,16 +34,16 @@ export const TableBooks = () => {
                             <td>{book.year}</td>
                             <td>{book.author}</td>
                             <td className="flex">
+                                <ModalEdit
+                                    h1="Editar livro"
+                                    p="Edite informações do livro"
+                                    modalId={`modal_edit_${book.id}`}
+                                />
                                 <ModalDelete
                                     h1="Tem certeza que deseja excluir esse livro?"
                                     p="Essa ação é irreversível"
                                     acao={() => deleteBook(book.id)}
                                     modalId={`modal_delete_${book.id}`}
-                                />
-                                <ModalEdit
-                                    h1="Editar livro"
-                                    p="Edite informações do livro"
-                                    modalId={`modal_edit_${book.id}`}
                                 />
                             </td>
                         </tr>

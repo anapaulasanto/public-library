@@ -2,10 +2,8 @@ import { ContentTitle } from "../../../AdminDashboard/ContentTitle";
 import { TableBooks } from "../TableBooks";
 
 export const SectionTableBooks = () => {
-    
-
     return (
-        <section className="p-8 mt-12 bg-neutral-50/40 mt-15 rounded-xl border border-gray-200">
+        <section className="p-8 w-[90%] bg-neutral-50/40 my-15 rounded-xl border border-gray-200">
             <div className="flex justify-between items-center">
                 <ContentTitle h1="Gerenciar livros" p="Adicione, edite ou remova livros." />
                 <button
