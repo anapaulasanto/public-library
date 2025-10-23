@@ -10,11 +10,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { userLoginSchema } from "../../../../data/schemaForms";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Toast } from "../../../Toast";
 
 export function FormLogin() {
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(userLoginSchema) });
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [erro, setErro] = useState(null);
+    const [toast, setToast] = useState({visible: false})
     const navigate = useNavigate();
 
     async function formSubmit(data) {
@@ -23,8 +25,11 @@ export function FormLogin() {
         if (data.email && data.password) {
             try {
                 await axios.get(`/user?email=${data.email}`);
-                navigate('/');
-
+                setToast({visible: true})
+                setTimeout(() => {
+                    navigate('/user/profile');
+                }, 2000);
+                
             } catch (error) {
                 console.log('Erro ao logar usuario', error);
                 setErro(error.response.data.message)
@@ -34,6 +39,7 @@ export function FormLogin() {
 
     return (
         <>
+            {toast.visible && <Toast message="Login realizado com sucesso!" />}
             <form class="w-full mt-4 space-y-2" onSubmit={handleSubmit(formSubmit)}>
                 <Fieldset
                     htmlFor="email"

@@ -12,23 +12,23 @@ export function MenuProfile() {
                     className='w-10 hover:w-11'
                 />
             </div>
-            <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-56 py-4 text-base shadow-sm text-gray-700 mt-2">
-                <li className='ml-1 rounded-lg hover:bg-blue-300 hover:text-white'>
+            <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-56 py-2 text-sm shadow-sm text-gray-700 mt-6">
+                <li className='ml-1 rounded-lg hover:bg-blue-300 hover:text-white '>
                     <a>
                         <FaRegUser size={14} />
-                        <p className='font-semibold '>Meu perfil</p>
+                        <p className=' '>Meu perfil</p>
                     </a>
                 </li>
                 <li className='mb-3 rounded-lg hover:bg-blue-300 hover:text-white'>
                     <a>
                         <CiSettings size={19} />
-                        <p className='font-semibold'>Painel Admin</p>
+                        <p className=''>Painel Admin</p>
                     </a>
                 </li>
                 <li className='rounded-lg hover:bg-blue-300 hover:text-white'>
-                    <a className='border-t border-gray-200 w-full pt-3 rounded-none'>
+                    <a className='border-t border-gray-200 w-full pt-2 rounded-none'>
                         <IoExitOutline size={19} />
-                        <p className='font-semibold'>Sair</p>
+                        <p className=''>Sair</p>
                     </a>
                 </li>
             </ul>
