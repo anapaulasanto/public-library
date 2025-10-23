@@ -1,6 +1,7 @@
 package br.edu.unichristus.security.jwt;
 
 import br.edu.unichristus.service.CustomUserDetailsService;
+import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,7 +35,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
-
         String path = request.getRequestURI();
         if (path.startsWith("/auth")) {
             filterChain.doFilter(request, response);
@@ -45,33 +45,46 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         String username = null;
         String jwt = null;
 
-        // 1. Primeiro tenta pegar o token do Header (Bearer ...)
+        // 1️⃣ Tenta pegar o token do Header (Bearer ...)
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             jwt = authorizationHeader.substring(7);
-            username = jwtUtil.extractUsername(jwt);
         }
-        // 2. Se não tiver no Header, tenta pegar do Cookie
+        // 2️⃣ Se não tiver no Header, tenta pegar do Cookie
         else if (request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {
                 if ("JWT_TOKEN".equals(cookie.getName())) {
                     jwt = cookie.getValue();
-                    username = jwtUtil.extractUsername(jwt);
                     break;
                 }
             }
         }
 
-        // 🟢 3. Valida o token e autentica o usuário
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        // 🖨️ Debug
+        System.out.println("JWT que chegou no filtro: " + jwt);
 
-            if (jwtUtil.validateToken(jwt, userDetails.getUsername())) {
-                UsernamePasswordAuthenticationToken token =
-                        new UsernamePasswordAuthenticationToken(
-                                userDetails, null, userDetails.getAuthorities()
-                        );
-                token.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(token);
+        if (jwt != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            try {
+                username = jwtUtil.extractUsername(jwt);
+            } catch (ExpiredJwtException e) {
+                System.out.println("Token expirado: " + jwt);
+                // opcional: você pode remover o cookie aqui se quiser forçar logout
+                // Cookie expiredCookie = new Cookie("JWT_TOKEN", null);
+                // expiredCookie.setHttpOnly(true);
+                // expiredCookie.setPath("/");
+                // expiredCookie.setMaxAge(0);
+                // response.addCookie(expiredCookie);
+            }
+
+            if (username != null) {
+                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                if (jwtUtil.validateToken(jwt, userDetails.getUsername())) {
+                    UsernamePasswordAuthenticationToken token =
+                            new UsernamePasswordAuthenticationToken(
+                                    userDetails, null, userDetails.getAuthorities()
+                            );
+                    token.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(token);
+                }
             }
         }
 
