@@ -78,7 +78,6 @@ public class User {
         updatedAt = LocalDateTime.now();
     }
 
-    // ==================== Equals / HashCode / ToString ====================
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

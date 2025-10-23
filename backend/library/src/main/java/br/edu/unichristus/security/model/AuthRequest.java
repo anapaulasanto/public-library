@@ -4,7 +4,7 @@ public class AuthRequest {
     private String email;
     private String password;
 
-    // getters e setters
+
     public String getEmail() {
         return email;
     }

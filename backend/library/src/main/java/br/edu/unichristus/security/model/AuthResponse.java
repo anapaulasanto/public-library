@@ -3,12 +3,12 @@ package br.edu.unichristus.security.model;
 public class AuthResponse {
     private String token;
 
-    // Construtor
+
     public AuthResponse(String token) {
         this.token = token;
     }
 
-    // Getter e Setter
+
     public String getToken() {
         return token;
     }

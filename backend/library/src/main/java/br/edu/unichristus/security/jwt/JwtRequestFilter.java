@@ -34,7 +34,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
-        // 🚫 Ignora rotas públicas (login, register, logout)
+
         String path = request.getRequestURI();
         if (path.startsWith("/auth")) {
             filterChain.doFilter(request, response);
@@ -45,12 +45,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         String username = null;
         String jwt = null;
 
-        // 🟢 1. Primeiro tenta pegar o token do Header (Bearer ...)
+        // 1. Primeiro tenta pegar o token do Header (Bearer ...)
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             jwt = authorizationHeader.substring(7);
             username = jwtUtil.extractUsername(jwt);
         }
-        // 🟢 2. Se não tiver no Header, tenta pegar do Cookie
+        // 2. Se não tiver no Header, tenta pegar do Cookie
         else if (request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {
                 if ("JWT_TOKEN".equals(cookie.getName())) {
