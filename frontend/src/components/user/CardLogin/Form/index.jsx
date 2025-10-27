@@ -3,43 +3,17 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { CiMail } from "react-icons/ci";
 import { FaRegEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-import { Button } from "../Button";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userLoginSchema } from "../../../../data/schemaForms";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { Toast } from "../../../Toast";
 
-export const FormLogin = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(userLoginSchema) });
+export const FormLogin = ({ formSubmit, error, isLoading }) => {
+    const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({ resolver: zodResolver(userLoginSchema) });
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-    const [erro, setErro] = useState(null);
-    const [toast, setToast] = useState({visible: false})
-    const navigate = useNavigate();
-
-    async function formSubmit(data) {
-        setErro(null)
-
-        if (data.email && data.password) {
-            try {
-                await axios.get(`/user?email=${data.email}`);
-                setToast({visible: true})
-                setTimeout(() => {
-                    navigate('/user/profile');
-                }, 2000);
-                
-            } catch (error) {
-                console.log('Erro ao logar usuario', error);
-                setErro(error.message)
-            }
-        }
-    }
 
     return (
         <>
-            {toast.visible && <Toast message="Login realizado com sucesso!" />}
             <form className="w-full mt-4 space-y-2" onSubmit={handleSubmit(formSubmit)}>
                 <Fieldset
                     htmlFor="email"
@@ -60,7 +34,12 @@ export const FormLogin = () => {
                     props={{ ...register("password", { required: true }) }}
                 >
                     <RiLockPasswordLine className="absolute left-2 top-4" />
-                    <button type="button" className="absolute right-4 top-4">
+                    <button
+                        type="button"
+                        className="absolute right-4 top-4"
+                        text={isLoading ? "Entrando..." : "Entrar"}
+                        disabled={isLoading}
+                    >
                         {isPasswordVisible ? (
                             <FaRegEye className="text-gray-400" onClick={() => setIsPasswordVisible(false)} />
                         ) : (
@@ -69,9 +48,11 @@ export const FormLogin = () => {
                     </button>
                 </Fieldset>
                 <p className="text-red-600 text-sm">{errors.password?.message}</p>
-                {erro && <p className="text-red-600 text-center pt-1 text-sm">{erro}</p>}
+                {error && <p className="text-red-600 text-center pt-1 text-sm">{error}</p>}
 
-                <Button text="Entrar" />
+                <button type="submit" className="bg-gradient text-white rounded-lg p-3 w-full mt-4 font-semibold hover:text-black hover:cursor-pointer" disabled={isSubmitting}>
+                    {isSubmitting ? (<span className="loading loading-spinner loading-lg"></span>) : "Entrar"}
+                </button>
             </form>
         </>
     )

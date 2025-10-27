@@ -45,11 +45,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         String username = null;
         String jwt = null;
 
-        // 1️⃣ Tenta pegar o token do Header (Bearer ...)
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             jwt = authorizationHeader.substring(7);
         }
-        // 2️⃣ Se não tiver no Header, tenta pegar do Cookie
         else if (request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {
                 if ("JWT_TOKEN".equals(cookie.getName())) {
@@ -59,7 +57,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             }
         }
 
-        // 🖨️ Debug
         System.out.println("JWT que chegou no filtro: " + jwt);
 
         if (jwt != null && SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -67,12 +64,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 username = jwtUtil.extractUsername(jwt);
             } catch (ExpiredJwtException e) {
                 System.out.println("Token expirado: " + jwt);
-                // opcional: você pode remover o cookie aqui se quiser forçar logout
-                // Cookie expiredCookie = new Cookie("JWT_TOKEN", null);
-                // expiredCookie.setHttpOnly(true);
-                // expiredCookie.setPath("/");
-                // expiredCookie.setMaxAge(0);
-                // response.addCookie(expiredCookie);
             }
 
             if (username != null) {
@@ -91,3 +82,4 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 }
+

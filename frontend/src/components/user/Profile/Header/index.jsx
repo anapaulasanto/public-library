@@ -3,11 +3,12 @@ import profileIcon from '../../../../assets/icons/profile-icon.png'
 import { CardHeader } from "../CardHeader";
 import { CiSettings } from "react-icons/ci";
 import { Link } from "react-router-dom"
-import { useUserProfile } from "../../../../hooks/user/index.jsx";
 import { Skeleton } from "../../../Skeleton/index.jsx";
+import { useContext } from "react";
+import { AuthContext } from "../../../../context/AuthContext/index.jsx";
 
 export const Header = () => {
-    const { data: user, isLoading, isError } = useUserProfile(9)
+    const { user, isLoading, error } = useContext(AuthContext);
     console.log(user);
 
     if (isLoading) {
@@ -16,7 +17,7 @@ export const Header = () => {
         )
     }
 
-    if (isError) {
+    if (error) {
         return (
             <section className="flex items-center justify-center h-40  border-gray-200 font-bold ">
                 <p>Ops... Não consegui carregar informaçõs desse usuário</p>

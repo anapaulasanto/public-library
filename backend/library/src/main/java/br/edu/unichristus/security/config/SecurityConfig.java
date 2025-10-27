@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -12,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.http.HttpMethod;
 
 @Configuration
 public class SecurityConfig {
@@ -25,13 +27,30 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .cors(Customizer.withDefaults())
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        //Permite todas as requisições OPTIONS (preflight)
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
+                        // !! CORREÇÃO AQUI !!
                         // Rotas públicas (registro, login, logout)
                         .requestMatchers("/auth/**").permitAll()
 
+                        // Rotas públicas (frontend)
+                        // Assumindo que estas não são rotas de API
+                        .requestMatchers("/", "/catalog/books").permitAll()
+
+                        // Protege as rotas de Admin
+                        // Se /admin/** for rota de API, mude para /api/v1/admin/**
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+
+                        // Protege as rotas de User
+                        // Se /user/** for rota de API, mude para /api/v1/user/**
+                        .requestMatchers("/user/**").hasRole("USER")
+
                         // Rotas de User — usuários e admins
-                        .requestMatchers("/api/v1/user/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
 
                         // Rotas de Review — apenas usuários
                         .requestMatchers("/api/v1/review/**").hasRole("USER")

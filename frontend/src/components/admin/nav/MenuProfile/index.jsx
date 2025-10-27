@@ -2,8 +2,27 @@ import { CiSettings } from 'react-icons/ci'
 import profileIcon from '../../../../assets/icons/profile-icon.png'
 import { FaRegUser } from 'react-icons/fa'
 import { IoExitOutline } from 'react-icons/io5'
+import { useLogout } from '../../../../hooks/auth'
+import { useContext } from 'react'
+import { AuthContext } from '../../../../context/AuthContext'
 
 export const MenuProfile = () => {
+    const { handleLogout, isLoading } = useLogout();
+    const { user } = useContext(AuthContext);
+
+    const logoutClick = async () => {
+        try {
+            await handleLogout();
+
+        } catch (error) {
+            console.log("Falha ao deslogar usuario", error);
+        }
+    }
+
+    if (!user) {
+        return null;
+    }
+
     return (
         <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn border-none shadow-none bg-transparent hover:shadow-none">
@@ -26,10 +45,14 @@ export const MenuProfile = () => {
                     </a>
                 </li>
                 <li className='rounded-lg hover:bg-blue-300 hover:text-white'>
-                    <a className='border-t border-gray-200 w-full pt-2 rounded-none'>
+                    <button
+                        className='border-t border-gray-200 w-full pt-2 rounded-none'
+                        onClick={logoutClick}
+                        disabled={isLoading}
+                    >
                         <IoExitOutline size={19} />
-                        <p className=''>Sair</p>
-                    </a>
+                        <p>{isLoading ? "Saindo.." : "Sair"}</p>
+                    </button>
                 </li>
             </ul>
         </div>

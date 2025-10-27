@@ -5,6 +5,7 @@ import br.edu.unichristus.security.model.AuthRequest;
 import br.edu.unichristus.security.model.AuthResponse;
 import br.edu.unichristus.service.CustomUserDetailsService;
 import br.edu.unichristus.domain.model.User;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -80,6 +81,46 @@ public class AuthController {
         response.addCookie(cookie);
 
         return ResponseEntity.ok(new AuthResponse(jwt));
+    }
+
+    // ====================VERIFICA USUÁRIO A PARTIR DO COOKIE ====================
+    @GetMapping("/logged")
+    public ResponseEntity<User> getLoggedInUser(HttpServletRequest request) {
+        String email = null;
+        String jwt = null;
+
+        // Tenta extrair o JWT do cookie
+        if (request.getCookies() != null) {
+            for (Cookie cookie : request.getCookies()) {
+                if (cookie.getName().equals("JWT_TOKEN")) {
+                    jwt = cookie.getValue();
+                    break;
+                }
+            }
+        }
+
+        // Se não achou o cookie, não está logado
+        if (jwt == null) {
+            return ResponseEntity.status(401).build(); // 401 Unauthorized
+        }
+
+        try {
+            email = jwtUtil.extractUsername(jwt);
+        } catch (Exception e) {
+            return ResponseEntity.status(401).build();
+        }
+
+        //Se achou o email, busca o usuário no banco
+        if (email != null) {
+            User user = (User) this.userDetailsService.loadUserByUsername(email);
+
+            if (jwtUtil.validateToken(jwt, user.getEmail())) {
+                user.setPassword(null);
+                return ResponseEntity.ok(user);
+            }
+        }
+
+        return ResponseEntity.status(401).build();
     }
 
     // ==================== LOGOUT ====================

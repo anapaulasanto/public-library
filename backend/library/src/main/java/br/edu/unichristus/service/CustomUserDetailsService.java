@@ -3,15 +3,12 @@ package br.edu.unichristus.service;
 import br.edu.unichristus.domain.model.User;
 import br.edu.unichristus.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+// import org.springframework.security.core.authority.SimpleGrantedAuthority; // Não é mais necessário aqui
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Collections;
-import java.util.List;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -25,19 +22,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     // ==================== LOGIN ====================
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        // 1. Busca o *seu* objeto User (que agora implementa UserDetails)
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado: " + email));
+        return user;
 
-        // Garante que o papel venha corretamente (USER ou ADMIN)
-        String role = user.getRole() != null ? user.getRole() : "USER";
-        List<SimpleGrantedAuthority> authorities =
-                Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role.toUpperCase()));
-
-        return new org.springframework.security.core.userdetails.User(
-                user.getEmail(),
-                user.getPassword(),
-                authorities
-        );
     }
 
     // ==================== REGISTER ====================

@@ -1,8 +1,9 @@
 import { FaBookOpen, FaCalendar, FaStar } from "react-icons/fa";
-import { useUserProfile } from "../../../../hooks/user/index.jsx";
+import { useContext } from "react";
+import { AuthContext } from "../../../../context/AuthContext/index.jsx";
 
 export const CardHeader = () => {
-    const { data: user} = useUserProfile(9)
+    const { user } = useContext(AuthContext);
 
     const createdAtString = user?.createdAt
     const year = createdAtString ? createdAtString.substring(0,4) : ''

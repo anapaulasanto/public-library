@@ -2,12 +2,18 @@ package br.edu.unichristus.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Objects;
 
 @Entity
 @Table(name = "tb_user")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,10 +25,11 @@ public class User {
     @Column(unique = true)
     private String email;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // Esconde o password nas respostas JSON
     private String password;
 
     @Column(length = 20, nullable = false)
-    private String role; // ROLE_USER ou ROLE_ADMIN
+    private String role; // USER ou ADMIN
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Column(nullable = false, updatable = false)
@@ -46,7 +53,7 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
-    // ==================== Getters e Setters ====================
+    // ==================== Getters e Setters  ====================
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -56,6 +63,7 @@ public class User {
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
+    @Override
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
 
@@ -67,6 +75,7 @@ public class User {
     public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
+    // ==================== Métodos do JPA ====================
     @PrePersist
     protected void onCreate() {
         createdAt = updatedAt = LocalDateTime.now();
@@ -78,6 +87,7 @@ public class User {
         updatedAt = LocalDateTime.now();
     }
 
+    // ==================== Métodos de Comparação  ====================
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -102,5 +112,37 @@ public class User {
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // Garante que a role tenha um valor padrão e esteja em maiúsculas
+        String userRole = (this.role == null || this.role.isBlank()) ? "USER" : this.role.toUpperCase();
+        // Cria a "autoridade" que o Spring entende
+        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + userRole));
+    }
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true; // Conta nunca expira
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true; // Conta nunca é bloqueada
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true; // Credenciais nunca expiram
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true; // Conta está sempre habilitada
     }
 }

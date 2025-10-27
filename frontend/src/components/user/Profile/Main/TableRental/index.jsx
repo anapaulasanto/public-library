@@ -36,7 +36,8 @@ export const TableRental = () => {
                                 <p className="text-gray-500 text-sm">Autor</p>
                             </div>
                             <div>
-                                <button className={`${r.status === 'Atrasado' ? 'bg-red-500' : 'bg-slate-500'} text-white px-2 text-sm font-semibold rounded-xl py-0.5`}
+                                <button
+                                    className={`${r.status === 'Atrasado' ? 'bg-red-500' : 'bg-slate-500'} text-white px-2 text-sm font-semibold rounded-xl py-0.5`}
                                 >
                                     {r.status}
                                 </button>
@@ -55,8 +56,24 @@ export const TableRental = () => {
                         </div>
 
                         <div className="flex flex-col gap-3 lg:flex-row">
-                            <Modal props="bg-sky-900 text-white w-50 lg:w-60" modalId="my_modal_1" h1="Deseja renovar?" p="Ao renovar o livro você tem um prazo de 15 dias de leitura." tittleBtn="Renovar" txtBtn1="Renovar" txtBtn2="Cancelar" />
-                            <Modal props="bg-neutral-200 w-50 lg:w-30 text-black" modalId="my_modal_2" h1="Deseja devolver?" p="Ao devolver o livro, o seu progresso será perdido." tittleBtn="Devolver" txtBtn1="Devolver" txtBtn2="Cancelar" />
+                            <Modal
+                                props="bg-sky-900 text-white w-50 lg:w-60"
+                                modalId="my_modal_1"
+                                h1="Deseja renovar?"
+                                p="Ao renovar o livro você tem um prazo de 15 dias de leitura."
+                                tittleBtn="Renovar"
+                                txtBtn1="Renovar"
+                                txtBtn2="Cancelar"
+                            />
+                            <Modal
+                                props="bg-neutral-200 w-50 lg:w-30 text-black"
+                                modalId="my_modal_2"
+                                h1="Deseja devolver?"
+                                p="Ao devolver o livro, o seu progresso será perdido."
+                                tittleBtn="Devolver"
+                                txtBtn1="Devolver"
+                                txtBtn2="Cancelar"
+                            />
                         </div>
                     </div>
                 </div>

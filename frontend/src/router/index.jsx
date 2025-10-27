@@ -12,32 +12,49 @@ import { UserProfileLayout } from "../layout/user";
 import { Account } from "../pages/user/Account";
 import { Catalog } from "../pages/catalog";
 import { LayoutCatalog } from "../layout/catalog";
-
+import { ProtectedRoutes } from "../router/ProtectedRoutes";
+import { PublicRoutes } from "./PublicRoutes";
 export const AppRouter = () => {
-    return(
+    return (
         <BrowserRouter>
             <Routes>
+                {/* Rotas publicas, todos podem ver*/}
                 <Route path="/">
                     <Route path="" element={<Home />} />
-                </Route>
-                <Route path="/auth/user" element={<AuthLayout />}>
-                    <Route path="login" element={<Login />} />
-                    <Route path="sign-up" element={<SignUp />} />
-                </Route>
-                <Route path="/auth/admin" element={<AuthLayout />}>
-                    <Route path="login" element={<LoginAdmin />} />
-                    <Route path="sign-up" element={<SignUpAdmin />} />
-                </Route>
-                <Route path="/admin" element={<AdminLayout />}>
-                    <Route path="dashboard" element={<Dashboard />} />
-                </Route>
-                <Route path="/user" element={<UserProfileLayout />}>
-                    <Route path="profile" element={<Profile />} />
-                    <Route path="profile/account" element={<Account />} />
                 </Route>
                 <Route path="/catalog" element={<LayoutCatalog />}>
                     <Route path="books" element={<Catalog />} />
                 </Route>
+
+                {/* Rotas publicas, apenas deslogados podem ver*/}
+                <Route element={<PublicRoutes />}>
+                    <Route path="/auth/user" element={<AuthLayout />}>
+                        <Route path="login" element={<Login />} />
+                        <Route path="sign-up" element={<SignUp />} />
+                    </Route>
+                    <Route path="/auth/admin" element={<AuthLayout />}>
+                        <Route path="login" element={<LoginAdmin />} />
+                        <Route path="sign-up" element={<SignUpAdmin />} />
+                    </Route>
+                </Route>
+
+                {/* --- Rotas Protegidas (Apenas logados) --- */}
+
+                {/* Rotas de Usuário (Role 'USER') */}
+                <Route element={<ProtectedRoutes role="USER" />}>
+                    <Route path="/user" element={<UserProfileLayout />}>
+                        <Route path="profile" element={<Profile />} />
+                        <Route path="profile/account" element={<Account />} />
+                    </Route>
+                </Route>
+
+                {/* Rotas de Usuário (Role 'ADMIN') */}
+                <Route element={<ProtectedRoutes role="ADMIN" />}>
+                    <Route path="/admin" element={<AdminLayout />}>
+                        <Route path="dashboard" element={<Dashboard />} />
+                    </Route>
+                </Route>
+
             </Routes>
         </BrowserRouter>
     )
