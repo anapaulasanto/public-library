@@ -15,7 +15,7 @@ export const TableBooks = () => {
     }
 
     return (
-        <div className="overflow-x-auto mt-10 border border-neutral-200 bg-base-50">
+        <div className="overflow-auto h-1/2 mt-10 border border-neutral-200 bg-white/70 rounded-xl">
             <table className="table">
                 <thead>
                     <tr className="text-black">

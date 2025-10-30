@@ -2,7 +2,7 @@ import { MenuProfile } from '../MenuProfile'
 import favicon from '../../../../assets/favicon.png'
 import { Link } from 'react-router-dom'
 
-export const Nav = () => {
+export const NavAdmin = () => {
     return (
         <nav className='bg-slate-50 border border-slate-100 shadow-xs'>
             <div className='flex justify-between items-center p-5'>

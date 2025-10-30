@@ -5,6 +5,7 @@ import { IoExitOutline } from 'react-icons/io5'
 import { useLogout } from '../../../../hooks/auth'
 import { useContext } from 'react'
 import { AuthContext } from '../../../../context/AuthContext'
+import { Link } from 'react-router-dom'
 
 export const MenuProfile = () => {
     const { handleLogout, isLoading } = useLogout();
@@ -33,16 +34,16 @@ export const MenuProfile = () => {
             </div>
             <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-56 py-2 text-sm shadow-sm text-gray-700 mt-6">
                 <li className='ml-1 rounded-lg hover:bg-blue-300 hover:text-white '>
-                    <a>
+                    <Link to="/admin/dashboard">
                         <FaRegUser size={14} />
                         <p className=' '>Meu perfil</p>
-                    </a>
+                    </Link>
                 </li>
                 <li className='mb-3 rounded-lg hover:bg-blue-300 hover:text-white'>
-                    <a>
+                    <Link to="/admin/dashboard"> 
                         <CiSettings size={19} />
                         <p className=''>Painel Admin</p>
-                    </a>
+                    </Link>
                 </li>
                 <li className='rounded-lg hover:bg-blue-300 hover:text-white'>
                     <button

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { CiSettings } from 'react-icons/ci'
 import { FaRegUser } from 'react-icons/fa'
 
-export const Nav = () => {
+export const NavHome = () => {
     return (
         <nav className="w-full h-18 flex items-center justify-between px-8 shadow-md">
             <div className="flex items-center gap-2">

@@ -15,7 +15,7 @@ export const TableUsers = () => {
     }
 
     return (
-        <div className="overflow-x-auto mt-10 border border-neutral-200 bg-base-50">
+        <div className="overflow-auto h-1/2 mt-10 border border-neutral-200 bg-white/50 rounded-xl">
                     <table className="table">
                         <thead>
                             <tr className="text-black">
@@ -23,6 +23,7 @@ export const TableUsers = () => {
                                 <th>Email</th>
                                 <th>Nome</th>
                                 <th>Membro desde</th>
+                                <th>Tipo</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
@@ -32,7 +33,8 @@ export const TableUsers = () => {
                                     <td>{user.id}</td>
                                     <td>{user.email}</td>
                                     <td>{user.nome}</td>
-                                    <td>{user.atualizado}</td>
+                                    <td>{user.updatedAt}</td>
+                                    <td>{user.role}</td>
                                     <td className="flex">
                                         <ModalEdit
                                             h1="Editar livro"

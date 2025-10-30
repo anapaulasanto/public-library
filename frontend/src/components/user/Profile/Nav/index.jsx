@@ -1,7 +1,7 @@
 import favicon from '../../../../assets/favicon.png'
 import { Link } from "react-router-dom"
 import { DropdownUser } from './DropdownUser'
-export const Nav = () => {
+export const NavUser = () => {
     return (
         <div className="navbar bg-base-50 shadow-sm flex justify-between px-10">
             <Link to='/'>

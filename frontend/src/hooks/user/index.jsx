@@ -1,25 +1,61 @@
-import { useQuery } from "@tanstack/react-query"
-import { fetchAllUsers, fetchUserData, fetchUserRentals } from "../../services/user"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { fetchAllUsers, fetchUserRentals, fetchUserReviews, updateUser } from "../../services/user"
 
-// export const useUserProfile = (userId) => {
-//     return useQuery({
-//         queryKey: ['user', userId],
-//         queryFn: () => fetchUserData(userId),
-//         enabled: !!userId, //garante que n chame essa funcao toda hora, so qnd precisar, no caso qnd userId n for nulo ou undefined
-//     });
-// };
-
-export const useUserRentals = (userId) => {
-    return useQuery({
-        queryKey: ['rentals', userId],
-        queryFn: () => fetchUserRentals(userId),
-        enabled: !!userId,
-    });
-};
-
+// ============ TODOS OS USUARIOS ============
 export const useAllUsers = () => {
     return useQuery({
         queryKey: ['users'],
         queryFn: fetchAllUsers,
     });
 };
+
+// ============ ALUGUEIS DE UM USUARIO ============
+export const useUserRentals = () => {
+    const queryClient = useQueryClient();
+    const userId = queryClient.getQueryData(['authUser'])?.id
+
+    return useQuery({
+        queryKey: ['rentalsByUser', userId],
+        queryFn: () => fetchUserRentals(userId),
+        retry: false,
+        enabled: !!userId,
+    });
+};
+
+// ============ AVALIAÇÕES DE UM USUARIO ============
+export const useUserReviews = () => {
+    const queryClient = useQueryClient();
+    const userId = queryClient.getQueryData(['authUser'])?.id;
+
+    return useQuery({
+        queryKey: ['reviewsByUser', userId],
+        queryFn: () => fetchUserReviews(userId),
+        retry: false,
+        enabled: !!userId,
+    })
+}
+
+export const useUserUpdate = () => {
+    const queryClient = useQueryClient();
+    const userId = queryClient.getQueryData(['authUser'])?.id;
+
+    const mutation = useMutation({
+        mutationFn: (updateData) => updateUser(userId, updateData), 
+
+        onSuccess: () => {
+            console.log("Usuário atualizado");
+            queryClient.invalidateQueries({ queryKey: ['authUser'] });
+        },
+
+        onError: (error) => {
+            console.log("Erro ao atualizar usuário:", error);
+            
+        }
+    });
+
+    return {
+        handleUpdate: mutation.mutateAsync,
+        error: mutation.error,
+        isSubmitting: mutation.isLoading,
+    };
+}

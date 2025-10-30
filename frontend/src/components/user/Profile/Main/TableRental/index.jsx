@@ -3,9 +3,11 @@ import { FaRegCalendarAlt, FaRegClock } from "react-icons/fa"
 import { Modal } from "../../ModalSure"
 import { useUserRentals } from "../../../../../hooks/user/index.jsx"
 import { Loading } from "../../../../Loading/index.jsx";
+import { Link } from "react-router-dom";
+import bookIcon  from "../../../../../assets/icons/book-icon.png"
 
 export const TableRental = () => {
-    const { data: rental, isLoading, isError } = useUserRentals(9);
+    const { data: rental, isLoading, isError } = useUserRentals();
 
     if (isLoading) {
         return (
@@ -15,8 +17,16 @@ export const TableRental = () => {
 
     if (isError) {
         return (
-            <section className="flex items-center justify-center h-40  border-gray-200 font-bold ">
-                <p>Ops... Não consegui carregar os alugueis desse usuário</p>
+            <section className="flex flex-col items-center justify-center h-full ">
+                <img src={bookIcon} alt="Icone de livro" />
+                <p className="font-semibold text-xl mb-3">Nenhum aluguel ativo</p>
+                <p className="text-gray-500">Você ainda não possui livros alugados no momento.</p>
+                <Link
+                    className="bg-gradient text-white font-semibold shadow rounded-xl w-full h-10 flex items-center mx-auto justify-center mt-10 gap-2 text-sm hover:cursor-pointer hover:shadow-xl lg:w-1/7"
+                    to="/catalog/books"
+                >
+                    Alugar um livro
+                </Link>
             </section>
         );
     }
@@ -30,19 +40,16 @@ export const TableRental = () => {
                 >
                     <img src={imgCard} alt="" className="w-1/3 rounded-l-xl " />
                     <div className="flex flex-col justify-around ">
-                        <div className="flex justify-between px-2">
                             <div>
                                 <h1 className="font-semibold text-xl">{r.bookTitle}</h1>
-                                <p className="text-gray-500 text-sm">Autor</p>
                             </div>
-                            <div>
+                            {/* <div>
                                 <button
                                     className={`${r.status === 'Atrasado' ? 'bg-red-500' : 'bg-slate-500'} text-white px-2 text-sm font-semibold rounded-xl py-0.5`}
                                 >
                                     {r.status}
                                 </button>
-                            </div>
-                        </div>
+                            </div> */}
 
                         <div className="flex flex-col items-start gap-2 w-full">
                             <div className="flex items-center gap-2 bg-green-500 text-white rounded-xl py-1 px-4 ">

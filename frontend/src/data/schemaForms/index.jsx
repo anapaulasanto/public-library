@@ -27,7 +27,7 @@ export const userRegisterSchema = z.object({
 export const userLoginSchema = z.object({
     email: z
         .string()
-        .min(1,{ message: "Campo obrigatório." })
+        .min(1, { message: "Campo obrigatório." })
         .email({ message: "Email inválido." }),
     password: z
         .string()

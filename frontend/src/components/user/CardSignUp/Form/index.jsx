@@ -15,7 +15,7 @@ export const FormSignUp = ({ formSubmit, error }) => {
 
     return (
         <>
-            <form className="w-full " onSubmit={handleSubmit(formSubmit)}>
+            <form className="w-full" onSubmit={handleSubmit(formSubmit)}>
                 <Fieldset
                     htmlFor="nome" label="Nome completo"
                     placeholder="Seu nome completo"
