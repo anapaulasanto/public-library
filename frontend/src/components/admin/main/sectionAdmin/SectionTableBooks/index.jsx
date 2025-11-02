@@ -7,7 +7,7 @@ export const SectionTableBooks = () => {
             <div className="flex justify-between items-center">
                 <ContentTitle h1="Gerenciar livros" p="Adicione, edite ou remova livros." />
                 <button
-                    onClick= {() => deleteBook()}
+                    // onClick= {() => deleteBook()}
                     className="bg-blue-300 text-sm h-10 w-30 rounded-md font-semibold text-white shadow-md"
                 >+ Adicionar livro
                 </button>

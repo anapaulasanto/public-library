@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 import { Loading } from "../../../Loading";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { userRegisterSchema } from "../../../../data/schemaForms";
+import { userUpdateSchema } from "../../../../data/schemaForms";
 import { useEffect } from "react";
 
 export const SectionSettings = ({ redirectTo, defaultName, defaultEmail, isLoading, handleUpdate, error, isSubmitting }) => {
-    const { register, handleSubmit, reset, formState: { errors } } = useForm({ resolver: zodResolver(userRegisterSchema)});
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({ resolver: zodResolver(userUpdateSchema) });
 
     useEffect(() => {
         // Se os dados existirem (não forem undefined), reseta o formulário populando os campos.
@@ -51,20 +51,14 @@ export const SectionSettings = ({ redirectTo, defaultName, defaultEmail, isLoadi
                         <input type="email" className="input w-full" defaultValue={defaultEmail}  {...register("email")} />
                         <p className="text-red-600 text-sm">{errors.email?.message}</p>
                     </fieldset>
-                    <fieldset>
-                        <legend className="fieldset-legend text-base">Nova senha</legend>
-                        <input type="password" className="input w-full" placeholder="••••••••"  {...register("password")} />
-                        <p className="text-red-600 text-sm">{errors.password?.message}</p>
-                    </fieldset>
-                    <fieldset>
-                        <legend className="fieldset-legend text-base">Confirmar senha</legend>
-                        <input type="password" className="input w-full" placeholder="••••••••"  {...register("confirmPassword")} />
-                        <p className="text-red-600 text-sm">{errors.confirmPassword?.message}</p>
-                    </fieldset>
-                    
                     <div className="flex gap-4 text-base mt-2">
                         <button className="bg-white font-semibold w-30 h-10 rounded-lg border border-neutral-200 hover:bg-neutral-400 hover:cursor-pointer">Cancelar</button>
-                        <button type="submit" className="flex items-center justify-around bg-sky-800 font-semibold text-white w-50 h-10 rounded-lg hover:bg-sky-700 hover:cursor-pointer" disabled={isSubmitting}>
+                        <button
+                            type="submit"
+                            className="flex items-center justify-around bg-sky-800 font-semibold text-white w-50 h-10 rounded-lg hover:bg-sky-700 hover:cursor-pointer"
+                            disabled={isSubmitting}
+                            
+                        >
                             <FaRegSave />
                             {isSubmitting ? "Salvando..." : "Salvar alterações"}
                         </button>

@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { fetchAllUsers, fetchUserRentals, fetchUserReviews, updateUser } from "../../services/user"
+import { deleteUser, fetchAllUsers, fetchUserRentals, fetchUserReviews, updateUser } from "../../services/user"
 
-// ============ TODOS OS USUARIOS ============
+// ============ EXIBIR TODOS OS USUARIOS ============
 export const useAllUsers = () => {
     return useQuery({
         queryKey: ['users'],
@@ -35,26 +35,51 @@ export const useUserReviews = () => {
     })
 }
 
-export const useUserUpdate = () => {
+// ============ ATUALIZAR UM USUARIO ============
+export const useUserUpdate = (userIdToUpdate) => {
     const queryClient = useQueryClient();
-    const userId = queryClient.getQueryData(['authUser'])?.id;
 
     const mutation = useMutation({
-        mutationFn: (updateData) => updateUser(userId, updateData), 
+        mutationFn: (updateData) => updateUser(userIdToUpdate, updateData), 
 
         onSuccess: () => {
             console.log("Usuário atualizado");
             queryClient.invalidateQueries({ queryKey: ['authUser'] });
+            queryClient.invalidateQueries({ queryKey: ['users'] });
         },
 
         onError: (error) => {
-            console.log("Erro ao atualizar usuário:", error);
-            
-        }
+            console.log("Erro ao atualizar usuário:", error);  
+        },
     });
 
     return {
-        handleUpdate: mutation.mutateAsync,
+        handleUpdateUser: mutation.mutateAsync,
+        error: mutation.error,
+        isSubmitting: mutation.isLoading,
+    };
+}
+
+// ============ EXCLUIR UM USUARIO ============
+export const useUserDelete = (userIdToDelete) => {
+    const queryClient = useQueryClient();
+
+    const mutation = useMutation({
+        mutationFn: () => deleteUser(userIdToDelete),
+
+        onSuccess: () => {
+            console.log("Usuário removido com sucesso");
+            queryClient.invalidateQueries({ queryKey: ['authUser'] });
+            queryClient.invalidateQueries({ queryKey: ['users'] });
+        },
+
+        onError: (error) => {
+            console.log("Erro ao remover usuário:", error);
+        },
+    });
+
+    return {
+        handleDeleteUser: mutation.mutateAsync,
         error: mutation.error,
         isSubmitting: mutation.isLoading,
     };

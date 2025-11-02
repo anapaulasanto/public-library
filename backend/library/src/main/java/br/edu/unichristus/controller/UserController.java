@@ -39,7 +39,7 @@ public class UserController {
 
     @Operation(summary = "Retorna a lista de todos os usuários | role: [ADMIN]", tags = "User")
     @GetMapping("/all")
-    public List<UserLowDTO> findAll() {
+    public List<User> findAll() {
         return service.findAll();
     }
 

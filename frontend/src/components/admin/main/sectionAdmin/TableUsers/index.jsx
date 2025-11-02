@@ -1,13 +1,16 @@
-import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
-import { ModalEdit } from "../ModalEdit";
-import { ModalDelete } from "../ModalDelete";
+import { FaCalendar, FaCalendarAlt, FaPencilAlt, FaTrashAlt, FaUser } from "react-icons/fa";
+import { IoIosMail } from "react-icons/io";
+import { ModalDeleteUser } from "../ModalDelete";
 import { useAllUsers } from "../../../../../hooks/user";
+import { formatDate } from "../../../../../utils";
+import { Loading } from "../../../../Loading";
+import { ModalEditUsers } from "../ModalEditUsers";
 
 export const TableUsers = () => {
     const { data: users, isLoading, isError } = useAllUsers()
 
     if (isLoading) {
-        return <div className="mt-10">Carregando usuarios...</div>;
+        return <Loading />
     }
 
     if (isError) {
@@ -15,43 +18,71 @@ export const TableUsers = () => {
     }
 
     return (
-        <div className="overflow-auto h-1/2 mt-10 border border-neutral-200 bg-white/50 rounded-xl">
-                    <table className="table">
-                        <thead>
-                            <tr className="text-black">
-                                <th>Id</th>
-                                <th>Email</th>
-                                <th>Nome</th>
-                                <th>Membro desde</th>
-                                <th>Tipo</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {users.map((user) => (
-                                <tr key={user.id}>
-                                    <td>{user.id}</td>
-                                    <td>{user.email}</td>
-                                    <td>{user.nome}</td>
-                                    <td>{user.updatedAt}</td>
-                                    <td>{user.role}</td>
-                                    <td className="flex">
-                                        <ModalEdit
-                                            h1="Editar livro"
-                                            p="Edite informações do livro"
-                                            // modalId={`modal_edit_${user.id}`}
-                                        />
-                                        <ModalDelete
-                                            h1="Tem certeza que deseja excluir esse livro?"
-                                            p="Essa ação é irreversível"
-                                            // acao={() => useDeleteBook(book.id)}
-                                            // modalId={`modal_delete_${book.id}`}
-                                        />
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+        <div className="overflow-auto  h-[400px] mt-10 border border-neutral-200 bg-white/50 rounded-xl">
+
+            <table className="table">
+                <thead>
+                    <tr className="text-black">
+                        <th>Id</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Membro desde</th>
+                        <th>Tipo</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {users.map((user) => (
+                        <tr key={user.id}>
+                            <td>{user.id}</td>
+                            <td>
+                                <span className="flex items-center gap-1">
+                                    <FaUser />
+                                    {user.name}
+                                </span>
+                            </td>
+                            <td>
+                                <span className="flex items-center gap-1">
+                                    <IoIosMail />
+                                    {user.email}
+                                </span>
+                            </td>
+                            <td>
+                                <span className="flex items-center gap-1">
+                                    <FaCalendarAlt />
+                                    {formatDate(user.createdAt)}
+                                </span>
+                            </td>
+                            <td>
+                                <span className={`
+                                                py-1 px-3 
+                                                rounded-xl 
+                                                text-white 
+                                                text-xs 
+                                                font-semibold
+                                                ${user.role === 'ADMIN' ? "bg-blue-500" : "bg-green-500"}
+                                            `}>
+                                    {user.role === null ? 'USER' : user.role}
+                                </span>
+                            </td>
+                            <td className="flex">
+                                <ModalEditUsers
+                                    h1="Editar usuário"
+                                    p="Edite informações do usuário"
+                                    modalId={`modal_edit_${user.id}`}
+                                    defaultName={user.name}
+                                    defaultEmail={user.email}
+                                    userId={user.id}
+                                />
+                                <ModalDeleteUser
+                                    modalId={`modal_delete_${user.id}`}
+                                    userId={user.id}
+                                />
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
     )
 }

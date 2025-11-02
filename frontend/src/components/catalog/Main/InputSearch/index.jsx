@@ -17,7 +17,7 @@ export const InputSearch = () => {
                         <option>Palavra-chave</option>
                     </select>
                 </div>
-                <button type="submit" className="bg-gradient text-white p-3 ml-3 rounded-lg text-sm font-semibold hover:bg-blue-600 cursor-pointer hover:p-3.5 transition-all duration-300">
+                <button type="submit" className="bg-blue-300 text-white p-3 ml-3 rounded-lg text-sm font-semibold hover:bg-blue-400 transition-all duration-200 cursor-pointer">
                     <IoSearch />
                 </button>
             </form>

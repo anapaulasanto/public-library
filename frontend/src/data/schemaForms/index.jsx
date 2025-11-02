@@ -33,3 +33,8 @@ export const userLoginSchema = z.object({
         .string()
         .min(1, { message: "Campo obrigatório." })
 });
+
+export const userUpdateSchema = z.object({
+    name: z.string().min(3, "Nome deve ter no mínimo 3 caracteres."),
+    email: z.string().email("Email inválido."),
+});

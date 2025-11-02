@@ -11,10 +11,20 @@ export const useBooksAdmin = () => {
 export const useDeleteBook = () => {
     const queryClient = useQueryClient();
 
-    return useMutation({
-        mutationFn: deleteBook,
+    const mutation = useMutation({
+        mutationFn: (bookId) => deleteBook(bookId),
         onSuccess: () => {
+            console.log("Livro excluido com sucesso");
             queryClient.invalidateQueries({ queryKey: ['booksAdmin'] });
+        },
+
+        onError: (error) => {
+            console.log("Erro ao excluir livro", error);
         }
     })
+
+    return {
+        handleDeleteBook: mutation.mutateAsync,
+        error: mutation.error
+    }
 }

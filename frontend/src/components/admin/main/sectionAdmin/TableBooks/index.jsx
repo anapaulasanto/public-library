@@ -1,13 +1,15 @@
-import { ModalDelete } from "../ModalDelete";
-import { ModalEdit } from "../ModalEdit";
+import { ModalEditBooks } from "../ModalEditBooks";
 import { useBooksAdmin, useDeleteBook } from "../../../../../hooks/book";
+import { Loading } from "../../../../Loading"
+import { FaBook, FaCalendarAlt } from "react-icons/fa";
+import { FaUserEdit } from "react-icons/fa";
 
 export const TableBooks = () => {
     const { data: books, isLoading, isError } = useBooksAdmin()
-    const { mutate: deleteBook} = useDeleteBook()
+    const { handleDeleteBook, error } = useDeleteBook()
 
     if (isLoading) {
-        return <div className="mt-10">Carregando livros...</div>;
+        return <Loading />
     }
 
     if (isError) {
@@ -15,7 +17,7 @@ export const TableBooks = () => {
     }
 
     return (
-        <div className="overflow-auto h-1/2 mt-10 border border-neutral-200 bg-white/70 rounded-xl">
+        <div className="overflow-auto h-[400px] mt-10 border border-neutral-200 bg-white/70 rounded-xl">
             <table className="table">
                 <thead>
                     <tr className="text-black">
@@ -29,22 +31,50 @@ export const TableBooks = () => {
                 <tbody>
                     {books.map((book) => (
                         <tr key={book.id}>
-                            <td>{book.title}</td>
-                            <td>{book.categoryName}</td>
-                            <td>{book.year}</td>
-                            <td>{book.author}</td>
+                            <td>
+                                <span className="flex items-center gap-1">
+                                    <FaBook />
+                                    {book.title}
+                                </span>
+                            </td>
+                            <td>
+                                <span className="flex justify-center py-1 px-3 
+                                                rounded-xl 
+                                                text-white 
+                                                text-xs 
+                                                font-semibold
+                                                bg-purple-800">
+                                    {book.categoryName}
+                                </span>
+                            </td>
+                            <td>
+                                <span className="flex items-center gap-1">
+                                    <FaCalendarAlt />
+                                    {book.year}
+                                </span>
+                            </td>
+                            <td>
+                                <span className="flex items-center gap-1">
+                                    <FaUserEdit />
+                                    {book.author}
+                                </span>
+                            </td>
                             <td className="flex">
-                                <ModalEdit
+                                <ModalEditBooks
                                     h1="Editar livro"
-                                    p="Edite informações do livro"
+                                    p="Atualize os dados do livro"
                                     modalId={`modal_edit_${book.id}`}
+                                    defaultValue1={book.title}
+                                    defaultValue2={book.author}
+                                    defaultValue3={book.categoryName}
+                                    defaultValue4={book.year}
                                 />
-                                <ModalDelete
+                                {/* <ModalDelete
                                     h1="Tem certeza que deseja excluir esse livro?"
                                     p="Essa ação é irreversível"
-                                    acao={() => deleteBook(book.id)}
+                                    acao={() => handleDeleteBook(book.id)}
                                     modalId={`modal_delete_${book.id}`}
-                                />
+                                /> */}
                             </td>
                         </tr>
                     ))}

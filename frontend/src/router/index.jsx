@@ -14,19 +14,24 @@ import { Catalog } from "../pages/catalog";
 import { LayoutCatalog } from "../layout/catalog";
 import { ProtectedRoutes } from "../router/ProtectedRoutes";
 import { PublicRoutes } from "./PublicRoutes";
+import { ProfileAdmin } from "../pages/admin/Profile";
+import { BookId } from "../pages/bookId";
 export const AppRouter = () => {
     return (
         <BrowserRouter>
             <Routes>
-                {/* Rotas publicas, todos podem ver*/}
+                {/* --- Rotas Públicas (Deslogados) --- */}
+
+                {/* Todos vão ver*/}
                 <Route path="/">
                     <Route path="" element={<Home />} />
                 </Route>
                 <Route path="/catalog" element={<LayoutCatalog />}>
                     <Route path="books" element={<Catalog />} />
+                    <Route path="book" element={<BookId />} />
                 </Route>
 
-                {/* Rotas publicas, apenas deslogados podem ver*/}
+                {/* Apenas deslogados vão ver*/}
                 <Route element={<PublicRoutes />}>
                     <Route path="/auth/user" element={<AuthLayout />}>
                         <Route path="login" element={<Login />} />
@@ -48,10 +53,11 @@ export const AppRouter = () => {
                     </Route>
                 </Route>
 
-                {/* Rotas de Usuário (Role 'ADMIN') */}
+                {/* Rotas de Admin (Role 'ADMIN') */}
                 <Route element={<ProtectedRoutes role="ADMIN" />}>
                     <Route path="/admin" element={<AdminLayout />}>
                         <Route path="dashboard" element={<Dashboard />} />
+                        <Route path="profile" element={<ProfileAdmin />} />
                     </Route>
                 </Route>
 
