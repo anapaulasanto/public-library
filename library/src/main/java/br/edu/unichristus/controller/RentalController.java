@@ -70,4 +70,10 @@ public class RentalController {
     public List<RentalDTO> findByUser(@PathVariable Long userId) {
         return service.findByUserId(userId);
     }
+
+    @Operation(summary = "Verifica o prazo de um aluguel | role: [ADMIN, USER]", tags = "Rental")
+    @GetMapping("/rentalTerm/{id}")
+    public String rentalTerm(@PathVariable Long id) {
+        return service.checkRentalTerm(id);
+    }
 }
