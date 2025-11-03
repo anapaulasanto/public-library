@@ -7,20 +7,28 @@ import br.edu.unichristus.repository.BookRepository;
 import br.edu.unichristus.repository.CategoryRepository;
 import br.edu.unichristus.utils.MapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Service
 public class BookService {
+
+    @Value("${upload.dir}")
+    private String uploadDir;
 
     @Autowired
     private BookRepository repository;
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public BookDTO save(BookDTO bookDTO) {
+    public BookDTO save(BookDTO bookDTO, MultipartFile file) {
         if (repository.findByIsbn(bookDTO.getIsbn()).isPresent()) {
             throw new CommonsException(HttpStatus.CONFLICT,
                     "unichristus.book.isbn.conflict",
@@ -39,9 +47,14 @@ public class BookService {
                     "Título do livro é um campo obrigatório!");
         }
 
+        if (bookDTO.getDescription() == null || bookDTO.getDescription().isBlank()) {
+            throw new CommonsException(HttpStatus.BAD_REQUEST,
+                    "unichristus.book.description.save.badrequest",
+                    "Descrição do livro é um campo obrigatório!");
+        }
+
         var bookEntity = MapperUtil.parseObject(bookDTO, Book.class);
 
-        // salvando categoria na entidade livro
         var category = categoryRepository.findById(bookDTO.getCategoryId())
                 .orElseThrow(() -> new CommonsException(HttpStatus.NOT_FOUND,
                         "unichristus.category.notfound",
@@ -49,7 +62,25 @@ public class BookService {
 
         bookEntity.setCategory(category);
 
+        if (bookDTO.getPalavrasChaves() != null) {
+            bookEntity.setPalavrasChaves(bookDTO.getPalavrasChaves());
+        }
+
         var savedBook = repository.save(bookEntity);
+
+        if (file != null && !file.isEmpty()) {
+            try {
+                String fileName = savedBook.getId() + "_" + file.getOriginalFilename();
+                Path path = Paths.get(uploadDir, fileName);
+                Files.createDirectories(path.getParent());
+                Files.write(path, file.getBytes());
+                savedBook.setCoverUrl(fileName);
+                savedBook = repository.save(savedBook);
+            } catch (Exception e) {
+                throw new CommonsException(HttpStatus.INTERNAL_SERVER_ERROR, "unichristus.book.cover.upload.error", "Erro ao fazer upload da capa do livro.");
+            }
+        }
+
         BookDTO dto = MapperUtil.parseObject(savedBook, BookDTO.class);
         dto.setCategoryId(savedBook.getCategory().getId());
 
@@ -82,10 +113,21 @@ public class BookService {
                     "Título do livro é um campo obrigatório.");
         }
 
+        if (bookDTO.getDescription() == null || bookDTO.getDescription().isBlank()) {
+            throw new CommonsException(HttpStatus.BAD_REQUEST,
+                    "unichristus.book.description.update.badrequest",
+                    "Descrição do livro é um campo obrigatório!");
+        }
+
         existingBook.setTitle(bookDTO.getTitle());
         existingBook.setAuthor(bookDTO.getAuthor());
         existingBook.setYear(bookDTO.getYear());
         existingBook.setIsbn(bookDTO.getIsbn());
+        existingBook.setDescription(bookDTO.getDescription());
+
+        if (bookDTO.getPalavrasChaves() != null) {
+            existingBook.setPalavrasChaves(bookDTO.getPalavrasChaves());
+        }
 
         var category = categoryRepository.findById(bookDTO.getCategoryId())
                 .orElseThrow(() -> new CommonsException(HttpStatus.NOT_FOUND,
@@ -107,25 +149,22 @@ public class BookService {
         return MapperUtil.parseListObjects(listBooks, BookDTO.class);
     }
 
-    public List<BookDTO> search(String title, String author, Long categoryId) {
-        var books = repository.findByTitleContainingIgnoreCaseOrAuthorContainingIgnoreCaseOrCategory_Id(
-                title != null ? title : "",
-                author != null ? author : "",
-                categoryId
-        );
+    public List<BookDTO> search(String title, String author, String palavrasChaves, Long categoryId, String categoryName) {
+        var books = repository.search(title, author, palavrasChaves, categoryId, categoryName);
         return MapperUtil.parseListObjects(books, BookDTO.class);
     }
 
 
     public Book findById(Long id) {
-        var bookEntity = repository.findById(id);
+        return repository.findById(id)
+                .orElseThrow(() -> new CommonsException(HttpStatus.NOT_FOUND,
+                        "unichristus.book.findbyid.notfound",
+                        "Livro não encontrado!"));
+    }
 
-        if (bookEntity.isEmpty()) {
-            throw new CommonsException(HttpStatus.NOT_FOUND,
-                    "unichristus.book.findbyid.notfound",
-                    "Livro não encontrado!");
-        }
-        return repository.findById(id).get();
+    public BookDTO findByIdDTO(Long id) {
+        var book = findById(id);
+        return MapperUtil.parseObject(book, BookDTO.class);
     }
 
     public void delete(Long id) {
