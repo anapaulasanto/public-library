@@ -39,6 +39,9 @@ public class VolumeInfo {
     private Double averageRating;
     private Integer ratingsCount;
 
+    @Embedded
+    private ImageLinks imageLinks;
+
     public String getTitle() {
         return title;
     }
@@ -93,5 +96,13 @@ public class VolumeInfo {
 
     public void setRatingsCount(Integer ratingsCount) {
         this.ratingsCount = ratingsCount;
+    }
+
+    public ImageLinks getImageLinks() {
+        return imageLinks;
+    }
+
+    public void setImageLinks(ImageLinks imageLinks) {
+        this.imageLinks = imageLinks;
     }
 }
