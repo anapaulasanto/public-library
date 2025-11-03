@@ -25,31 +25,11 @@ public class BookApiService {
     RestTemplate restTemplate = new RestTemplate(); // cria instancia de RestTemplate (classe do spring q faz chamadas à API externa, tipo o axios do React)
 
     //ENDPOINTS DA API DO GOOGLE
-    public List<BookLowDTO> findAllApi() {
+    public List<BookLowDTO> findAllApi() { // pega a variavel endpoint.books que salvei no application.properties, que é o endpoint da API do Google
         String url = endpoint + "-harry" + "&key=" + apiKey; // armazena em url o endpoint completo pra fazer a requisição à API
         GoogleResponse response = restTemplate.getForObject(url, GoogleResponse.class);// faz uma requisição do tipo GET pra "url", esperando receber um dado do tipo GoogleResponse
 
-        return response.getItems().stream().map(items -> { // se a resposta da api nao for null, faz um map na classe que armazena as respostas da API
-            VolumeInfo volumeInfo = items.getVolumeInfo();
-            AccessInfo accessInfo = items.getAccessInfo();
-            String linkPdf = null;
-
-            if (accessInfo != null && accessInfo.getPdf() != null && accessInfo.getPdf().isAvailable()) {
-                linkPdf = accessInfo.getPdf().getAcsTokenLink();
-            }
-
-            return new BookLowDTO(
-                    volumeInfo.getTitle(),
-                    volumeInfo.getAuthors(),
-                    volumeInfo.getPublishedDate(),
-                    volumeInfo.getDescription(),
-                    volumeInfo.getCategories(),
-                    linkPdf,
-                    volumeInfo.getAverageRating(),
-                    volumeInfo.getRatingsCount()
-            );
-
-        }).collect(Collectors.toList()); // transforma em uma lista
+        return mapResponseToDTO(response);
     }
 
     public List<BookLowDTO> findByTitle(String title) {
@@ -62,26 +42,7 @@ public class BookApiService {
                     "Nenhum livro encontrado para o título informado.");
         }
 
-        return response.getItems().stream().map(items -> {
-            VolumeInfo volumeInfo = items.getVolumeInfo();
-            AccessInfo accessInfo = items.getAccessInfo();
-            String linkPdf = null;
-
-            if (accessInfo != null && accessInfo.getPdf() != null && accessInfo.getPdf().isAvailable()) {
-                linkPdf = accessInfo.getPdf().getAcsTokenLink();
-            }
-
-            return new BookLowDTO(
-                    volumeInfo.getTitle(),
-                    volumeInfo.getAuthors(),
-                    volumeInfo.getPublishedDate(),
-                    volumeInfo.getDescription(),
-                    volumeInfo.getCategories(),
-                    linkPdf,
-                    volumeInfo.getAverageRating(),
-                    volumeInfo.getRatingsCount()
-            );
-        }).collect(Collectors.toList());
+        return mapResponseToDTO(response);
     }
 
     public List<BookLowDTO> findByAuthor(String author) {
@@ -94,26 +55,7 @@ public class BookApiService {
                     "Nenhum livro encontrado para o autor informado.");
         }
 
-        return response.getItems().stream().map(items -> {
-            VolumeInfo volumeInfo = items.getVolumeInfo();
-            AccessInfo accessInfo = items.getAccessInfo();
-            String linkPdf = null;
-
-            if (accessInfo != null && accessInfo.getPdf() != null && accessInfo.getPdf().isAvailable()) {
-                linkPdf = accessInfo.getPdf().getAcsTokenLink();
-            }
-
-            return new BookLowDTO(
-                    volumeInfo.getTitle(),
-                    volumeInfo.getAuthors(),
-                    volumeInfo.getPublishedDate(),
-                    volumeInfo.getDescription(),
-                    volumeInfo.getCategories(),
-                    linkPdf,
-                    volumeInfo.getAverageRating(),
-                    volumeInfo.getRatingsCount()
-            );
-        }).collect(Collectors.toList());
+        return mapResponseToDTO(response);
     }
 
     public List<BookLowDTO> findBySubject(String subject) {
@@ -126,26 +68,7 @@ public class BookApiService {
                     "Nenhum livro encontrado para o assunto informado.");
         }
 
-        return response.getItems().stream().map(items -> {
-            VolumeInfo volumeInfo = items.getVolumeInfo();
-            AccessInfo accessInfo = items.getAccessInfo();
-            String linkPdf = null;
-
-            if (accessInfo != null && accessInfo.getPdf() != null && accessInfo.getPdf().isAvailable()) {
-                linkPdf = accessInfo.getPdf().getAcsTokenLink();
-            }
-
-            return new BookLowDTO(
-                    volumeInfo.getTitle(),
-                    volumeInfo.getAuthors(),
-                    volumeInfo.getPublishedDate(),
-                    volumeInfo.getDescription(),
-                    volumeInfo.getCategories(),
-                    linkPdf,
-                    volumeInfo.getAverageRating(),
-                    volumeInfo.getRatingsCount()
-            );
-        }).collect(Collectors.toList());
+        return mapResponseToDTO(response);
     }
 
     public List<BookLowDTO> search(String title, String author, String subject) {
@@ -187,6 +110,14 @@ public class BookApiService {
                 linkPdf = accessInfo.getPdf().getAcsTokenLink();
             }
 
+            String coverUrl = null;
+            if (volumeInfo.getImageLinks() != null) {
+                coverUrl = volumeInfo.getImageLinks().getThumbnail();
+                if (coverUrl == null) {
+                    coverUrl = volumeInfo.getImageLinks().getSmallThumbnail();
+                }
+            }
+
             return new BookLowDTO(
                     volumeInfo.getTitle(),
                     volumeInfo.getAuthors(),
@@ -195,7 +126,8 @@ public class BookApiService {
                     volumeInfo.getCategories(),
                     linkPdf,
                     volumeInfo.getAverageRating(),
-                    volumeInfo.getRatingsCount()
+                    volumeInfo.getRatingsCount(),
+                    coverUrl
             );
         }).collect(Collectors.toList());
     }
