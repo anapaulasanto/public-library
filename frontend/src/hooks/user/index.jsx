@@ -40,7 +40,7 @@ export const useUserUpdate = (userIdToUpdate) => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
-        mutationFn: (updateData) => updateUser(userIdToUpdate, updateData), 
+        mutationFn: (updateData) => updateUser(userIdToUpdate, updateData),         
 
         onSuccess: () => {
             console.log("Usuário atualizado");
@@ -57,6 +57,8 @@ export const useUserUpdate = (userIdToUpdate) => {
         handleUpdateUser: mutation.mutateAsync,
         error: mutation.error,
         isSubmitting: mutation.isLoading,
+        isSuccess: mutation.isSuccess,
+        isError: mutation.isError
     };
 }
 
@@ -82,5 +84,7 @@ export const useUserDelete = (userIdToDelete) => {
         handleDeleteUser: mutation.mutateAsync,
         error: mutation.error,
         isSubmitting: mutation.isLoading,
+        isSuccess: mutation.isSuccess,
+        isError: mutation.isError
     };
 }

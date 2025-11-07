@@ -1,19 +1,19 @@
 import React from "react";
-import { IoIosAlert } from "react-icons/io";
+import { LuCircleCheckBig } from "react-icons/lu";
 
-export const ModalError = ({ h1, p, modalId }) => {
+export const ModalSucess = ({ modalId, h1, p }) => {
     return (
         <div>
             <dialog id={modalId} className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box flex flex-col items-center justify-center">
-                    <IoIosAlert size={45} color="#e70000ff" />
+                    <LuCircleCheckBig size={40}color="#449200ff" />
                     <h3 className="font-semibold text-2xl pt-3">{h1}</h3>
-                    <p className="py-2 text-gray-500">{p}</p>
+                    <p className="text-gray-500 pt-2">{p}</p>
                     <div className="modal-action flex justify-center">
                         <form method="dialog" className="flex gap-2">
                             <button
                                 type="button"
-                                className="btn rounded-lg"
+                                className="btn rounded-lg bg-green-300 text-white"
                                 onClick={() => document.getElementById(modalId).close()}
                             >
                                 Continuar

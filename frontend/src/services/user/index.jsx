@@ -9,8 +9,9 @@ export const fetchAllUsers = async () => {
 
 // =========== UPDATE DE USER =============
 export const updateUser = async (userId, data) => {
+    console.log('tentando enviar:' , data);
     const res = await axios.put(`api/v1/user/${userId}`, data);
-    return res.data;
+    return res;
 };
 
 // =========== DELETE DE USER =============

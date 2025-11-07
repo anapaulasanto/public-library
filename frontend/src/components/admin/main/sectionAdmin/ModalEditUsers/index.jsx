@@ -4,25 +4,23 @@ import { useForm } from "react-hook-form";
 import { FaPencilAlt } from "react-icons/fa";
 import { userUpdateSchema } from "../../../../../data/schemaForms";
 import { useUserUpdate } from "../../../../../hooks/user";
+import { ModalSucess } from "../../../../ModalSucess";
 
 export const ModalEditUsers = ({ modalId, h1, p, defaultName, defaultEmail, userId }) => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm({ resolver: zodResolver(userUpdateSchema) })
-    const { handleUpdateUser } = useUserUpdate(userId);
+    const { handleUpdateUser, isSuccess } = useUserUpdate(userId);
+    const modalIdSucess = "modal_sucess_edit_user_admin"
 
     useEffect(() => {
-        if (defaultName && defaultEmail) {
-            reset({
-                name: defaultName,
-                email: defaultEmail,
-            })
+        if (isSuccess) {
+            const modal = document.getElementById(modalIdSucess)
+            modal.showModal()
         }
-    }, [defaultName, defaultEmail, reset]);
+    }, [isSuccess]);
 
     const onValidSubmit = (data) => {
         handleUpdateUser(data);
-        if (isSuccess) {
-            document.getElementById(modalId).close();
-        }
+        document.getElementById(modalId).close();
     }
 
     return (
@@ -47,6 +45,7 @@ export const ModalEditUsers = ({ modalId, h1, p, defaultName, defaultEmail, user
                                     <input
                                         type="text"
                                         className="input rounded-lg border border-gray-200 outline-blue-400"
+                                        defaultValue={defaultName}
                                         {...register("name")}
                                     />
                                     <p className="text-red-600 text-sm">{errors.name?.message}</p>
@@ -56,6 +55,7 @@ export const ModalEditUsers = ({ modalId, h1, p, defaultName, defaultEmail, user
                                     <input
                                         type="text"
                                         className="input rounded-lg border border-gray-200 outline-blue-400"
+                                        defaultValue={defaultEmail}
                                         {...register("email")}
                                     />
                                     <p className="text-red-600 text-sm">{errors.email?.message}</p>
@@ -67,12 +67,8 @@ export const ModalEditUsers = ({ modalId, h1, p, defaultName, defaultEmail, user
                                     type="button"
                                     onClick={() => {
                                         document.getElementById(modalId).close()
-                                        reset({
-                                            name: defaultName,
-                                            email: defaultEmail,
-                                        })
                                     }}
-                                    
+
                                 >
                                     Cancelar
                                 </button>
@@ -87,6 +83,7 @@ export const ModalEditUsers = ({ modalId, h1, p, defaultName, defaultEmail, user
                     </div>
                 </div>
             </dialog>
+            <ModalSucess modalId={modalIdSucess} h1="Usuário atualizado com sucesso!" p="Todas as alterações foram salvas." />
         </div>
     )
 }

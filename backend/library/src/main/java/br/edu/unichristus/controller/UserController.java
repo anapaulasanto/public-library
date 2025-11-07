@@ -11,12 +11,15 @@ import br.edu.unichristus.domain.dto.review.ReviewDTO;
 import br.edu.unichristus.domain.dto.user.UserDTO;
 import br.edu.unichristus.domain.dto.user.UserLowDTO;
 import br.edu.unichristus.domain.model.User;
+import br.edu.unichristus.security.jwt.JwtUtil; // NOVO: Importar o JwtUtil
 import br.edu.unichristus.service.RentalService;
 import br.edu.unichristus.service.ReviewService;
 import br.edu.unichristus.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.servlet.http.Cookie; // NOVO: Importar Cookie
+import jakarta.servlet.http.HttpServletResponse; // NOVO: Importar HttpServletResponse
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -24,6 +27,9 @@ public class UserController {
 
     @Autowired
     private UserService service;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @Operation(summary = "Cadastra os dados de um usuário | role: [ADMIN]", tags = "User")
     @PostMapping
@@ -33,8 +39,22 @@ public class UserController {
 
     @Operation(summary = "Atualiza os dados de um usuário | role: [ADMIN]", tags = "User")
     @PutMapping("/{id}")
-    public ResponseEntity<UserLowDTO> update(@PathVariable Long id, @RequestBody UserDTO userDTO) {
-        return ResponseEntity.ok(service.update(id, userDTO));
+    public ResponseEntity<UserLowDTO> update(@PathVariable Long id,
+                                             @RequestBody UserDTO userDTO,
+                                             HttpServletResponse response
+    ) {
+
+        UserLowDTO updatedUserDTO = service.update(id, userDTO);
+
+        final String jwt = jwtUtil.generateToken(updatedUserDTO.getEmail());
+
+        Cookie cookie = new Cookie("JWT_TOKEN", jwt);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(24 * 60 * 60); // 1 dia
+        response.addCookie(cookie);
+
+        return ResponseEntity.ok(updatedUserDTO);
     }
 
     @Operation(summary = "Retorna a lista de todos os usuários | role: [ADMIN]", tags = "User")
@@ -42,6 +62,7 @@ public class UserController {
     public List<User> findAll() {
         return service.findAll();
     }
+
 
     @Operation(summary = "Retorna os dados de um usuário pelo ID | role: [ADMIN]", tags = "User")
     @ApiResponses({
@@ -82,5 +103,4 @@ public class UserController {
     public List<RentalDTO> getRentalsByUserId(@PathVariable Long userId) {
         return rentalService.findRentalsByUserId(userId);
     }
-
 }

@@ -7,20 +7,18 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userUpdateSchema } from "../../../../data/schemaForms";
 import { useEffect } from "react";
+import { ModalSucess } from "../../../ModalSucess";
 
-export const SectionSettings = ({ redirectTo, defaultName, defaultEmail, isLoading, handleUpdate, error, isSubmitting }) => {
-    const { register, handleSubmit, reset, formState: { errors } } = useForm({ resolver: zodResolver(userUpdateSchema) });
+export const SectionSettings = ({ redirectTo, defaultName, defaultEmail, isLoading, handleUpdate, error, isSubmitting, isSuccess }) => {
+    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(userUpdateSchema) });
+    const modal_id = "sucess_modal_settings"
 
     useEffect(() => {
-        // Se os dados existirem (não forem undefined), reseta o formulário populando os campos.
-        if (defaultName && defaultEmail) {
-            reset({
-                name: defaultName,
-                email: defaultEmail,
-            });
+        if (isSuccess) {
+            const modal = document.getElementById(modal_id);
+            modal.showModal()
         }
-        // roda sempre que os valores default mudarem
-    }, [defaultName, defaultEmail, reset]);
+    }, [isSuccess]);
 
     if (isLoading) {
         return (
@@ -66,6 +64,7 @@ export const SectionSettings = ({ redirectTo, defaultName, defaultEmail, isLoadi
                     {error && <p className="text-red-600 text-center pt-1 text-sm">{error}</p>}
                 </div>
             </form>
+            <ModalSucess modalId={modal_id} h1="Usuário atualizado com sucesso!" p="Todas as alterações foram salvas." />
         </section>
     )
 }

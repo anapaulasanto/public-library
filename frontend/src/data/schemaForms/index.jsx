@@ -20,7 +20,7 @@ export const userRegisterSchema = z.object({
 }).refine((data) => {
     return data.password === data.confirmPassword
 }, {
-    message: "As senhas não coincidem", path:
+    message: "As senhas devem ser iguais.", path:
         ["confirmPassword"]
 });
 

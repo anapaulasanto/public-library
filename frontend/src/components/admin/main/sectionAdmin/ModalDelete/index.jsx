@@ -2,20 +2,25 @@ import { FaTrashAlt } from "react-icons/fa";
 import { useUserDelete } from "../../../../../hooks/user";
 import { IoIosAlert } from "react-icons/io";
 import { ModalError } from "../../../../ModalError";
+import { useEffect } from "react";
+import { ModalSucess } from "../../../../ModalSucess";
 
 export const ModalDeleteUser = ({ modalId, userId }) => {
-    const { handleDeleteUser } = useUserDelete(userId);
+    const { handleDeleteUser, isSuccess, isError } = useUserDelete(userId);
+    const modalIdSucess = "modal_delete_user"
+    const modalIdError = "modal_delete_user_error"
 
-    const onConfirmDelete = async () => {
-        try {
-            await handleDeleteUser();
-            document.getElementById(modalId).close();
-
-        } catch (error) {
-            return <ModalError modalId={modalId} title="Não foi possível excluir usuário" subtitle="Este usuário possui aluguéis pendentes" />
-            
+    useEffect(() => {
+        if (isSuccess) {
+            const modalSuccess = document.getElementById(modalIdSucess)
+            modalSuccess.showModal()
         }
-    }
+        else if (isError) {
+            const modalError = document.getElementById(modalIdError)
+            modalError.showModal()
+        }
+    }, [isSuccess, isError]);
+    
 
     return (
         <div>
@@ -36,7 +41,7 @@ export const ModalDeleteUser = ({ modalId, userId }) => {
                             </button>
                             <button
                                 className="btn bg-sky-700 text-white rounded-lg"
-                                onClick={onConfirmDelete}
+                                onClick={handleDeleteUser}
                             >
                                 Excluir
                             </button>
@@ -44,6 +49,8 @@ export const ModalDeleteUser = ({ modalId, userId }) => {
                     </div>
                 </div>
             </dialog>
+            <ModalSucess modalId={modalIdSucess} h1="Usuário deletado com sucesso!" p="Todas as alterações foram salvas." />
+            <ModalError modalId={modalIdError} h1="Não foi possível deletar usuário" p="Este usuário possui aluguéis ativos e não pode ser excluído." />
         </div>
     )
 }
