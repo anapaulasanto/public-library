@@ -5,7 +5,7 @@ import { SectionReviews } from "./sectionReviews";
 
 export const Main = () => {
     return (
-        <div>
+        <div className="flex flex-col gap-10">
             <SectionCountReviews />
             <SectionWriteReview />
             <SectionReviews />
