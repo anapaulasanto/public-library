@@ -10,15 +10,19 @@ export const useBooksAdmin = () => {
 
 export const useBookId = (id) => {
     return useQuery({
-        queryKey: ['book'],
+        queryKey: ['book', id],
         queryFn: () => getBookById(id),
+        enabled: !!id,
     })
 }
 
 export const useReviewesBook = (id) => {
     return useQuery({
-        queryKey: ['reviewsBook'],
+        queryKey: ['reviewsBook', id],
         queryFn: () => getReviewsByBook(id),
+        enabled: !!id,
+        refetchOnWindowFocus: true,
+        retry: true,
     })
 }
 

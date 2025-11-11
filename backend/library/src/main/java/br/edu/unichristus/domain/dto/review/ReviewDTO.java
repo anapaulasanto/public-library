@@ -20,7 +20,6 @@ public class ReviewDTO {
     @JsonProperty("comentario")
     private String comment;
 
-    @JsonProperty("data da avaliação")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate reviewDate;
     private String reviewerName;
