@@ -15,10 +15,6 @@ public class BookDTO {
     private int year;
     private String isbn;
     private String categoryName;
-    private String description;
-    private String palavrasChaves;
-    private Long categoryId;
-    private String coverUrl;
 
 
     public BookDTO(Long id, String title, String author, int year, String isbn) {
@@ -72,40 +68,12 @@ public class BookDTO {
         this.isbn = isbn;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Long getCategoryId() {
-        return categoryId;
-    }
-
     public String getCategoryName() {
         return categoryName;
     }
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
-    }
-
-    public String getPalavrasChaves() {
-        return palavrasChaves;
-    }
-
-    public void setPalavrasChaves(String palavrasChaves) {
-        this.palavrasChaves = palavrasChaves;
-    }
-
-    public String getCoverUrl() {
-        return coverUrl;
-    }
-
-    public void setCoverUrl(String coverUrl) {
-        this.coverUrl = coverUrl;
     }
 
 
@@ -117,13 +85,12 @@ public class BookDTO {
                 Objects.equals(title, book.getTitle()) &&
                 Objects.equals(author, book.getAuthor()) &&
                 Objects.equals(year, book.getYear()) &&
-                Objects.equals(isbn, book.getIsbn()) &&
-                Objects.equals(description, book.getDescription());
+                Objects.equals(isbn, book.getIsbn());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, year, isbn, description);
+        return Objects.hash(id, title, author, year, isbn);
     }
 
     @Override
@@ -134,7 +101,6 @@ public class BookDTO {
                 ", author='" + author + '\'' +
                 ", year=" + year +
                 ", isbn='" + isbn + '\'' +
-                ", description='" + description + '\'' +
                 '}';
     }
 }

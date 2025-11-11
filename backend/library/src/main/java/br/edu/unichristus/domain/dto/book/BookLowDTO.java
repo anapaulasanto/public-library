@@ -15,22 +15,14 @@ public class BookLowDTO {
     private String description;
     private List<String> categories;
     private String pdf;
-    private Double averageRating;
-    private Integer ratingsCount;
-    private String coverUrl;
 
-
-    public BookLowDTO(String title, List<String> author, String year, String description,
-                      List<String> categories, String pdf, Double averageRating, Integer ratingsCount, String coverUrl) {
+    public BookLowDTO(String title, List<String> author, String year, String description, List<String> categories, String pdf) {
         this.title = title;
         this.author = author;
         this.year = year;
         this.description = description;
         this.categories = categories;
         this.pdf = pdf;
-        this.averageRating = averageRating;
-        this.ratingsCount = ratingsCount;
-        this.coverUrl = coverUrl;
     }
 
     public BookLowDTO() {
@@ -83,29 +75,4 @@ public class BookLowDTO {
     public void setPdf(String pdf) {
         this.pdf = pdf;
     }
-
-    public Double getAverageRating() {
-        return averageRating;
-    }
-
-    public void setAverageRating(Double averageRating) {
-        this.averageRating = averageRating;
-    }
-
-    public Integer getRatingsCount() {
-        return ratingsCount;
-    }
-
-    public void setRatingsCount(Integer ratingsCount) {
-        this.ratingsCount = ratingsCount;
-    }
-
-    public String getCoverUrl() {
-        return coverUrl;
-    }
-
-    public void setCoverUrl(String coverUrl) {
-        this.coverUrl = coverUrl;
-    }
-
 }

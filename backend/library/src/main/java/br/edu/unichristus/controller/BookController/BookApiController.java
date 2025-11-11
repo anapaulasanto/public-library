@@ -40,15 +40,4 @@ public class BookApiController {
     public List<BookLowDTO> findBySubject(@PathVariable String subject) {
         return service.findBySubject(subject);
     }
-
-    @Operation(summary = "Busca livros da API do Google por título, autor e/ou assunto", tags = "Book (API externa)")
-    @GetMapping("/external/search")
-    public List<BookLowDTO> searchBooks(
-            @RequestParam(required = false) String title,
-            @RequestParam(required = false) String author,
-            @RequestParam(required = false) String subject
-    ) {
-        return service.search(title, author, subject);
-    }
-
 }

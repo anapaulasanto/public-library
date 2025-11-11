@@ -7,11 +7,8 @@ import br.edu.unichristus.domain.model.Book;
 import br.edu.unichristus.service.BookService.BookService;
 import br.edu.unichristus.service.RentalService;
 import br.edu.unichristus.service.ReviewService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -25,18 +22,10 @@ public class BookController {
     @Autowired
     private BookService service;
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
     @Operation(summary = "Cadastra um novo livro | role: [ADMIN]", tags = "Book")
-    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public BookDTO save(@RequestPart("book") String bookJson, @RequestPart(value = "file", required = false) MultipartFile file) {
-        try {
-            BookDTO bookDTO = objectMapper.readValue(bookJson, BookDTO.class);
-            return service.save(bookDTO, file);
-        } catch (Exception e) {
-            throw new RuntimeException("Erro ao desserializar o JSON do livro: " + e.getMessage());
-        }
+    @PostMapping
+    public BookDTO save(@RequestBody BookDTO book){
+        return service.save(book);
     }
 
     @Operation(summary = "Atualiza um livro existente | role: [ADMIN]", tags = "Book")
@@ -51,19 +40,6 @@ public class BookController {
         return service.findAll();
     }
 
-    @Operation(summary = "Busca livros por título, autor e/ou categoria | role: [ADMIN, USER]", tags = "Book")
-    @GetMapping("/search")
-    public List<BookDTO> search(
-            @RequestParam(required = false) String title,
-            @RequestParam(required = false) String author,
-            @RequestParam(required = false) String palavrasChaves,
-            @RequestParam(required = false) Long categoryId,
-            @RequestParam(required = false, name = "category") String categoryName
-    ) {
-        return service.search(title, author, palavrasChaves, categoryId, categoryName);
-    }
-
-
     @Operation(summary = "Retorna um livro por ID | role: [ADMIN, USER]", tags = "Book")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Livro encontrado com sucesso"),
@@ -72,7 +48,7 @@ public class BookController {
     })
     @GetMapping("/{id}")
     public BookDTO findById(@PathVariable Long id){
-        return service.findByIdDTO(id);
+        return service.findById(id);
     }
 
     @Operation(summary = "Exclui um livro por ID | role: [ADMIN]", tags = "Book")

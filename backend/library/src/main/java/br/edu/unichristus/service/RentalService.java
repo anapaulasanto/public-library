@@ -1,7 +1,5 @@
 package br.edu.unichristus.service;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -191,24 +189,4 @@ public class RentalService {
         }
         return MapperUtil.parseListObjects(rentals, RentalDTO.class);
     }
-
-    public String checkRentalTerm(Long id) {
-        var rental = repository.findById(id);
-
-        if (rental.isEmpty()) {
-            throw new CommonsException(HttpStatus.NOT_FOUND, "unichristus.rental.checkterm.notfound",
-                    "Aluguel não encontrado!");
-        }
-
-        LocalDate rentalDate = LocalDate.parse(rental.get().getRentalDate());
-
-        long daysDifference = ChronoUnit.DAYS.between(rentalDate, LocalDate.now());
-
-        if (daysDifference > 15) {
-            return "A data do aluguel é superior a 15 dias.";
-        } else {
-            return "A data do aluguel não é superior a 15 dias.";
-        }
-    }
-
 }
