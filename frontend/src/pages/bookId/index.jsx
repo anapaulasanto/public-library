@@ -7,7 +7,6 @@ import { useBookId } from "../../hooks/book";
 export const BookId = () => {
   const { id } = useParams();
 
-
   const { data: book, isLoading, isError } = useBookId(id);
 
   if (isLoading) return <Loading />;
