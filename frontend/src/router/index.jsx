@@ -16,6 +16,7 @@ import { ProtectedRoutes } from "../router/ProtectedRoutes";
 import { PublicRoutes } from "./PublicRoutes";
 import { ProfileAdmin } from "../pages/admin/Profile";
 import { BookId } from "../pages/bookId";
+import { GoogleBooks } from "../pages/googleBooks";
 export const AppRouter = () => {
     return (
         <BrowserRouter>
@@ -28,7 +29,9 @@ export const AppRouter = () => {
                 </Route>
                 <Route path="/catalog" element={<LayoutCatalog />}>
                     <Route path="books" element={<Catalog />} />
-                    <Route path="book" element={<BookId />} />
+                    <Route path="googleBooks" element={<GoogleBooks />} />
+                    {/* URL com slug e id: /catalog/book/:slug/:id */}
+                    <Route path="book/:slug/:id" element={<BookId />} />
                 </Route>
 
                 {/* Apenas deslogados vão ver*/}

@@ -1,6 +1,5 @@
 import React from "react";
 import { CiFilter } from "react-icons/ci";
-import { IoFilter } from "react-icons/io5";
 import { CategoriesSearch } from "../CategoriesSearchAside";
 import { Filter } from "../FilterAside";
 

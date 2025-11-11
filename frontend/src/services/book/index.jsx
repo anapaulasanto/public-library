@@ -11,6 +11,18 @@ export const fetchBooks = async () => {
 export const deleteBook = async (bookId) => {
     const { data } = await axios.delete(`api/v1/book/${bookId}`);
     console.log(data);
+    return data;
+}
 
+// =========== GET BOOK BY ID =============
+export const getBookById = async (bookId) => {
+    const { data } = await axios.get(`api/v1/book/${bookId}`);
+    console.log("livro acessado: ", data);
+    return data;
+}
+
+export const getReviewsByBook = async (bookId) => {
+    const { data } = await axios.get(`api/v1/book/${bookId}/reviews`);
+    console.log("avaliacoes do livro ", data);
     return data;
 }

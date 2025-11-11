@@ -1,10 +1,24 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deleteBook, fetchBooks } from "../../services/book";
+import { deleteBook, fetchBooks, getBookById, getReviewsByBook } from "../../services/book";
 
 export const useBooksAdmin = () => {
     return useQuery({
         queryKey: ['booksAdmin'],
         queryFn:  fetchBooks,
+    })
+}
+
+export const useBookId = (id) => {
+    return useQuery({
+        queryKey: ['book'],
+        queryFn: () => getBookById(id),
+    })
+}
+
+export const useReviewesBook = (id) => {
+    return useQuery({
+        queryKey: ['reviewsBook'],
+        queryFn: () => getReviewsByBook(id),
     })
 }
 

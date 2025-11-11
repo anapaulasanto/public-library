@@ -6,3 +6,17 @@ export const formatDate = (dateString) => {
 
     return formatedDate;
 }
+
+export const nameToSlug = (name) => {
+    return name
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w-]/g, '');
+}
+
+export const slugToName = (slug) => {
+    return slug
+        .replace(/-/g, ' ')
+        .replace(/\b\w/g, (char) => char.toUpperCase());
+}
