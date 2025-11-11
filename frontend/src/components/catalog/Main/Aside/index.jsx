@@ -6,7 +6,7 @@ import { Filter } from "../FilterAside";
 
 export const Aside = () => {
     return (
-        <aside className="bg-neutral-200 shadow border border-neutral-300 mt-10 p-5 rounded-lg h-fit w-[30%]">
+        <aside className="bg-neutral-200/10 shadow border border-neutral-300 mt-10 p-5 rounded-lg h-fit w-[30%] ">
             <header className="flex items-center text-lg font-semibold gap-1">
                 <CiFilter />
                 <p>Filtros de busca</p>
