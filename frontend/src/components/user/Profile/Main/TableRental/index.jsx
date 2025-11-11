@@ -1,6 +1,6 @@
 import imgCard from "../../../../../assets/bg-auth.jfif"
 import { FaRegCalendarAlt, FaRegClock } from "react-icons/fa"
-import { Modal } from "../../ModalSure"
+import { ModalSure } from "../../ModalSure"
 import { useUserRentals } from "../../../../../hooks/user/index.jsx"
 import { Loading } from "../../../../Loading/index.jsx";
 import { Link } from "react-router-dom";
@@ -43,13 +43,6 @@ export const TableRental = () => {
                             <div>
                                 <h1 className="font-semibold text-xl">{r.bookTitle}</h1>
                             </div>
-                            {/* <div>
-                                <button
-                                    className={`${r.status === 'Atrasado' ? 'bg-red-500' : 'bg-slate-500'} text-white px-2 text-sm font-semibold rounded-xl py-0.5`}
-                                >
-                                    {r.status}
-                                </button>
-                            </div> */}
 
                         <div className="flex flex-col items-start gap-2 w-full">
                             <div className="flex items-center gap-2 bg-green-500 text-white rounded-xl py-1 px-4 ">
@@ -63,7 +56,7 @@ export const TableRental = () => {
                         </div>
 
                         <div className="flex flex-col gap-3 lg:flex-row">
-                            <Modal
+                            <ModalSure
                                 props="bg-sky-900 text-white w-50 lg:w-60"
                                 modalId="my_modal_1"
                                 h1="Deseja renovar?"
@@ -72,7 +65,7 @@ export const TableRental = () => {
                                 txtBtn1="Renovar"
                                 txtBtn2="Cancelar"
                             />
-                            <Modal
+                            <ModalSure
                                 props="bg-neutral-200 w-50 lg:w-30 text-black"
                                 modalId="my_modal_2"
                                 h1="Deseja devolver?"

@@ -2,6 +2,7 @@ import { SectionSettings } from "./SectionAccSettings";
 import { useContext } from "react";
 import { AuthContext } from "../../../context/AuthContext"
 import { useUserUpdate } from "../../../hooks/user"
+import { SectionAccDelete } from "./SectionAccDelete";
 
 export const UserAccount = () => {
     const { user, isLoading } = useContext(AuthContext);
@@ -19,6 +20,7 @@ export const UserAccount = () => {
                 error={error}
                 isSubmitting={isSubmitting}
             />
+            <SectionAccDelete />
         </div>
     )
 }

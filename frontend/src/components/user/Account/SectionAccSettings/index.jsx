@@ -10,12 +10,12 @@ import { useEffect } from "react";
 import { ModalSucess } from "../../../ModalSucess";
 
 export const SectionSettings = ({ redirectTo, defaultName, defaultEmail, isLoading, handleUpdate, error, isSubmitting, isSuccess }) => {
-    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(userUpdateSchema) });
-    const modal_id = "sucess_modal_settings"
+    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(userUpdateSchema) })
+    const modalId = "sucess_modal_settings"
 
     useEffect(() => {
         if (isSuccess) {
-            const modal = document.getElementById(modal_id);
+            const modal = document.getElementById(modalId);
             modal.showModal()
         }
     }, [isSuccess]);
@@ -50,12 +50,11 @@ export const SectionSettings = ({ redirectTo, defaultName, defaultEmail, isLoadi
                         <p className="text-red-600 text-sm">{errors.email?.message}</p>
                     </fieldset>
                     <div className="flex gap-4 text-base mt-2">
-                        <button className="bg-white font-semibold w-30 h-10 rounded-lg border border-neutral-200 hover:bg-neutral-400 hover:cursor-pointer">Cancelar</button>
                         <button
                             type="submit"
                             className="flex items-center justify-around bg-sky-800 font-semibold text-white w-50 h-10 rounded-lg hover:bg-sky-700 hover:cursor-pointer"
                             disabled={isSubmitting}
-                            
+
                         >
                             <FaRegSave />
                             {isSubmitting ? "Salvando..." : "Salvar alterações"}
@@ -64,7 +63,7 @@ export const SectionSettings = ({ redirectTo, defaultName, defaultEmail, isLoadi
                     {error && <p className="text-red-600 text-center pt-1 text-sm">{error}</p>}
                 </div>
             </form>
-            <ModalSucess modalId={modal_id} h1="Usuário atualizado com sucesso!" p="Todas as alterações foram salvas." />
+            <ModalSucess modalId={modalId} h1="Usuário atualizado com sucesso!" p="Todas as alterações foram salvas." />
         </section>
     )
 }

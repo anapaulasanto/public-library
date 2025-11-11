@@ -4,6 +4,8 @@ import { LuStar, LuUserRoundPen } from "react-icons/lu";
 import { CiCalendarDate, CiStar } from "react-icons/ci";
 import { CiEdit } from "react-icons/ci";
 import { AiFillStar, AiOutlineBorderlessTable } from "react-icons/ai";
+import { FaArrowAltCircleLeft } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export const Book = () => {
     const dados = [
@@ -29,6 +31,9 @@ export const Book = () => {
     return (
         <div className="flex flex-col w-[95%]" >
             <div className="flex justify-center gap-10 py-10" >
+                <Link to="/catalog/books">
+                    <FaArrowAltCircleLeft size={26} />
+                </Link>
                 <figure class="h-50 w-70">
                     <img
                         src="https://m.media-amazon.com/images/I/91r5G8RxqfL._SL1500_.jpg"
@@ -37,11 +42,15 @@ export const Book = () => {
                     />
                 </figure>
                 <div className="flex flex-col">
-                    <div className="flex flex-col gap-1">
-                        <h2 className="card-title text-[1.8rem] ">É Assim que Acaba</h2>
-                        <p className="text-gray-600">Colleen Hoove</p>
-                        <p class="bg-gray-300 px-3 py-1 w-fit font-semibold rounded-xl text-xs">Romance</p>
-
+                    <div className="flex justify-between items-center">
+                        <div className="flex flex-col gap-1">
+                            <h2 className="card-title text-[1.8rem] ">É Assim que Acaba</h2>
+                            <p className="text-gray-600">Colleen Hoove</p>
+                            <p class="bg-gray-300 px-3 py-1 w-fit font-semibold rounded-xl text-xs">Romance</p>
+                        </div>
+                        <div>
+                            <button className="btn bg-sky-600 text-white rounded-2xl px-8 hover:bg-sky-700 duration-150">Alugar</button>
+                        </div>
                     </div>
                     <div className="w-150 pt-10">
                         <h1 className="font-semibold">Descrição</h1>
@@ -134,7 +143,7 @@ export const Book = () => {
                 <div>
                     <form>
                         <textarea className="textarea w-full bg-neutral-200 border border-gray-300" placeholder="Compartilhe sua opinião sobre esse livro..."></textarea>
-                        <button className="mt-8 bg-sky-600 p-1 px-3 text-white rounded-lg hover:cursor-pointer hover:bg-sky-700 duration-150" type="submit">Enviar</button>
+                        <button className="btn mt-8 bg-sky-600 px-4 text-white rounded-lg hover:cursor-pointer hover:bg-sky-600 duration-150" type="submit">Publicar</button>
                     </form>
                 </div>
             </div>

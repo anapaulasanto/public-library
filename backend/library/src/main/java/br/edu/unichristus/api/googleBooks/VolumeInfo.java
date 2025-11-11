@@ -36,6 +36,12 @@ public class VolumeInfo {
     @Column(name = "category")
     private List<String> categories = new ArrayList<>();
 
+    private Double averageRating;
+    private Integer ratingsCount;
+
+    @Embedded
+    private ImageLinks imageLinks;
+
     public String getTitle() {
         return title;
     }
@@ -74,5 +80,29 @@ public class VolumeInfo {
 
     public void setCategories(List<String> categories) {
         this.categories = categories;
+    }
+
+    public Double getAverageRating() {
+        return averageRating;
+    }
+
+    public void setAverageRating(Double averageRating) {
+        this.averageRating = averageRating;
+    }
+
+    public Integer getRatingsCount() {
+        return ratingsCount;
+    }
+
+    public void setRatingsCount(Integer ratingsCount) {
+        this.ratingsCount = ratingsCount;
+    }
+
+    public ImageLinks getImageLinks() {
+        return imageLinks;
+    }
+
+    public void setImageLinks(ImageLinks imageLinks) {
+        this.imageLinks = imageLinks;
     }
 }
