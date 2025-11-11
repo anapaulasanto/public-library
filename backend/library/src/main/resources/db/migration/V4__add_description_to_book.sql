@@ -1,0 +1,1 @@
+ALTER TABLE public.tb_book ADD COLUMN description TEXT NOT NULL;
