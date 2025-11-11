@@ -1,9 +1,19 @@
 import React from "react";
 import { StarRating } from "../starRating";
 import { BarRating } from "../barRating";
+import { Loading } from "../../../../Loading";
 
 
-export const SectionCountReviews = () => {
+export const SectionCountReviews = ({ reviews, isLoading, isError }) => {
+
+    if (isLoading) {
+        return <div>{null}</div>;
+    }
+
+    if (isError) {
+        return <div className="text-center text-zinc-500">{null}</div>;
+    }
+
     return (
         <div className="bg-neutral-100 mt-20 p-4 border border-neutral-200 rounded-xl w-[80%] mx-auto shadow">
             <p className="text-2xl font-semibold">Visão Geral das Avaliações</p>

@@ -3,8 +3,8 @@ import { IoSearch } from "react-icons/io5";
 
 export const InputSearch = () => {
     return (
-        <div className="flex  py-5 rounded-xl w-[95%] mx-auto mt-10  items-center">
-            <form className="w-[85%] mx-auto flex justify-center items-center">
+        <div className="flex  py-5 rounded-xl w-full mx-auto mt-10  items-center">
+            <form className="w-full mx-auto flex justify-center items-center">
                 <input
                     type="text"
                     placeholder="Buscar livros, autores ou palavra-chave.. "
