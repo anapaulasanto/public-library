@@ -21,6 +21,7 @@ export const getBookById = async (bookId) => {
     return data;
 }
 
+// =========== GET REVIEWS BY BOOK =============
 export const getReviewsByBook = async (bookId) => {
     const { data } = await axios.get(`api/v1/book/${bookId}/reviews`);
     console.log("avaliacoes do livro ", data);

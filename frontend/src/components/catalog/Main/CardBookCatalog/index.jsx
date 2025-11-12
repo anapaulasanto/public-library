@@ -41,7 +41,7 @@ export const CardBook = () => {
                     </figure>
 
                     <div className="card-body flex flex-col items-start max-h-[35%] w-full p-3">
-                        <h2 className="card-title text-[1.03rem]">{book.title}</h2>
+                        <h2 className="card-title text-[1.03rem] text-start">{book.title}</h2>
                         <div className="flex items-center justify-between w-full">
                             <p className="flex items-center gap-1 text-sm text-zinc-600">                               
                                 {book.author}

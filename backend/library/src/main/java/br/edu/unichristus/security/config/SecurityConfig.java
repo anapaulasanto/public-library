@@ -44,19 +44,21 @@ public class SecurityConfig {
 
                         .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
 
+                        .requestMatchers(HttpMethod.GET, "/api/v1/review/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/api/v1/review/**").hasRole("USER")
 
+                        .requestMatchers(HttpMethod.GET, "/api/v1/book/**").permitAll()
                         .requestMatchers("/api/v1/book/**").hasRole("ADMIN")
 
-                        .requestMatchers("/api/v1/book/external/**").hasRole("USER")
+                        .requestMatchers("/api/v1/book/external/**").permitAll()
 
                         .requestMatchers("/api/v1/category/**").hasRole("ADMIN")
 
+                        .requestMatchers(HttpMethod.GET, "/api/v1/rental/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/api/v1/rental/**").authenticated()
 
                         .anyRequest().authenticated()
                 )
-                // Stateless, sem sessão
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
