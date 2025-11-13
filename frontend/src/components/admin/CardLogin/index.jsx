@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { FormHeader } from "../../user/CardLogin/FormHeader";
 import { Link } from "react-router-dom";
 import { FormLogin } from "../../user/CardLogin/Form"
-import { useLogin } from "../../../hooks/auth";
+import { useLogin } from "../../../hooks/auth/index.js";
 
 export const CardLoginAdmin = () => {
     const { handleLogin, error } = useLogin('ADMIN');

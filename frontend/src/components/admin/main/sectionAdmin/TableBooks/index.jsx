@@ -1,5 +1,5 @@
 import { ModalEditBooks } from "../ModalEditBooks";
-import { useBooksAdmin, useDeleteBook } from "../../../../../hooks/book";
+import { useBooksAdmin, useDeleteBook } from "../../../../../hooks/book/index.js";
 import { Loading } from "../../../../Loading"
 import { FaBook, FaCalendarAlt } from "react-icons/fa";
 import { FaUserEdit } from "react-icons/fa";

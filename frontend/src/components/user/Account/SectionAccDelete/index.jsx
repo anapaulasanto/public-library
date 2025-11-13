@@ -1,7 +1,7 @@
 import React from "react";
 import { ModalSure } from "../../Profile/ModalSure";
 import { ContentTitle } from "../../../admin/AdminDashboard/ContentTitle";
-import { useUserDelete } from "../../../../hooks/user";
+import { useUserDelete } from "../../../../hooks/user/index.js";
 
 
 export const SectionAccDelete = () => {

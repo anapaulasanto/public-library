@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FaPencilAlt } from "react-icons/fa";
 import { userUpdateSchema } from "../../../../../data/schemaForms";
-import { useUserUpdate } from "../../../../../hooks/user";
+import { useUserUpdate } from "../../../../../hooks/user/index.js";
 import { ModalSucess } from "../../../../ModalSucess";
 
 export const ModalEditUsers = ({ modalId, h1, p, defaultName, defaultEmail, userId }) => {

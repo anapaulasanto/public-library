@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom"
-import { loginAdmin, loginUser, logoutUser, registerAdmin, registerUser } from "../../services/auth";
+import { loginAdmin, loginUser, logoutUser, registerAdmin, registerUser } from "../../services/auth/index.js";
 
 // ========== LOGAR USUARIO OU ADMIN ==========
 

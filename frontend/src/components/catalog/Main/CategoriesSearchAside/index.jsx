@@ -1,5 +1,5 @@
 import React from "react";
-import { useCategoryCatalog } from "../../../../hooks/category";
+import { useCategoryCatalog } from "../../../../hooks/category/index.js";
 
 export const CategoriesSearch = () => {
     const { data: categories } = useCategoryCatalog();

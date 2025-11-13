@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { SectionSettings } from "../../components/user/Account/SectionAccSettings";
 import { AuthContext } from "../../context/AuthContext";
-import { useUserUpdate } from "../../hooks/user";
+import { useUserUpdate } from "../../hooks/user/index.js";
 
 export const ProfileAdmin = () => {
     const { user, isLoading } = useContext(AuthContext);

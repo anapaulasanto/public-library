@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useRegister } from "../../../hooks/auth";
+import { useRegister } from "../../../hooks/auth/index.js";
 import { FormHeader } from "../CardLogin/FormHeader"
 import { FormSignUp } from "./Form"
 import { Link } from "react-router-dom"

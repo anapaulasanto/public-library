@@ -1,13 +1,19 @@
 import imgCard from "../../../../../assets/bg-auth.jfif"
 import { FaRegCalendarAlt, FaRegClock } from "react-icons/fa"
 import { ModalSure } from "../../ModalSure"
-import { useUserRentals } from "../../../../../hooks/user/index.jsx"
+import { useUserRentals } from "../../../../../hooks/user/index.js"
 import { Loading } from "../../../../Loading/index.jsx";
-import { Link } from "react-router-dom";
-import bookIcon  from "../../../../../assets/icons/book-icon.png"
+import { Link, useNavigate } from "react-router-dom";
+import bookIcon from "../../../../../assets/icons/book-icon.png"
+import { nameToSlug } from "../../../../../utils/index.js";
 
 export const TableRental = () => {
     const { data: rental, isLoading, isError } = useUserRentals();
+    const navigate = useNavigate();
+
+    const onClickRental = (bookTitle, bookId) => {
+        navigate(`/catalog/book/${nameToSlug(bookTitle)}/${bookId}`, { state: { bookId } });
+    }
 
     if (isLoading) {
         return (
@@ -36,13 +42,14 @@ export const TableRental = () => {
             {rental.map((r, index) => (
                 <div
                     key={index}
-                    className="flex gap-3 h-54 border border-gray-200 rounded-xl hover:cursor-pointer hover:shadow-2xl hover:h-55 hover:duration-150 ease-out"
+                    className="flex gap-3 h-40 border border-gray-200 rounded-xl hover:cursor-pointer hover:shadow-2xl hover:h-41 hover:duration-150 ease-out"
+                    onClick={() => onClickRental(r.bookTitle, r.bookId)}
                 >
                     <img src={imgCard} alt="" className="w-1/3 rounded-l-xl " />
-                    <div className="flex flex-col justify-around ">
-                            <div>
-                                <h1 className="font-semibold text-xl">{r.bookTitle}</h1>
-                            </div>
+                    <div className="flex flex-col gap-10 ">
+                        <div>
+                            <h1 className="font-semibold text-xl pt-2">{r.bookTitle}</h1>
+                        </div>
 
                         <div className="flex flex-col items-start gap-2 w-full">
                             <div className="flex items-center gap-2 bg-green-500 text-white rounded-xl py-1 px-4 ">
@@ -53,27 +60,6 @@ export const TableRental = () => {
                                 <FaRegCalendarAlt size={12} />
                                 <p>Data do aluguel: {r.rentalDate} </p>
                             </div>
-                        </div>
-
-                        <div className="flex flex-col gap-3 lg:flex-row">
-                            <ModalSure
-                                props="bg-sky-900 text-white w-50 lg:w-60"
-                                modalId="my_modal_1"
-                                h1="Deseja renovar?"
-                                p="Ao renovar o livro você tem um prazo de 15 dias de leitura."
-                                tittleBtn="Renovar"
-                                txtBtn1="Renovar"
-                                txtBtn2="Cancelar"
-                            />
-                            <ModalSure
-                                props="bg-neutral-200 w-50 lg:w-30 text-black"
-                                modalId="my_modal_2"
-                                h1="Deseja devolver?"
-                                p="Ao devolver o livro, o seu progresso será perdido."
-                                tittleBtn="Devolver"
-                                txtBtn1="Devolver"
-                                txtBtn2="Cancelar"
-                            />
                         </div>
                     </div>
                 </div>

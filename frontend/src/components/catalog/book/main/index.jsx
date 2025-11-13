@@ -2,8 +2,7 @@ import React from "react";
 import { SectionCountReviews } from "./sectionCountReviews";
 import { SectionWriteReview } from "./sectionWriteReview";
 import { SectionReviews } from "./sectionReviews";
-import { useReviewesBook } from "../../../../hooks/book";
-import { Loading } from "../../../Loading";
+import { useReviewesBook } from "../../../../hooks/book/index.js";
 
 export const Main = ({ book }) => {
     const { data: reviews, isLoading, isError } = useReviewesBook(book.id);

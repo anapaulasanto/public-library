@@ -1,7 +1,7 @@
 import { SectionSettings } from "./SectionAccSettings";
 import { useContext } from "react";
 import { AuthContext } from "../../../context/AuthContext"
-import { useUserUpdate } from "../../../hooks/user"
+import { useUserUpdate } from "../../../hooks/user/index.js"
 import { SectionAccDelete } from "./SectionAccDelete";
 
 export const UserAccount = () => {

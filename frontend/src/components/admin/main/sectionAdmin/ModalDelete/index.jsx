@@ -1,5 +1,5 @@
 import { FaTrashAlt } from "react-icons/fa";
-import { useUserDelete } from "../../../../../hooks/user";
+import { useUserDelete } from "../../../../../hooks/user/index.js";
 import { IoIosAlert } from "react-icons/io";
 import { ModalError } from "../../../../ModalError";
 import { useEffect } from "react";

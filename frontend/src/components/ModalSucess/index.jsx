@@ -8,7 +8,7 @@ export const ModalSucess = ({ modalId, h1, p }) => {
                 <div className="modal-box flex flex-col items-center justify-center">
                     <LuCircleCheckBig size={40}color="#449200ff" />
                     <h3 className="font-semibold text-2xl pt-3">{h1}</h3>
-                    <p className="text-gray-500 pt-2">{p}</p>
+                    <p className="text-gray-500 pt-2 text-center">{p}</p>
                     <div className="modal-action flex justify-center">
                         <form method="dialog" className="flex gap-2">
                             <button

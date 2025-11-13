@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { createContext, useState } from "react";
-import { checkAuthStatus } from "../../services/auth";
+import { checkAuthStatus } from "../../services/auth/index.js";
 
 export const AuthContext = createContext(null);
 

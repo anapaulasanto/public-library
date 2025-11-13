@@ -4,7 +4,7 @@ import { FaRegUser } from 'react-icons/fa'
 import { IoExitOutline } from 'react-icons/io5'
 import profileIcon from '../../../../../assets/icons/profile-icon.png'
 import { Link } from "react-router-dom"
-import { useLogout } from "../../../../../hooks/auth";
+import { useLogout } from "../../../../../hooks/auth/index.js";
 import { AuthContext } from "../../../../../context/AuthContext";
 import { IconLetter } from "../../../../iconLetter"
 

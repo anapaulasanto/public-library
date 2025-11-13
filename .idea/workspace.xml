@@ -5,9 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c18daa89-d018-4d01-9bb2-afbdf027f4a4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/security/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/security/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/ModalSucess/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ModalSucess/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/CardLogin/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/CardLogin/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/CardSignUp/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/CardSignUp/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalDelete/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalDelete/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalEditUsers/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalEditUsers/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/TableBooks/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/TableBooks/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/TableUsers/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/TableUsers/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/nav/MenuProfile/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/nav/MenuProfile/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/catalog/Main/CardBookCatalog/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/catalog/Main/CardBookCatalog/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/catalog/Main/CategoriesSearchAside/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/catalog/Main/CategoriesSearchAside/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/catalog/book/header/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/catalog/book/header/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/catalog/book/main/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/catalog/book/main/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/user/Account/SectionAccDelete/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/user/Account/SectionAccDelete/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/user/Account/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/user/Account/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/user/CardLogin/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/user/CardLogin/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/user/CardSignUp/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/user/CardSignUp/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/user/Profile/Main/TableRental/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/user/Profile/Main/TableRental/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/user/Profile/Main/TableReview/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/user/Profile/Main/TableReview/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/user/Profile/Nav/DropdownUser/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/user/Profile/Nav/DropdownUser/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/context/AuthContext/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/context/AuthContext/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/hooks/auth/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/hooks/book/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/hooks/category/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/hooks/review/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/hooks/user/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/admin/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/admin/Profile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/bookId/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/bookId/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/router/PublicRoutes/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/router/PublicRoutes/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/services/auth/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/services/book/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/services/category/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/services/review/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/services/user/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/utils/index.jsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,17 +79,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.LibraryApplication.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "development",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Arquivos/Documents/.pesquisa/public-library"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.LibraryApplication.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;development&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Arquivos/Documents/.pesquisa/public-library&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="LibraryApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="br.edu.unichristus.LibraryApplication" />

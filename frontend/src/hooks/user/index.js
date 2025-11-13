@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { deleteUser, fetchAllUsers, fetchUserRentals, fetchUserReviews, updateUser } from "../../services/user"
+import { deleteUser, fetchAllUsers, fetchUserRentals, fetchUserReviews, updateUser } from "../../services/user/index.js"
 
 // ============ EXIBIR TODOS OS USUARIOS ============
 export const useAllUsers = () => {

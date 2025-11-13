@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { Book } from "../../components/catalog/book";
 import { Loading } from "../../components/Loading";
-import { useBookId } from "../../hooks/book";
+import { useBookId } from "../../hooks/book/index.js";
 
 export const BookId = () => {
   const { id } = useParams();

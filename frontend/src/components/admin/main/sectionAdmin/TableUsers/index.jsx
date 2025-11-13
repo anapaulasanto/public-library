@@ -1,8 +1,8 @@
 import { FaCalendar, FaCalendarAlt, FaPencilAlt, FaTrashAlt, FaUser } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
 import { ModalDeleteUser } from "../ModalDelete";
-import { useAllUsers } from "../../../../../hooks/user";
-import { formatDate } from "../../../../../utils";
+import { useAllUsers } from "../../../../../hooks/user/index.js";
+import { formatDate } from "../../../../../utils/index.js";
 import { Loading } from "../../../../Loading";
 import { ModalEditUsers } from "../ModalEditUsers";
 

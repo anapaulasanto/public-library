@@ -2,9 +2,9 @@ import React, { useCallback } from "react";
 import { CiCalendar } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom"
-import { useBooksAdmin } from "../../../../hooks/book";
+import { useBooksAdmin } from "../../../../hooks/book/index.js";
 import { Loading } from "../../../Loading";
-import { nameToSlug } from "../../../../utils";
+import { nameToSlug } from "../../../../utils/index.js";
 
 export const CardBook = () => {
     const { data: books, isLoading, isError } = useBooksAdmin();

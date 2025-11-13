@@ -2,7 +2,7 @@ import React from "react";
 import { FormHeader } from "../../user/CardLogin/FormHeader";
 import { Link } from "react-router-dom";
 import { FormSignUp } from "../../user/CardSignUp/Form";
-import { useRegister } from "../../../hooks/auth/";
+import { useRegister } from "../../../hooks/auth/index.js";
 
 export const CardSignUpAdmin = () => {
     const { handleRegister, error } = useRegister('ADMIN');

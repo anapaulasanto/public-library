@@ -1,5 +1,5 @@
 import { FaRegCalendar } from "react-icons/fa";
-import { useUserReviews } from "../../../../../hooks/user";
+import { useUserReviews } from "../../../../../hooks/user/index.js";
 import { Loading } from "../../../../Loading";
 import reviewIcon from "../../../../../assets/icons/review-icon.png"
 import { StarRating } from "../StarRating";
