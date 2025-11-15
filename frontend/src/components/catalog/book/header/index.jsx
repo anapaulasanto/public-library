@@ -9,7 +9,7 @@ import { BookHeader } from "./bookHeader";
 import { AuthContext } from "../../../../context/AuthContext";
 
 export const Header = ({ book }) => {
-    const { handleSaveRental, isSuccess, data } = useSaveRental()
+    const { handleSaveRental, isSuccess} = useSaveRental()
     const { user } = useContext(AuthContext);
     const modalIdSucess = "modal_rental_book_success"
     const [isRented, setIsRented] = useState(false);
@@ -28,12 +28,12 @@ export const Header = ({ book }) => {
         }
     }, [user, book]);
 
-    // Após sucesso da locação, persiste informação e exibe modal
+    // Após sucesso da locação, persiste informação e exibe modal (sem reload)
     useEffect(() => {
         if (isSuccess && user && book) {
             const modalSuccess = document.getElementById(modalIdSucess);
             modalSuccess?.showModal();
-            
+
             const key = `rental_${user.id}_${book.id}`;
             localStorage.setItem(key, 'true');
             setIsRented(true);

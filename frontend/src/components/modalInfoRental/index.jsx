@@ -15,7 +15,7 @@ export const ModalInfoRental = ({ modalId, bookTitle, userName, rentalDate, retu
                             <span className="text-sm text-gray-500 mt-1">{bookTitle}</span>
                         </div>
                         <form method="dialog">
-                            <button className="btn btn-ghost btn-sm">
+                            <button className="btn btn-ghost btn-sm outline-none">
                                 <IoCloseOutline size={22} />
                             </button>
                         </form>

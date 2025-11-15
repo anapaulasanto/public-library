@@ -1,15 +1,20 @@
 import { FaBookOpen, FaCalendar, FaStar } from "react-icons/fa";
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { AuthContext } from "../../../../context/AuthContext/index.jsx";
 import { useFetchRentalsByUser } from "../../../../hooks/rental";
 
 export const CardHeader = () => {
     const { user } = useContext(AuthContext);
-    const createdAtString = user?.createdAt
-    const year = createdAtString ? createdAtString.substring(0,4) : ''
-    
     const { data: rentals, isLoading: isLoadingRentals } = useFetchRentalsByUser(user?.id);
-    const rentalsCount = isLoadingRentals ? null : (Array.isArray(rentals) ? rentals.length : 0);
+    
+    const year = useMemo(() => {
+        return user?.createdAt?.substring(0, 4) || '';
+    }, [user?.createdAt]);
+
+    const rentalsCount = useMemo(() => {
+        if (isLoadingRentals) return null;
+        return Array.isArray(rentals) ? rentals.length : 0;
+    }, [rentals, isLoadingRentals]);
 
     return (
         <div className="flex flex-col mx-auto gap-4 lg:flex-row">
