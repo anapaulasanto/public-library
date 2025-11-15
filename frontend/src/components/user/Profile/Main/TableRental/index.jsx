@@ -1,19 +1,28 @@
-import imgCard from "../../../../../assets/bg-auth.jfif"
-import { FaRegCalendarAlt, FaRegClock } from "react-icons/fa"
-import { ModalSure } from "../../ModalSure"
-import { useUserRentals } from "../../../../../hooks/user/index.js"
+import imgCard from "../../../../../assets/bg-auth.jfif";
+import { FaRegCalendarAlt, FaRegClock } from "react-icons/fa";
+import { useUserRentals } from "../../../../../hooks/user/index.js";
 import { Loading } from "../../../../Loading/index.jsx";
 import { Link, useNavigate } from "react-router-dom";
-import bookIcon from "../../../../../assets/icons/book-icon.png"
+import bookIcon from "../../../../../assets/icons/book-icon.png";
 import { nameToSlug } from "../../../../../utils/index.js";
+import { useState } from "react";
+import { ModalInfoRental } from "../../../../modalInfoRental";
 
 export const TableRental = () => {
     const { data: rental, isLoading, isError } = useUserRentals();
     const navigate = useNavigate();
+    const [selectedRental, setSelectedRental] = useState(null);
+    const modalId = 'modal_info_rental';
 
     const onClickRental = (bookTitle, bookId) => {
         navigate(`/catalog/book/${nameToSlug(bookTitle)}/${bookId}`, { state: { bookId } });
-    }
+    };
+
+    const openRentalInfo = (r) => {
+        setSelectedRental(r);
+        const dialog = document.getElementById(modalId);
+        dialog?.showModal();
+    };
 
     if (isLoading) {
         return (
@@ -38,32 +47,56 @@ export const TableRental = () => {
     }
 
     return (
-        <div className="grid grid-cols-1 pb-6 gap-10 mt-10 lg:grid-cols-2 max-h-[500px] overflow-y-auto">
-            {rental.map((r, index) => (
-                <div
-                    key={index}
-                    className="flex gap-3 h-40 border border-gray-200 rounded-xl hover:cursor-pointer hover:shadow-2xl hover:h-41 hover:duration-150 ease-out"
-                    onClick={() => onClickRental(r.bookTitle, r.bookId)}
-                >
-                    <img src={imgCard} alt="" className="w-1/3 rounded-l-xl " />
-                    <div className="flex flex-col gap-10 ">
-                        <div>
-                            <h1 className="font-semibold text-xl pt-2">{r.bookTitle}</h1>
-                        </div>
-
-                        <div className="flex flex-col items-start gap-2 w-full">
-                            <div className="flex items-center gap-2 bg-green-500 text-white rounded-xl py-1 px-4 ">
-                                <FaRegClock size={12} />
-                                <p className="text-xs ">Entrega: {r.returnDate}</p>
+        <>
+            <div className="grid grid-cols-1 pb-12 gap-10 mt-10 lg:grid-cols-2 max-h-[500px] overflow-y-auto">
+                {rental.map((r) => (
+                    <div
+                        key={r.bookId}
+                        className="flex gap-3 h-50 border border-gray-200 rounded-xl hover:shadow-2xl hover:h-51 hover:duration-150 ease-out"
+                    >
+                        <img
+                            src={imgCard}
+                            alt=""
+                            className="w-1/3 rounded-l-xl hover:cursor-pointer"
+                            onClick={() => onClickRental(r.bookTitle, r.bookId)}
+                        />
+                        <div className="flex flex-col justify-between flex-1 py-2 pr-2">
+                            <div className="flex items-start justify-between">
+                                <h1
+                                    className="font-semibold text-xl pt-2 hover:cursor-pointer"
+                                    onClick={() => onClickRental(r.bookTitle, r.bookId)}
+                                >
+                                    {r.bookTitle}
+                                </h1>
                             </div>
-                            <div className="flex gap-1 items-center text-xs text-gray-500">
-                                <FaRegCalendarAlt size={12} />
-                                <p>Data do aluguel: {r.rentalDate} </p>
+                            <div className="flex flex-col items-start gap-2 w-full mt-2">
+                                <div className="flex items-center gap-2 bg-green-500 text-white rounded-xl py-1 px-4">
+                                    <FaRegClock size={12} />
+                                    <p className="text-xs">Entrega: {r.returnDate}</p>
+                                </div>
+                                <div className="flex gap-1 items-center text-xs text-gray-500">
+                                    <FaRegCalendarAlt size={12} />
+                                    <p>Data do aluguel: {r.rentalDate}</p>
+                                </div>
                             </div>
+                            <button
+                                type="button"
+                                className="btn btn-xs rounded-lg"
+                                onClick={() => { openRentalInfo(r) }}
+                            >
+                                Visualizar aluguel
+                            </button>
                         </div>
                     </div>
-                </div>
-            ))}
-        </div>
-    )
+                ))}
+            </div>
+            <ModalInfoRental
+                modalId={modalId}
+                bookTitle={selectedRental?.bookTitle}
+                userName={selectedRental?.userName || 'Você'}
+                rentalDate={selectedRental?.rentalDate}
+                returnDate={selectedRental?.returnDate}
+            />
+        </>
+    );
 }

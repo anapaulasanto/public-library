@@ -1,15 +1,18 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../../../context/AuthContext";
-import { useFetchRentalsByUser } from "../../../../../hooks/rental";
+import { FcInfo } from "react-icons/fc";
+import { ModalInfoRental } from "../../../../modalInfoRental";
 
-export const BookHeader = ({ book, onRentalClick, isRented, rentalData }) => {
+export const BookHeader = ({ book, onRentalClick, isRented }) => {
     const { isLogged, user } = useContext(AuthContext);
+    const modaIdlInfo = "modal_info_rental";
     const navigate = useNavigate();
-    const { data: rentals } = useFetchRentalsByUser(user?.id);
 
-    console.log("alugueis do usuario", rentals);
-    
+    const handleOpenModalInfo = () => {
+        const modal = document.getElementById(modaIdlInfo);
+        modal.showModal();
+    }
 
     const handleToRental = () => {
         if (!isLogged) {
@@ -34,14 +37,24 @@ export const BookHeader = ({ book, onRentalClick, isRented, rentalData }) => {
             <p className="text-gray-600">{book.author}</p>
             <div className="flex justify-between items-center">
                 <p className="bg-gray-300 px-3 py-1 w-fit font-semibold rounded-xl text-xs">{book.categoryName}</p>
-                <div>
-                    <button
-                        onClick={handleToRental}
-                        className={`btn bg-sky-600 text-white rounded-2xl px-8 hover:bg-sky-700 duration-150 ${isRented ? "opacity-50 cursor-not-allowed" : ""}`}
-                        disabled={isRented}
-                    >
-                        {isRented ? "Alugado" : "Alugar"}
-                    </button>
+                <div className="flex items-center gap-2">
+                    <div>
+                        <button
+                            onClick={handleToRental}
+                            className={`btn bg-sky-600 text-white rounded-2xl px-8 hover:bg-sky-700 duration-150 ${user?.role === "ADMIN" ? "hidden" : ""} ${isRented ? "opacity-50 cursor-not-allowed" : ""}`}
+                            disabled={isRented}
+                        >
+                            {isRented ? "Alugado" : "Alugar"}
+                        </button>
+                    </div>
+                    {isRented && (
+                        <div className="cursor-pointer">
+                            <FcInfo
+                                size={25}
+                                onClick={handleOpenModalInfo}
+                            />
+                        </div>
+                    )}
                 </div>
             </div>
             <div className="w-150 pt-10">
@@ -49,6 +62,7 @@ export const BookHeader = ({ book, onRentalClick, isRented, rentalData }) => {
                 <p className="text-sm pt-2 text-gray-700">Lily nem sempre teve uma vida fácil, mas isso nunca a impediu de trabalhar arduamente para conquistar a vida tão sonhada. Ela percorreu um longo caminho desde a infância, em uma cidadezinha no Maine: se formou em marketing, se mudou para Boston e abriu a própria loja. Então, quando se sente atraída por um lindo neurocirurgião chamado Ryle Kincaid, tudo parece perfeito demais para ser verdade.
                 </p>
             </div>
+            <ModalInfoRental modalId={modaIdlInfo} bookTitle={book.title} userName={user?.name} rentalDate={new Date().toLocaleDateString('pt-BR')} returnDate={new Date(Date.now() + 15 * 24 * 60 * 60 * 1000).toLocaleDateString('pt-BR')} />
         </div>
     )
 };

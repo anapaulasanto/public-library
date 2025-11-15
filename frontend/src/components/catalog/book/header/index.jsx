@@ -33,6 +33,7 @@ export const Header = ({ book }) => {
         if (isSuccess && user && book) {
             const modalSuccess = document.getElementById(modalIdSucess);
             modalSuccess?.showModal();
+            
             const key = `rental_${user.id}_${book.id}`;
             localStorage.setItem(key, 'true');
             setIsRented(true);
@@ -46,7 +47,7 @@ export const Header = ({ book }) => {
             </Link>
             <BookCover />
             <div className="flex flex-col">
-                <BookHeader book={book} onRentalClick={handleRentalClick} isRented={isRented} rentalData={data} />
+                <BookHeader book={book} onRentalClick={handleRentalClick} isRented={isRented} />
                 <SectionDataBook book={book} />
             </div>
             <ModalSucess h1="Livro alugado!" p="Você tem um prazo de 15 dias para devolver o livro. Aproveite sua leitura." modalId={modalIdSucess} />

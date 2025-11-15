@@ -4,7 +4,7 @@ import { BarRating } from "../barRating";
 import { Loading } from "../../../../Loading";
 
 
-export const SectionCountReviews = ({ reviews, isLoading, isError }) => {
+export const SectionCountReviews = ({ isLoading, isError }) => {
 
     if (isLoading) {
         return <div>{null}</div>;

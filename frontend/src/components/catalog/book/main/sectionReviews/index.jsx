@@ -27,7 +27,7 @@ export const SectionReviews = ({ reviews, isLoading, isError }) => {
             <div className="flex flex-col gap-10 bg-neutral-100 mt-5 p-4 border border-neutral-200 rounded-xl w-[80%] mx-auto shadow mb-10">
                 <p className="text-2xl font-semibold">Avaliações dos leitores</p>
                 {reviews.map((review) => (
-                    <div key={review.id} className="flex gap-3">
+                    <div key={review.id} className="flex gap-3 border-b border-gray-200 pb-4">
                         <img
                             src={userImg}
                             alt="Imagem de boneco de usuario"
