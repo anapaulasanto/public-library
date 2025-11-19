@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { MenuPages } from "../../admin/main/MenuPages";
 import { LuBookA, LuStar } from "react-icons/lu";
-import { BookContext } from "../../../context/BookContext";
+import { BookContext } from "../../../context/bookContext";
 import { SectionTableRental } from "./Main/SectionTableRental";
 import { SectionRecomended } from "./Main/SectionRecomended";
 import { SectionTableReview } from "./Main/SectionTableReview";

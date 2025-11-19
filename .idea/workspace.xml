@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c18daa89-d018-4d01-9bb2-afbdf027f4a4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/catalog/mainApi/bookCardApi/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/hooks/book/api/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/services/book/api/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/user/Profile/Main/TableRental/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/user/Profile/Main/TableRental/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/catalog/Main/CardBookCatalog/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/catalog/Main/CardBookCatalog/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/catalog/mainApi/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/catalog/mainApi/index.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,11 +18,6 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="development-V1" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -73,7 +72,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.LibraryApplication" />
         <item itemvalue="Application.LibraryApplication" />
       </list>
     </recent_temporary>

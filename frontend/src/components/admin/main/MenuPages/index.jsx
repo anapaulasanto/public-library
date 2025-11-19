@@ -1,4 +1,4 @@
-import { BookContext } from "../../../../context/BookContext";
+import { BookContext } from "../../../../context/bookContext";
 import { useContext } from "react";
 
 export const MenuPages = ({ page, activeTab }) => {

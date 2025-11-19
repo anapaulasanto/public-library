@@ -17,17 +17,17 @@ export const CardBook = () => {
     }, [navigate]);
 
     if (isLoading) {
-            return <Loading />
-        }
-    
-        if (isError) {
-            return <div className="mt-10 text-red-500">Erro ao carregar os livros. Tente novamente.</div>;
-        }
-    
+        return <Loading />
+    }
+
+    if (isError) {
+        return <div className="mt-10 text-red-500">Erro ao carregar os livros. Tente novamente.</div>;
+    }
+
     return (
             <div className=" flex flex-col items-center justify-center gap-5 lg:flex-row lg:flex-wrap my-10 hover:cursor-pointer w-full">
             {books?.map((book, index) => (
-                <button 
+                <button
                     key={index}
                     onClick={() => handleBookClick(book)}
                     className="card bg-neutral-200/20 border border-neutral-300 shadow-sm h-[95%] hover:shadow-2xl w-[17%] cursor-pointer transition-all duration-200 hover:scale-105"
@@ -43,7 +43,7 @@ export const CardBook = () => {
                     <div className="card-body flex flex-col items-start max-h-[35%] w-full p-3">
                         <h2 className="card-title text-[1.03rem] text-start">{book.title}</h2>
                         <div className="flex items-center justify-between w-full">
-                            <p className="flex items-center gap-1 text-sm text-zinc-600">                               
+                            <p className="flex items-center gap-1 text-sm text-zinc-600">
                                 {book.author}
                             </p>
                             <div>
@@ -61,7 +61,7 @@ export const CardBook = () => {
                                 <p className="text-xs">(20)</p>
                             </div>
                         </div>
-                        
+
                     </div>
                 </button>
             ))}

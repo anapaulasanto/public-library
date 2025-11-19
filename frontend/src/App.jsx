@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { AppRouter } from './router'
-import { BookContextProvider } from './context/BookContext'
+import { BookContextProvider } from './context/bookContext'
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { AuthProvider } from './context/AuthContext'
 import { CatalogContextProvider } from './context/CatalogContext'
