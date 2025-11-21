@@ -1,0 +1,1 @@
+ALTER TABLE tb_book ADD COLUMN palavras_chaves VARCHAR(255);
