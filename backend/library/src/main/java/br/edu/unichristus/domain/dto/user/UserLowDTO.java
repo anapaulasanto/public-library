@@ -14,7 +14,7 @@ public class UserLowDTO {
 
     private String email;
 
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(value="atualizado em", access = JsonProperty.Access.READ_ONLY)
     private LocalDateTime updatedAt;
 
     public Long getId() {

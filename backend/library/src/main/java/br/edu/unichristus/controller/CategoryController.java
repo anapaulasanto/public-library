@@ -71,8 +71,8 @@ public class CategoryController {
     private BookService bookService;
 
     @Operation(summary = "Retorna livros de uma categoria | role: [ADMIN, USER]", tags = "Category")
-    @GetMapping("/{nome}/books")
-    public List<BookDTO> getBooksByCategory(@PathVariable("nome") String categoryName) {
-        return bookService.findBooksByCategoryName(categoryName);
+    @GetMapping("/{id}/books")
+    public List<BookDTO> getBooksByCategory(@PathVariable("id") Long categoryId) {
+        return bookService.findBooksByCategoryId(categoryId);
     }
 }

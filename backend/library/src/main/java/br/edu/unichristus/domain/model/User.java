@@ -2,18 +2,15 @@ package br.edu.unichristus.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "tb_user")
-public class User implements UserDetails {
+
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,65 +18,87 @@ public class User implements UserDetails {
 
     @Column(length = 150, nullable = false)
     private String name;
-
-    @Column(unique = true)
     private String email;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // Esconde o password nas respostas JSON
+    @Column(unique = true)
+    private String login;
     private String password;
 
-    @Column(length = 20, nullable = false)
-    private String role; // USER ou ADMIN
-
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false,updatable = false)
     private LocalDateTime createdAt;
 
     @Column(nullable = false)
     private LocalDateTime updatedAt;
+    public User(){
 
-    public User() {
-        this.role = "USER"; // default
     }
 
-    public User(Long id, String name, String email, String password, String role,
-                LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public User(Long id, String name, String email, String login, String password, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.login = login;
         this.password = password;
-        this.role = role != null ? role : "USER";
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
 
-    // ==================== Getters e Setters  ====================
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public String getName() {
+        return name;
+    }
 
-    @Override
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public String getRole() { return role; }
-    public void setRole(String role) { this.role = role != null ? role : "USER"; }
+    public String getEmail() {
+        return email;
+    }
 
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public LocalDateTime getUpdatedAt() { return updatedAt; }
-    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    // ==================== Métodos do JPA ====================
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     @PrePersist
     protected void onCreate() {
         createdAt = updatedAt = LocalDateTime.now();
-        if (role == null) role = "USER"; // garante role default
     }
 
     @PreUpdate
@@ -87,19 +106,16 @@ public class User implements UserDetails {
         updatedAt = LocalDateTime.now();
     }
 
-    // ==================== Métodos de Comparação  ====================
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof User user)) return false;
-        return Objects.equals(id, user.id) &&
-                Objects.equals(name, user.name) &&
-                Objects.equals(email, user.email);
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(login, user.login) && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email);
+        return Objects.hash(id, name, email, login, password);
     }
 
     @Override
@@ -108,41 +124,11 @@ public class User implements UserDetails {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", role='" + role + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        // Garante que a role tenha um valor padrão e esteja em maiúsculas
-        String userRole = (this.role == null || this.role.isBlank()) ? "USER" : this.role.toUpperCase();
-        // Cria a "autoridade" que o Spring entende
-        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + userRole));
-    }
-    @Override
-    public String getUsername() {
-        return this.email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true; // Conta nunca expira
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true; // Conta nunca é bloqueada
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true; // Credenciais nunca expiram
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true; // Conta está sempre habilitada
-    }
 }

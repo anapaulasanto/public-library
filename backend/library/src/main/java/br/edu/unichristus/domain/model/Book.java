@@ -1,5 +1,4 @@
 package br.edu.unichristus.domain.model;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -21,10 +20,21 @@ public class Book {
     @Column(unique = true)
     private String isbn;
 
+    @Column(nullable = false)
+    private String description;
+
+    @Column(name = "palavras_chaves")
+    private String palavrasChaves;
+
+    @Column(name = "rating_average")
+    private Double ratingAverage;
+
+    @Column(name = "cover_url")
+    private String coverUrl;
+
     // Relacionamento N livros : 1 categoria
     @ManyToOne
     @JoinColumn(name = "category_id")
-    @JsonBackReference
     private Category category;
 
 
@@ -79,12 +89,44 @@ public class Book {
         this.isbn = isbn;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public void setCategory(Category category) {
         this.category = category;
     }
 
     public Category getCategory() {
         return category;
+    }
+
+    public String getPalavrasChaves() {
+        return palavrasChaves;
+    }
+
+    public void setPalavrasChaves(String palavrasChaves) {
+        this.palavrasChaves = palavrasChaves;
+    }
+
+    public Double getRatingAverage() {
+        return ratingAverage;
+    }
+
+    public void setRatingAverage(Double ratingAverage) {
+        this.ratingAverage = ratingAverage;
+    }
+
+    public String getCoverUrl() {
+        return coverUrl;
+    }
+
+    public void setCoverUrl(String coverUrl) {
+        this.coverUrl = coverUrl;
     }
 
     @Override
@@ -95,12 +137,15 @@ public class Book {
                 Objects.equals(title, book.title) &&
                 Objects.equals(author, book.author) &&
                 Objects.equals(year, book.year) &&
-                Objects.equals(isbn, book.isbn);
+                Objects.equals(isbn, book.isbn) &&
+                Objects.equals(description, book.description) &&
+                Objects.equals(ratingAverage, book.ratingAverage) &&
+                Objects.equals(coverUrl, book.coverUrl);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, year, isbn);
+        return Objects.hash(id, title, author, year, isbn, description, ratingAverage, coverUrl);
     }
 
     @Override
@@ -111,6 +156,7 @@ public class Book {
                 ", author='" + author + '\'' +
                 ", year=" + year +
                 ", isbn='" + isbn + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 
