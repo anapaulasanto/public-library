@@ -1,4 +1,5 @@
-export const Fieldset = ({ htmlFor, label, placeholder, type, children, props }) => {
+import React from "react";
+export const Fieldset = React.memo(({ htmlFor, label, placeholder, type, children, props }) => {
     return (
         <fieldset className="flex flex-col justify-center w-full text-sm">
             <label htmlFor={htmlFor} className="font-semibold py-1">{label}</label>
@@ -7,5 +8,5 @@ export const Fieldset = ({ htmlFor, label, placeholder, type, children, props })
                 <input type={type} placeholder={placeholder} className={`pl-8 border-none bg-gray-200 p-3 w-full rounded-lg outline-none ${props}`}  {...props} />
             </div>
         </fieldset>
-    )
-}
+    );
+});

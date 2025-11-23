@@ -10,7 +10,7 @@ export const CardBookApi = ({ book }) => {
     return (
         <div
             key={book.id}
-            className="card bg-neutral-200/20 border border-neutral-300 shadow-sm h-[650px] hover:shadow-2xl w-[19%] cursor-pointer transition-all duration-200 hover:scale-105 gap-2 2xl:h-[800px]"
+            className="card bg-neutral-200/20 border border-neutral-300 shadow-sm h-[600px] hover:shadow-2xl w-[19%] cursor-pointer transition-all duration-200 hover:scale-105 gap-2 2xl:h-[830px] 2xl:w-[19%]"
         >
             <figure className="w-full h-fit">
                 <img
@@ -20,7 +20,7 @@ export const CardBookApi = ({ book }) => {
                     loading="lazy"
                 />
             </figure>
-            <div className="card-body flex flex-col items-start max-h-[40%] w-full p-3">
+            <div className="card-body flex flex-col items-start max-h-[40%] w-full">
                 <h2 className="card-title text-[1rem] text-start">{info.title}</h2>
                 <div className="flex items-center justify-between w-full">
                     <p className="flex items-center gap-1 text-sm text-zinc-600">
