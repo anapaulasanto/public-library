@@ -9,6 +9,7 @@ export const InputSearch = ({ onSearch }) => {
         e.preventDefault();
         if (onSearch && searchValue) {
             let type = "all";
+            
             if (searchType === "Livro") type = "title";
             else if (searchType === "Autor") type = "author";
             else if (searchType === "Palavra-chave") type = "subject";
