@@ -8,9 +8,17 @@ export const useSaveRental = () => {
     const mutation = useMutation({
         mutationFn: (rentalData) => saveRental(rentalData),
 
-        onSuccess: (data) => {
+        onSuccess: (data, variables) => {
             console.log("Aluguel realizado com sucesso!", data);
-            queryClient.invalidateQueries({ queryKey: ['authUser', 'users', 'book'] });
+            // Invalida caches relevantes para refletir o novo aluguel
+            const userId = queryClient.getQueryData(['authUser'])?.id;
+            if (userId) {
+                queryClient.invalidateQueries({ queryKey: ['rentals', userId] });
+                queryClient.invalidateQueries({ queryKey: ['rentalsByUser', userId] });
+            }
+            if (variables?.bookId) {
+                queryClient.invalidateQueries({ queryKey: ['book', variables.bookId] });
+            }
         },
 
         onError: (error) => {

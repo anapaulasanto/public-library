@@ -7,11 +7,11 @@ export const NavAdmin = () => {
         <nav className='bg-slate-50 border border-slate-100 shadow-xs'>
             <div className='flex justify-between items-center p-5'>
                     <Link to='/'>
-                        <div class="flex items-center gap-2 w-full">
-                            <img src={favicon} alt="Favicon da biblioteca" class="w-[35px]" />
-                            <div class="flex flex-col leading-tight">
-                                <p class="bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent font-bold">BiblioTech</p>
-                                <p class="text-sm font-light">Biblioteca digital</p>
+                        <div className="flex items-center gap-2 w-full">
+                            <img src={favicon} alt="Favicon da biblioteca" className="w-[35px]" />
+                            <div className="flex flex-col leading-tight">
+                                <p className="bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent font-bold">BiblioTech</p>
+                                <p className="text-sm font-light">Biblioteca digital</p>
                             </div>
                         </div>
                     </Link>

@@ -1,6 +1,5 @@
 import React from "react";
-
-export const Skeleton = () => {
+export const Skeleton = React.memo(() => {
   return (
       <div className="flex w-full flex-col gap-4 m-auto">
           <div className="flex items-center gap-4">
@@ -12,5 +11,5 @@ export const Skeleton = () => {
           </div>
           <div className="skeleton h-32 w-full"></div>
       </div>
-  )
-};
+  );
+});

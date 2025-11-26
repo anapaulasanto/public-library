@@ -5,12 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c18daa89-d018-4d01-9bb2-afbdf027f4a4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/catalog/mainApi/bookCardApi/index.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/hooks/book/api/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/services/book/api/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/main/MenuPages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/main/MenuPages/index.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/catalog/Main/CardBookCatalog/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/catalog/Main/CardBookCatalog/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/catalog/Main/InputSearch/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/catalog/Main/InputSearch/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/catalog/mainApi/bookCardApi/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/catalog/mainApi/bookCardApi/index.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/catalog/mainApi/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/catalog/mainApi/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/user/Profile/Main/TableRental/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/user/Profile/Main/TableRental/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/user/Profile/Main/TableReview/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/user/Profile/Main/TableReview/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/user/Profile/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/user/Profile/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/services/book/api/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/book/api/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,17 +49,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.LibraryApplication.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;development&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Arquivos/Documents/.pesquisa/public-library&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.LibraryApplication.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "ana",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Arquivos/Documents/.pesquisa/public-library"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="LibraryApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="br.edu.unichristus.LibraryApplication" />

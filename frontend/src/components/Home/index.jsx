@@ -22,7 +22,7 @@ export const HomePage = () => {
     }
 
     return (
-        <div class="bg-zinc-100">
+        <div className="bg-zinc-100">
             <CurrentNav />
             <HeaderHome />
             <MainHome />

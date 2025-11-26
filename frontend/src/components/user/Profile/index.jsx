@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { MenuPages } from "../../admin/main/MenuPages";
 import { LuBookA, LuStar } from "react-icons/lu";
 import { BookContext } from "../../../context/bookContext";
@@ -9,7 +9,7 @@ import { SectionTableReview } from "./Main/SectionTableReview";
 export const DashboardUser = () => {
     const { activeTabRental } = useContext(BookContext)
 
-    const pages = [
+    const pages = useMemo(() => [
         {
             id: "alugueis",
             page: "Aluguéis",
@@ -19,7 +19,7 @@ export const DashboardUser = () => {
             page: "Avaliações",
             icon: <LuStar />
         }
-    ]
+    ], []);
 
     return (
         <div className="w-full 2xl:w-[80%]">
