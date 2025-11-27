@@ -1,9 +1,9 @@
 import { FaTrashAlt } from "react-icons/fa";
 import { useUserDelete } from "../../../../../hooks/user/index.js";
 import { IoIosAlert } from "react-icons/io";
-import { ModalError } from "../../../../ModalError";
+import { ModalError } from "../../../../ModalError/index.jsx";
 import { useEffect } from "react";
-import { ModalSucess } from "../../../../ModalSucess";
+import { ModalSucess } from "../../../../ModalSucess/index.jsx";
 
 export const ModalDeleteUser = ({ modalId, userId }) => {
     const { handleDeleteUser, isSuccess, isError } = useUserDelete(userId);

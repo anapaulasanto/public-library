@@ -1,5 +1,5 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { saveReview } from "../../services/review/index.js";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { fetchReviews, saveReview } from "../../services/review/index.js";
 
 export const useSaveReview = () => {
     const queryClient = useQueryClient();
@@ -21,4 +21,11 @@ export const useSaveReview = () => {
         handleSaveReview: mutation.mutateAsync,
         error: mutation.error
     }
+}
+
+export const useReviews = () => {
+    return useQuery({
+        queryKey: ['reviewsBook'],
+        queryFn: fetchReviews,
+    })
 }

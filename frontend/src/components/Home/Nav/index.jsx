@@ -7,13 +7,13 @@ import { FaRegUser } from 'react-icons/fa'
 export const NavHome = () => {
     return (
         <nav className="w-full h-18 flex items-center justify-between px-8 shadow-md">
-            <div className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2">
                 <img src={favicon} alt="Favicon da biblioteca" className="w-[35px]" />
                 <div className="flex flex-col leading-tight">
                     <p className="bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent font-bold">BiblioTech</p>
                     <p className="text-sm font-light">Biblioteca digital</p>
                 </div>
-            </div>
+            </Link>
             <button className="flex items-center bg-sky-700 gap-2 rounded-xl text-white font-semibold hover:bg-sky-600 cursor-pointer">
                 <div className="dropdown dropdown-end ">
                     <div tabIndex={0} role="button" className="p-2 py-1.5 flex items-center gap-2">
