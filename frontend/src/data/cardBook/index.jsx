@@ -1,5 +1,6 @@
 export const books = [
     {
+        id: 1,
         title: "É Assim que Acaba",
         author: "Colleen Hoover",
         year: 2016,
@@ -8,6 +9,7 @@ export const books = [
         avaliation: 4.8,
         avarageAvaliation: 20
     }, {
+        id: 2,
         title: "Entendendo Algoritmos",
         author: "Aditya Bhargava",
         year: 2016,
@@ -16,6 +18,7 @@ export const books = [
         avaliation: 4.5,
         avarageAvaliation: 15
     }, {
+        id: 3,
         title: "Outlive: A arte e a ciência de viver mais e melhor",
         author: "Peter Attia",
         year: 2023,
@@ -24,6 +27,7 @@ export const books = [
         avaliation: 4.7,
         avarageAvaliation: 8
     }, {
+        id: 4,
         title: "O Grande Livro de Química do Manual do Mundo",
         author: "Workman Publishing",
         year: 2023,

@@ -36,7 +36,7 @@ export const BookHeader = ({ book, onRentalClick, isRented }) => {
             <h2 className="card-title text-[1.8rem] ">{book.title}</h2>
             <p className="text-gray-600">{book.author}</p>
             <div className="flex justify-between items-center">
-                <p className="bg-gray-300 px-3 py-1 w-fit font-semibold rounded-xl text-xs">{book.categoryName}</p>
+                <p className="bg-gray-300 px-3 py-1 w-fit font-semibold rounded-xl text-xs">{book.category || book.categoryName || 'Sem categoria'}</p>
                 <div className="flex items-center gap-2">
                     <div>
                         <button
@@ -59,7 +59,7 @@ export const BookHeader = ({ book, onRentalClick, isRented }) => {
             </div>
             <div className="w-150 pt-10">
                 <h1 className="font-semibold">Descrição</h1>
-                <p className="text-sm pt-2 text-gray-700">Lily nem sempre teve uma vida fácil, mas isso nunca a impediu de trabalhar arduamente para conquistar a vida tão sonhada. Ela percorreu um longo caminho desde a infância, em uma cidadezinha no Maine: se formou em marketing, se mudou para Boston e abriu a própria loja. Então, quando se sente atraída por um lindo neurocirurgião chamado Ryle Kincaid, tudo parece perfeito demais para ser verdade.
+                <p className="text-sm pt-2 text-gray-700">{book.description || 'Sem descrição disponível.'}
                 </p>
             </div>
             <ModalInfoRental modalId={modaIdlInfo} bookTitle={book.title} userName={user?.name} rentalDate={new Date().toLocaleDateString('pt-BR')} returnDate={new Date(Date.now() + 15 * 24 * 60 * 60 * 1000).toLocaleDateString('pt-BR')} />

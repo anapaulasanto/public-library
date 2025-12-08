@@ -65,7 +65,7 @@ export const TableUsers = () => {
                                     {user.role === null ? 'USER' : user.role}
                                 </span>
                             </td>
-                            <td className="flex">
+                            <td className="">
                                 <ModalEditUsers
                                     h1="Editar usuário"
                                     p="Edite informações do usuário"
