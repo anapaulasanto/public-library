@@ -21,6 +21,12 @@ public class Book {
     @Column(unique = true)
     private String isbn;
 
+    @Column(length = 500)
+    private String img;
+
+    @Column(length = 2000)
+    private String description;
+
     // Relacionamento N livros : 1 categoria
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -28,12 +34,14 @@ public class Book {
     private Category category;
 
 
-    public Book(Long id, String title, String author, int year, String isbn) {
+    public Book(Long id, String title, String author, int year, String isbn, String img, String description) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.year = year;
         this.isbn = isbn;
+        this.img = img;
+        this.description = description;
     }
 
     public Book() {
@@ -87,6 +95,22 @@ public class Book {
         return category;
     }
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -95,12 +119,14 @@ public class Book {
                 Objects.equals(title, book.title) &&
                 Objects.equals(author, book.author) &&
                 Objects.equals(year, book.year) &&
-                Objects.equals(isbn, book.isbn);
+                Objects.equals(isbn, book.isbn) &&
+                Objects.equals(img, book.img) &&
+                Objects.equals(description, book.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, year, isbn);
+        return Objects.hash(id, title, author, year, isbn, img, description);
     }
 
     @Override
@@ -111,6 +137,8 @@ public class Book {
                 ", author='" + author + '\'' +
                 ", year=" + year +
                 ", isbn='" + isbn + '\'' +
+                ", img='" + img + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 

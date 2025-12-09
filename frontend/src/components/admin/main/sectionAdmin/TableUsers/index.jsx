@@ -18,7 +18,7 @@ export const TableUsers = () => {
     }
 
     return (
-        <div className="overflow-auto  h-[400px] mt-10 border border-neutral-200 bg-white/50 rounded-xl">
+        <div className="overflow-auto h-[400px] mt-10 border border-neutral-200 rounded-xl">
 
             <table className="table">
                 <thead>

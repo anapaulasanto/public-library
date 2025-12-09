@@ -14,6 +14,13 @@ export const deleteBook = async (bookId) => {
     return data;
 }
 
+// =========== UPDATE BOOK =============
+export const updateBook = async (bookId, bookData) => {
+    const { data } = await axios.put(`api/v1/book/${bookId}`, bookData);
+    console.log("Livro atualizado: ", data);
+    return data;
+}
+
 // =========== GET BOOK BY ID =============
 export const getBookById = async (bookId) => {
     const { data } = await axios.get(`api/v1/book/${bookId}`);

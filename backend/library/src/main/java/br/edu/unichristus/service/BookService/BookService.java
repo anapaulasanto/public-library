@@ -53,6 +53,8 @@ public class BookService {
         var savedBook = repository.save(bookEntity);
         BookDTO dto = MapperUtil.parseObject(savedBook, BookDTO.class);
         dto.setCategoryName(savedBook.getCategory().getCategoryName());
+        dto.setImg(savedBook.getImg());
+        dto.setDescription(savedBook.getDescription());
 
         return dto;
     }
@@ -87,6 +89,8 @@ public class BookService {
         existingBook.setAuthor(bookDTO.getAuthor());
         existingBook.setYear(bookDTO.getYear());
         existingBook.setIsbn(bookDTO.getIsbn());
+        existingBook.setImg(bookDTO.getImg());
+        existingBook.setDescription(bookDTO.getDescription());
 
         var category = categoryRepository.findByCategoryName(bookDTO.getCategoryName())
                 .orElseThrow(() -> new CommonsException(HttpStatus.NOT_FOUND,
@@ -98,6 +102,8 @@ public class BookService {
 
         BookDTO updatedDTO = MapperUtil.parseObject(updatedBook, BookDTO.class);
         updatedDTO.setCategoryName(updatedBook.getCategory().getCategoryName());
+        updatedDTO.setImg(updatedBook.getImg());
+        updatedDTO.setDescription(updatedBook.getDescription());
 
         return updatedDTO;
     }
@@ -112,6 +118,8 @@ public class BookService {
             dto.setAuthor(book.getAuthor());
             dto.setYear(book.getYear());
             dto.setIsbn(book.getIsbn());
+            dto.setImg(book.getImg());
+            dto.setDescription(book.getDescription());
             if (book.getCategory() != null) {
                 dto.setCategoryName(book.getCategory().getCategoryName());
             }
@@ -133,6 +141,8 @@ public class BookService {
         dto.setAuthor(book.getAuthor());
         dto.setYear(book.getYear());
         dto.setIsbn(book.getIsbn());
+        dto.setImg(book.getImg());
+        dto.setDescription(book.getDescription());
 
         if (book.getCategory() != null) {
             dto.setCategoryName(book.getCategory().getCategoryName());

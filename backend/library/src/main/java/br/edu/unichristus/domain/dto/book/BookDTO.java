@@ -14,15 +14,19 @@ public class BookDTO {
     private String author;
     private int year;
     private String isbn;
+    private String img;
+    private String description;
     private String categoryName;
 
 
-    public BookDTO(Long id, String title, String author, int year, String isbn) {
+    public BookDTO(Long id, String title, String author, int year, String isbn, String img, String description) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.year = year;
         this.isbn = isbn;
+        this.img = img;
+        this.description = description;
     }
 
     public BookDTO() {
@@ -76,6 +80,22 @@ public class BookDTO {
         this.categoryName = categoryName;
     }
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -85,12 +105,14 @@ public class BookDTO {
                 Objects.equals(title, book.getTitle()) &&
                 Objects.equals(author, book.getAuthor()) &&
                 Objects.equals(year, book.getYear()) &&
-                Objects.equals(isbn, book.getIsbn());
+                Objects.equals(isbn, book.getIsbn()) &&
+                Objects.equals(img, book.getImg()) &&
+                Objects.equals(description, book.getDescription());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, year, isbn);
+        return Objects.hash(id, title, author, year, isbn, img, description);
     }
 
     @Override
@@ -101,6 +123,8 @@ public class BookDTO {
                 ", author='" + author + '\'' +
                 ", year=" + year +
                 ", isbn='" + isbn + '\'' +
+                ", img='" + img + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

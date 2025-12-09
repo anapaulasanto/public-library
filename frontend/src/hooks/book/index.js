@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deleteBook, fetchBooks, getBookById, getReviewsByBook } from "../../services/book/index.js";
+import { deleteBook, fetchBooks, getBookById, getReviewsByBook, updateBook } from "../../services/book/index.js";
 
 export const useBooksAdmin = () => {
     return useQuery({
@@ -25,11 +25,11 @@ export const useReviewesBook = (id) => {
     })
 }
 
-export const useDeleteBook = () => {
+export const useDeleteBook = (bookId) => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
-        mutationFn: (bookId) => deleteBook(bookId),
+        mutationFn: () => deleteBook(bookId),
         onSuccess: () => {
             console.log("Livro excluido com sucesso");
             queryClient.invalidateQueries({ queryKey: ['booksAdmin'] });
@@ -44,4 +44,27 @@ export const useDeleteBook = () => {
         handleDeleteBook: mutation.mutateAsync,
         error: mutation.error
     }
+}
+
+export const useEditBook = (bookId) => {
+    const queryClient = useQueryClient();
+
+    const mutation = useMutation({
+        mutationFn: (bookData) => updateBook(bookId, bookData),
+        onSuccess: () => {
+            console.log("Livro editado com sucesso");
+            queryClient.invalidateQueries({ queryKey: ['booksAdmin'] });
+            queryClient.invalidateQueries({ queryKey: ['book', bookId] });
+        },
+        onError: (error) => {
+            console.log("Erro ao editar livro", error);
+        }
+    });
+
+    return {
+        handleEditBook: mutation.mutateAsync,
+        isSuccess: mutation.isSuccess,
+        isError: mutation.isError,
+        error: mutation.error
+    };
 }

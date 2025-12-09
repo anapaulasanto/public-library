@@ -11,7 +11,7 @@ export const TBody = ({ books }) => {
                         <div className="flex items-center gap-3">
                             <div className="avatar">
                                 <div className="mask mask-square h-24 w-15">
-                                    
+                                    <img src={book.img} alt={book.title} />
                                 </div>
                             </div>
                             <div>
@@ -21,7 +21,7 @@ export const TBody = ({ books }) => {
                         </div>
                     </td>
                     <td>
-                        <span className="badge badge-ghost badge-sm bg-purple-800 text-white">{book.categoryName || book.category}</span>
+                        <span className="badge badge-ghost badge-md bg-purple-800 text-white">{book.categoryName || book.category}</span>
                     </td>
                     <td>{book.author}</td>
                     <td>
@@ -35,7 +35,7 @@ export const TBody = ({ books }) => {
                             author={book.author}
                             category={book.categoryName || book.category}
                             year={book.year}
-                            isbn={book.isbn}
+                            defaultValue6={book.isbn}
                             description={book.description}
                             bookId={book.id}
                         />
