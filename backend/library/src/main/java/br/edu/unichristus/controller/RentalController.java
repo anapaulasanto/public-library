@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.http.ResponseEntity;
+
 import br.edu.unichristus.domain.dto.rental.RentalDTO;
 import br.edu.unichristus.domain.model.Rental;
 import br.edu.unichristus.service.RentalService;
@@ -69,5 +71,28 @@ public class RentalController {
     @GetMapping("/user/{userId}")
     public List<RentalDTO> findByUser(@PathVariable Long userId) {
         return service.findByUserId(userId);
+    }
+
+    @Operation(summary = "Retorna todos os aluguéis atrasados | role: [ADMIN]", tags = "Rental")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Aluguéis atrasados encontrados com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Nenhum aluguel atrasado encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
+    @GetMapping("/overdue")
+    public List<RentalDTO> findOverdueRentals() {
+        return service.findOverdueRentals();
+    }
+
+    @Operation(summary = "Verifica se um aluguel específico está atrasado | role: [ADMIN, USER]", tags = "Rental")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Status de atraso do aluguel retornado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Aluguel não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
+    @GetMapping("/overdue/{id}")
+    public ResponseEntity<Boolean> isRentalOverdue(@PathVariable Long id) {
+        boolean overdue = service.isRentalOverdue(id);
+        return ResponseEntity.ok(overdue);
     }
 }

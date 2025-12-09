@@ -1,5 +1,6 @@
 package br.edu.unichristus.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -115,6 +116,7 @@ public class User implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // Garante que a role tenha um valor padrão e esteja em maiúsculas
         String userRole = (this.role == null || this.role.isBlank()) ? "USER" : this.role.toUpperCase();

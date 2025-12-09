@@ -1,5 +1,6 @@
 package br.edu.unichristus.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -188,5 +189,29 @@ public class RentalService {
                     "Aluguel não encontrado para o usuário fornecido!");
         }
         return MapperUtil.parseListObjects(rentals, RentalDTO.class);
+    }
+
+    public List<RentalDTO> findOverdueRentals() {
+        List<Rental> overdueRentals = repository.findOverdueRentals(LocalDate.now());
+        if (overdueRentals.isEmpty()) {
+            throw new CommonsException(HttpStatus.NOT_FOUND,
+                    "unichristus.rental.overdue.notfound",
+                    "Nenhum aluguel atrasado encontrado!");
+        }
+        return MapperUtil.parseListObjects(overdueRentals, RentalDTO.class);
+    }
+
+    public boolean isRentalOverdue(Long rentalId) {
+        Optional<Rental> rentalOptional = repository.findById(rentalId);
+
+        if (rentalOptional.isEmpty()) {
+            throw new CommonsException(HttpStatus.NOT_FOUND,
+                    "unichristus.rental.isoverdue.notfound",
+                    "Aluguel não encontrado para o ID informado!");
+        }
+
+        Rental rental = rentalOptional.get();
+        LocalDate returnDate = LocalDate.parse(rental.getReturnDate()); // Assuming returnDate is in "YYYY-MM-DD" format
+        return returnDate.isBefore(LocalDate.now()) && rental.getStatus().equals("active");
     }
 }

@@ -28,9 +28,9 @@ public class BookService {
                     "Livro já existente para o ISBN informado.");
         }
 
-        if (bookDTO.getCategoryName() == null) {
+        if (bookDTO.getCategoryId() == null) {
             throw new CommonsException(HttpStatus.BAD_REQUEST,
-                    "unichristus.book.categoryname.save.badrequest",
+                    "unichristus.book.categoryid.save.badrequest",
                     "Categoria do livro é um campo obrigatório!");
         }
 
@@ -43,7 +43,7 @@ public class BookService {
         var bookEntity = MapperUtil.parseObject(bookDTO, Book.class);
 
         // salvando categoria na entidade livro
-        var category = categoryRepository.findByCategoryName(bookDTO.getCategoryName())
+        var category = categoryRepository.findById(bookDTO.getCategoryId())
                 .orElseThrow(() -> new CommonsException(HttpStatus.NOT_FOUND,
                         "unichristus.category.notfound",
                         "Categoria não encontrada!"));
@@ -52,7 +52,7 @@ public class BookService {
 
         var savedBook = repository.save(bookEntity);
         BookDTO dto = MapperUtil.parseObject(savedBook, BookDTO.class);
-        dto.setCategoryName(savedBook.getCategory().getCategoryName());
+        dto.setCategoryId(savedBook.getCategory().getId());
 
         return dto;
     }
@@ -71,9 +71,9 @@ public class BookService {
                     "Já existe outro livro com o mesmo ISBN.");
         }
 
-        if (bookDTO.getCategoryName() == null) {
+        if (bookDTO.getCategoryId() == null) {
             throw new CommonsException(HttpStatus.BAD_REQUEST,
-                    "unichristus.book.categoryname.badrequest",
+                    "unichristus.book.categoryid.badrequest",
                     "Categoria do livro é um campo obrigatório.");
         }
 
@@ -87,8 +87,12 @@ public class BookService {
         existingBook.setAuthor(bookDTO.getAuthor());
         existingBook.setYear(bookDTO.getYear());
         existingBook.setIsbn(bookDTO.getIsbn());
+        existingBook.setDescription(bookDTO.getDescription());
+        existingBook.setPalavrasChaves(bookDTO.getPalavrasChaves());
+        existingBook.setCapa(bookDTO.getCapa());
 
-        var category = categoryRepository.findByCategoryName(bookDTO.getCategoryName())
+
+        var category = categoryRepository.findById(bookDTO.getCategoryId())
                 .orElseThrow(() -> new CommonsException(HttpStatus.NOT_FOUND,
                 "unichristus.category.notfound",
                 "Categoria não encontrada!"));
@@ -97,7 +101,7 @@ public class BookService {
         var updatedBook = repository.save(existingBook);
 
         BookDTO updatedDTO = MapperUtil.parseObject(updatedBook, BookDTO.class);
-        updatedDTO.setCategoryName(updatedBook.getCategory().getCategoryName());
+        updatedDTO.setCategoryId(updatedBook.getCategory().getId());
 
         return updatedDTO;
     }
@@ -106,14 +110,9 @@ public class BookService {
     public List<BookDTO> findAll() {
         var listBooks = repository.findAll();
         return listBooks.stream().map(book -> {
-            BookDTO dto = new BookDTO();
-            dto.setId(book.getId());
-            dto.setTitle(book.getTitle());
-            dto.setAuthor(book.getAuthor());
-            dto.setYear(book.getYear());
-            dto.setIsbn(book.getIsbn());
+            BookDTO dto = MapperUtil.parseObject(book, BookDTO.class);
             if (book.getCategory() != null) {
-                dto.setCategoryName(book.getCategory().getCategoryName());
+                dto.setCategoryId(book.getCategory().getId());
             }
             return dto;
         }).collect(Collectors.toList());
@@ -127,15 +126,10 @@ public class BookService {
                 "Livro não encontrado!"));
 
 
-        BookDTO dto = new BookDTO();
-        dto.setId(book.getId());
-        dto.setTitle(book.getTitle());
-        dto.setAuthor(book.getAuthor());
-        dto.setYear(book.getYear());
-        dto.setIsbn(book.getIsbn());
+        BookDTO dto = MapperUtil.parseObject(book, BookDTO.class);
 
         if (book.getCategory() != null) {
-            dto.setCategoryName(book.getCategory().getCategoryName());
+            dto.setCategoryId(book.getCategory().getId());
         }
 
         return dto;
