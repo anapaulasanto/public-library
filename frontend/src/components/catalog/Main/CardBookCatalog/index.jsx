@@ -37,7 +37,7 @@ export const CardBook = ({ searchParams }) => {
             <div
                 key={book.id}
                 onClick={() => handleBookClick(book)}
-                className="card bg-neutral-200/20 border border-neutral-300 shadow-sm min-h-[660px] hover:shadow-2xl w-[19%] cursor-pointer transition-all duration-200 hover:scale-105 gap-2 2xl:min-h-[780px] 2xl:w-[22%]"
+                className="card bg-neutral-200/20 border border-neutral-300 shadow-sm min-h-[660px] hover:shadow-2xl w-[19%] cursor-pointer transition-all duration-200 hover:scale-105 gap-2 2xl:h-[800px] 2xl:w-[22%]"
             >
                 <figure className="w-full h-fit">
                     <img
@@ -47,7 +47,7 @@ export const CardBook = ({ searchParams }) => {
                         loading="lazy"
                     />
                 </figure>
-                <div className="card-body flex flex-col items-start h-[38%] w-full">
+                <div className="card-body flex flex-col items-start min-h-[35%] w-full">
                     <h2 className="card-title text-[1rem] text-start">{book.title}</h2>
                     <div className="flex items-center justify-between w-full">
                         <p className="flex items-center gap-1 text-sm text-zinc-600">

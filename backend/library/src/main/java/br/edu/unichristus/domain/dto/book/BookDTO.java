@@ -17,6 +17,8 @@ public class BookDTO {
     private String img;
     private String description;
     private String categoryName;
+    private Double averageRating;
+    private Long reviewCount;
 
 
     public BookDTO(Long id, String title, String author, int year, String isbn, String img, String description) {
@@ -94,6 +96,22 @@ public class BookDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Double getAverageRating() {
+        return averageRating;
+    }
+
+    public void setAverageRating(Double averageRating) {
+        this.averageRating = averageRating;
+    }
+
+    public Long getReviewCount() {
+        return reviewCount;
+    }
+
+    public void setReviewCount(Long reviewCount) {
+        this.reviewCount = reviewCount;
     }
 
 

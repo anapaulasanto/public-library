@@ -65,7 +65,7 @@ export const TableRental = () => {
                     <img
                         src={r.bookImg || imgCard}
                         alt=""
-                        className={`w-1/4 rounded-l-xl ${isActive ? 'hover:cursor-pointer' : 'grayscale'}`}
+                        className={`w-1/5 rounded-l-xl ${isActive ? 'hover:cursor-pointer' : 'grayscale'}`}
                         onClick={() => isActive && onClickRental(r.bookTitle, r.bookId)}
                     />
                     <div className="flex flex-col justify-between flex-1 py-2 pr-2">

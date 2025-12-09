@@ -63,7 +63,18 @@ public class ReviewService {
                     "unichristus.review.findreviewsbyuserid.notfound",
                     "Avaliação não encontrada para o usuário fornecido");
         }
-        return MapperUtil.parseListObjects(reviews, ReviewDTO.class);
+        
+        List<ReviewDTO> reviewDTOs = MapperUtil.parseListObjects(reviews, ReviewDTO.class);
+        
+        // Adicionar o título do livro a cada review
+        reviewDTOs.forEach(dto -> {
+            reviews.stream()
+                .filter(r -> r.getId().equals(dto.getId()))
+                .findFirst()
+                .ifPresent(r -> dto.setBookTitle(r.getBook().getTitle()));
+        });
+        
+        return reviewDTOs;
     }
 
     public ReviewDTO save(ReviewDTO reviewDTO) {
@@ -95,7 +106,7 @@ public class ReviewService {
         Review review = new Review();
         review.setComment(reviewDTO.getComment());
         review.setRating(reviewDTO.getRating());
-        review.setReviewDate(reviewDTO.getReviewDate() != null ? reviewDTO.getReviewDate() : LocalDate.now());
+        review.setReviewDate(LocalDate.now()); // Define automaticamente a data atual
         review.setBook(book);
         review.setUser(user);
 

@@ -9,7 +9,13 @@ export const Main = ({ book }) => {
 
     return (
         <div className="flex flex-col items-center gap-10 mt-20">
-            <SectionCountReviews reviews={reviews} isError={isError} isLoading={isLoading} />
+            <SectionCountReviews 
+                reviews={reviews} 
+                averageRating={book.averageRating} 
+                reviewCount={book.reviewCount} 
+                isError={isError} 
+                isLoading={isLoading} 
+            />
             <SectionWriteReview book={book} />
             <SectionReviews reviews={reviews} isError={isError} isLoading={isLoading} />
         </div>

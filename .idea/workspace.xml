@@ -5,19 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c18daa89-d018-4d01-9bb2-afbdf027f4a4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/controller/BookController/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/controller/BookController/BookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/repository/BookRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/repository/BookRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/domain/dto/book/BookDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/domain/dto/book/BookDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/domain/dto/review/ReviewDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/domain/dto/review/ReviewDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/repository/ReviewRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/repository/ReviewRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/service/BookService/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/service/BookService/BookService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Home/CardsBook/CardBookItem/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Home/CardsBook/CardBookItem/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Home/CardsBook/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Home/CardsBook/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalAddBook/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalAddBook/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalAddCategory/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalAddCategory/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalDeleteCategory/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalDeleteCategory/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalEditBooks/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalEditBooks/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalEditCategory/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalEditCategory/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/SectionTableCategory/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/SectionTableCategory/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/SectionTableUsers/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/SectionTableUsers/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/TableCategory/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/TableCategory/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/service/ReviewService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/service/ReviewService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/catalog/Main/CardBookCatalog/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/catalog/Main/CardBookCatalog/index.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

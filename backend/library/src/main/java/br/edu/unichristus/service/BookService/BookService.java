@@ -5,6 +5,7 @@ import br.edu.unichristus.domain.model.Book;
 import br.edu.unichristus.exception.CommonsException;
 import br.edu.unichristus.repository.BookRepository;
 import br.edu.unichristus.repository.CategoryRepository;
+import br.edu.unichristus.repository.ReviewRepository;
 import br.edu.unichristus.utils.MapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,8 @@ public class BookService {
     private BookRepository repository;
     @Autowired
     private CategoryRepository categoryRepository;
+    @Autowired
+    private ReviewRepository reviewRepository;
 
     public BookDTO save(BookDTO bookDTO) {
         if (repository.findByIsbn(bookDTO.getIsbn()).isPresent()) {
@@ -123,6 +126,8 @@ public class BookService {
             if (book.getCategory() != null) {
                 dto.setCategoryName(book.getCategory().getCategoryName());
             }
+            dto.setAverageRating(calculateAverageRating(book.getId()));
+            dto.setReviewCount(countReviews(book.getId()));
             return dto;
         }).collect(Collectors.toList());
     }
@@ -147,6 +152,9 @@ public class BookService {
         if (book.getCategory() != null) {
             dto.setCategoryName(book.getCategory().getCategoryName());
         }
+        
+        dto.setAverageRating(calculateAverageRating(book.getId()));
+        dto.setReviewCount(countReviews(book.getId()));
 
         return dto;
     }
@@ -211,7 +219,20 @@ public class BookService {
             if (book.getCategory() != null) {
                 dto.setCategoryName(book.getCategory().getCategoryName());
             }
+            dto.setAverageRating(calculateAverageRating(book.getId()));
+            dto.setReviewCount(countReviews(book.getId()));
             return dto;
         }).collect(Collectors.toList());
+    }
+
+    // Método auxiliar para calcular a média de avaliações
+    private Double calculateAverageRating(Long bookId) {
+        Double average = reviewRepository.findAverageRatingByBookId(bookId);
+        return average != null ? Math.round(average * 10.0) / 10.0 : null;
+    }
+    
+    // Método auxiliar para contar avaliações
+    private Long countReviews(Long bookId) {
+        return reviewRepository.countReviewsByBookId(bookId);
     }
 }

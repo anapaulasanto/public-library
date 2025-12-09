@@ -1,19 +1,37 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
+import React, { useEffect, useState, useContext, useRef, useMemo } from "react";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { SectionDataBook } from "./sectionDataBook";
-import { useSaveRental } from "../../../../hooks/rental";
+import { useSaveRental, useFetchRentalsByUser } from "../../../../hooks/rental";
 import { ModalSucess } from "../../../ModalSucess";
 import { BookCover } from "./bookCover";
 import { BookHeader } from "./bookHeader";
 import { AuthContext } from "../../../../context/AuthContext";
 
 export const Header = ({ book }) => {
-    const { handleSaveRental, isSuccess} = useSaveRental()
+    const { handleSaveRental, isSuccess } = useSaveRental();
     const { user } = useContext(AuthContext);
-    const modalIdSucess = "modal_rental_book_success"
-    const [isRented, setIsRented] = useState(false);
+    const { data: rentals } = useFetchRentalsByUser(user?.id);
+    const modalIdSucess = "modal_rental_book_success";
     const modalRef = useRef(null);
+
+    // Verifica se o livro está alugado e se a data de devolução ainda não passou
+    const isRented = useMemo(() => {
+        if (!rentals || !book) return false;
+        
+        const activeRental = rentals.find(r => r.bookId === book.id && r.status === 'active');
+        
+        if (!activeRental) return false;
+        
+        // Converte returnDate (formato dd/MM/yyyy) para objeto Date
+        const [day, month, year] = activeRental.returnDate.split('/');
+        const returnDate = new Date(year, month - 1, day);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Remove horas para comparar apenas datas
+        
+        // Retorna true se a data de devolução ainda não passou
+        return returnDate >= today;
+    }, [rentals, book]);
 
     const handleRentalClick = (rentalData) => {
         handleSaveRental(rentalData);
@@ -21,7 +39,6 @@ export const Header = ({ book }) => {
 
     useEffect(() => {
         if (isSuccess) {
-            setIsRented(true);
             const modal = document.getElementById(modalIdSucess);
             if (modal) {
                 modal.showModal();
