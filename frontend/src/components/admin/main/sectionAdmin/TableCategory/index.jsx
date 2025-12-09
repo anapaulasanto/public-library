@@ -16,7 +16,7 @@ export const TableCategory = () => {
     }
 
     return (
-        <div className="overflow-auto h-[400px] rounded-box border border-neutral-200 bg-base-50 mt-10">
+        <div className="overflow-auto h-[400px] rounded-box border border-neutral-200 bg-base-50 my-10">
             <table className="table">
                 {/* head */}
                 <thead>

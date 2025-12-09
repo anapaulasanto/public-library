@@ -1,14 +1,30 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, useEffect } from "react";
 import { CiCalendar } from "react-icons/ci";
 import { useNavigate } from "react-router-dom"
 import { nameToSlug } from "../../../../utils/index.js";
-import { useBooksAdmin } from "../../../../hooks/book/index.js";
+import { useBooksAdmin, useSearchBooks } from "../../../../hooks/book/index.js";
 import { Loading } from "../../../Loading/index.jsx";
 import NoImg from "../../../../assets/no-img.png";
 
-export const CardBook = () => {
-    const { data: books, isLoading, isError } = useBooksAdmin();
+export const CardBook = ({ searchParams }) => {
+    const { data: allBooks, isLoading: isLoadingAll, isError: isErrorAll } = useBooksAdmin();
+    const { data: searchResults, isLoading: isLoadingSearch, isError: isErrorSearch, refetch } = useSearchBooks(
+        searchParams?.text,
+        searchParams?.type
+    );
     const navigate = useNavigate();
+
+    // Executar busca quando searchParams mudar
+    useEffect(() => {
+        if (searchParams?.text) {
+            refetch();
+        }
+    }, [searchParams, refetch]);
+
+    // Determinar qual dados usar: busca ou lista completa
+    const books = searchParams?.text ? searchResults : allBooks;
+    const isLoading = searchParams?.text ? isLoadingSearch : isLoadingAll;
+    const isError = searchParams?.text ? isErrorSearch : isErrorAll;
 
     const handleBookClick = useCallback((book) => {
         navigate(`/catalog/book/${nameToSlug(book.title)}/${book.id}`, {

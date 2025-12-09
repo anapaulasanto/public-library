@@ -7,7 +7,7 @@ export const InputSearch = ({ onSearch }) => {
 
     const handleSubmit = useCallback((e) => {
         e.preventDefault();
-        if (onSearch && searchValue) {
+        if (onSearch) {
             let type = "all";
             
             if (searchType === "Livro") type = "title";
@@ -16,6 +16,13 @@ export const InputSearch = ({ onSearch }) => {
             onSearch({ text: searchValue, type });
         }
     }, [onSearch, searchValue, searchType]);
+
+    const handleClear = useCallback(() => {
+        setSearchValue("");
+        if (onSearch) {
+            onSearch({ text: "", type: "all" });
+        }
+    }, [onSearch]);
 
     return (
         <div className="flex py-5 rounded-xl w-full mx-auto mt-10 items-center">
@@ -37,6 +44,15 @@ export const InputSearch = ({ onSearch }) => {
                 <button type="submit" className="bg-sky-700 text-white p-3 ml-3 rounded-full text-sm font-semibold hover:bg-sky-600 transition-all duration-200 cursor-pointer">
                     <IoSearch />
                 </button>
+                {searchValue && (
+                    <button 
+                        type="button" 
+                        onClick={handleClear}
+                        className="bg-gray-500 text-white p-3 ml-2 rounded-full text-xs font-semibold hover:bg-gray-600 transition-all duration-200 cursor-pointer"
+                    >
+                        Limpar
+                    </button>
+                )}
             </form>
         </div>
     );

@@ -1,12 +1,33 @@
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 import { FaPlus, FaBook, FaUser, FaHashtag, FaLayerGroup, FaCalendar, FaAlignLeft, FaImage } from "react-icons/fa";
 import { useAddBook } from "../../../../../hooks/book/index.js";
+import { useCategoryCatalog } from "../../../../../hooks/category/index.js";
 import { ModalSucess } from "../../../../ModalSucess/index.jsx";
 import { ModalError } from "../../../../ModalError/index.jsx";
 
 export const ModalAddBook = ({ modalId, h1, p }) => {
     const { register, handleSubmit, reset } = useForm();
     const { handleAddBook, isSuccess, isError, error } = useAddBook();
+    const { data: categories, isLoading: categoriesLoading, isError: categoriesError } = useCategoryCatalog();
+
+    useEffect(() => {
+        if (isSuccess) {
+            const modal = document.getElementById('modal_success_add_book');
+            if (modal) {
+                modal.showModal();
+            }
+        }
+    }, [isSuccess]);
+
+    useEffect(() => {
+        if (isError) {
+            const modal = document.getElementById('modal_error_add_book');
+            if (modal) {
+                modal.showModal();
+            }
+        }
+    }, [isError]);
 
     const onSubmit = async (data) => {
         try {
@@ -78,7 +99,18 @@ export const ModalAddBook = ({ modalId, h1, p }) => {
                                     </fieldset>
                                     <fieldset className="fieldset text-sm">
                                         <legend className="fieldset-legend flex items-center gap-1"><FaLayerGroup /> Categoria</legend>
-                                        <input type="text" {...register("category")} className="input rounded-lg border border-gray-200 outline-blue-400 w-full" placeholder="Ex: Romance, Ficção, Terror..." />
+                                        <select {...register("category")} className="select rounded-lg border border-gray-200 outline-blue-400 w-full" defaultValue="">
+                                            <option value="" disabled>Selecione uma categoria</option>
+                                            {categoriesLoading ? (
+                                                <option disabled>Carregando categorias...</option>
+                                            ) : (
+                                                categories?.map((category) => (
+                                                    <option key={category.id} value={category.categoryName}>
+                                                        {category.categoryName}
+                                                    </option>
+                                                ))
+                                            )}
+                                        </select>
                                     </fieldset>
                                     <fieldset className="fieldset text-sm">
                                         <legend className="fieldset-legend flex items-center gap-1"><FaCalendar /> Ano de Publicação</legend>

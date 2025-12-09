@@ -22,8 +22,8 @@ export const ModalAddCategory = ({ modalId, h1, p }) => {
         }
     }, [isSuccess, isError, reset]);
 
-    const onSubmit = (data) => {
-        handleAddCategory(data);
+    const onSubmit = async (data) => {
+        await handleAddCategory(data);
         document.getElementById(modalId).close();
     };
 

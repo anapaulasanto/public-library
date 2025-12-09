@@ -20,8 +20,8 @@ export const ModalDeleteCategory = ({ modalId, categoryId, categoryName }) => {
         }
     }, [isSuccess, isError, modalIdSucess, modalIdError]);
 
-    const handleDelete = () => {
-        handleDeleteCategory();
+    const handleDelete = async () => {
+        await handleDeleteCategory();
     };
 
     return (

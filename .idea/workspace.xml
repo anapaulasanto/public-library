@@ -5,13 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c18daa89-d018-4d01-9bb2-afbdf027f4a4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/domain/dto/rental/RentalDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/domain/dto/rental/RentalDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/service/RentalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/service/RentalService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/controller/BookController/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/controller/BookController/BookController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/repository/BookRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/repository/BookRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/service/BookService/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/service/BookService/BookService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Home/CardsBook/CardBookItem/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Home/CardsBook/CardBookItem/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Home/CardsBook/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Home/CardsBook/index.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalAddBook/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalAddBook/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalDeleteBooks/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalDeleteBooks/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalAddCategory/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalAddCategory/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalDeleteCategory/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalDeleteCategory/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalEditBooks/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalEditBooks/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalEditCategory/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalEditCategory/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/SectionTableCategory/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/SectionTableCategory/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/SectionTableUsers/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/SectionTableUsers/index.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/TableCategory/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/TableCategory/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/hooks/book/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/hooks/book/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/services/book/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/book/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deleteBook, fetchBooks, getBookById, getReviewsByBook, updateBook, createBook } from "../../services/book/index.js";
+import { deleteBook, fetchBooks, getBookById, getReviewsByBook, updateBook, createBook, searchBooks } from "../../services/book/index.js";
 
 export const useBooksAdmin = () => {
     return useQuery({
@@ -91,4 +91,12 @@ export const useAddBook = () => {
         isError: mutation.isError,
         error: mutation.error
     };
+}
+
+export const useSearchBooks = (searchText, searchType) => {
+    return useQuery({
+        queryKey: ['searchBooks', searchText, searchType],
+        queryFn: () => searchBooks(searchText, searchType),
+        enabled: false, // Não executa automaticamente
+    });
 }

@@ -18,15 +18,21 @@ export const ModalEditCategory = ({ modalId, h1, p, categoryName, description, c
 
     useEffect(() => {
         if (isSuccess) {
-            const modalSuccess = document.getElementById(modalIdSucess);
-            modalSuccess.showModal();
-            document.getElementById(modalId).close()
-
-        } else if (isError) {
-            const modalError = document.getElementById(modalIdError);
-            modalError.showModal();
+            const modal = document.getElementById(modalIdSucess);
+            if (modal) {
+                modal.showModal();
+            }
         }
-    }, [isSuccess, isError, modalIdSucess, modalIdError]);
+    }, [isSuccess]);
+
+    useEffect(() => {
+        if (isError) {
+            const modal = document.getElementById('modalIdError');
+            if (modal) {
+                modal.showModal();
+            }
+        }
+    }, [isError]);
 
     const handleOpenModal = () => {
         // Reseta os dados do formulário quando o modal é aberto
@@ -47,14 +53,18 @@ export const ModalEditCategory = ({ modalId, h1, p, categoryName, description, c
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        handleEditCategory(formData);
+        try {
+            await handleEditCategory(formData);
+            document.getElementById(modalId).close();
+        } catch (error) {
+            console.error("Erro ao editar categoria:", error);
+        }
     };
-
     return (
         <div>
-            <button className="hover:bg-blue-200 p-2 rounded-lg cursor-pointer" onClick={handleOpenModal}>
+            <button className="hover:bg-blue-200 p-2 rounded-lg cursor-pointer" onClick={() => document.getElementById(modalId).showModal()}>
                 <FaPencilAlt />
             </button>
             <dialog id={modalId} className="modal modal-bottom sm:modal-middle">

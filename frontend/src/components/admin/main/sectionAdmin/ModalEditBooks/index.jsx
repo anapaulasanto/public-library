@@ -29,6 +29,24 @@ export const ModalEditBooks = ({ modalId, h1, p, cover, title, author, category,
         });
     }, [cover, title, author, defaultValue6, category, year, description]);
 
+    useEffect(() => {
+        if (isSuccess) {
+            const modal = document.getElementById('modal_success_edit_book');
+            if (modal) {
+                modal.showModal();
+            }
+        }
+    }, [isSuccess]);
+
+    useEffect(() => {
+        if (isError) {
+            const modal = document.getElementById('modal_error_edit_book');
+            if (modal) {
+                modal.showModal();
+            }
+        }
+    }, [isError]);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({

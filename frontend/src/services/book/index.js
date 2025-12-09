@@ -41,3 +41,14 @@ export const getReviewsByBook = async (bookId) => {
     console.log("avaliacoes do livro ", data);
     return data;
 }
+
+// =========== SEARCH BOOKS =============
+export const searchBooks = async (searchText, searchType = 'all') => {
+    const params = new URLSearchParams();
+    if (searchText) params.append('text', searchText);
+    if (searchType) params.append('type', searchType);
+    
+    const { data } = await axios.get(`api/v1/book/search?${params.toString()}`);
+    console.log("Resultados da busca: ", data);
+    return data;
+}

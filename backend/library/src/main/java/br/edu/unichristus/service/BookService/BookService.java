@@ -173,4 +173,45 @@ public class BookService {
         }
         return MapperUtil.parseListObjects(books, BookDTO.class);
     }
+
+    // Buscar livros por título, autor ou palavra-chave
+    public List<BookDTO> searchBooks(String searchTerm, String searchType) {
+        List<Book> books;
+        
+        if (searchTerm == null || searchTerm.trim().isEmpty()) {
+            return findAll();
+        }
+        
+        switch (searchType != null ? searchType.toLowerCase() : "all") {
+            case "title":
+                books = repository.findByTitleContainingIgnoreCase(searchTerm);
+                break;
+            case "author":
+                books = repository.findByAuthorContainingIgnoreCase(searchTerm);
+                break;
+            case "subject":
+            case "keyword":
+                books = repository.findByDescriptionContainingIgnoreCase(searchTerm);
+                break;
+            case "all":
+            default:
+                books = repository.searchBooks(searchTerm);
+                break;
+        }
+        
+        return books.stream().map(book -> {
+            BookDTO dto = new BookDTO();
+            dto.setId(book.getId());
+            dto.setTitle(book.getTitle());
+            dto.setAuthor(book.getAuthor());
+            dto.setYear(book.getYear());
+            dto.setIsbn(book.getIsbn());
+            dto.setImg(book.getImg());
+            dto.setDescription(book.getDescription());
+            if (book.getCategory() != null) {
+                dto.setCategoryName(book.getCategory().getCategoryName());
+            }
+            return dto;
+        }).collect(Collectors.toList());
+    }
 }

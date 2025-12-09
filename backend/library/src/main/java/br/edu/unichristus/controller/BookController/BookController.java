@@ -40,6 +40,19 @@ public class BookController {
         return service.findAll();
     }
 
+    @Operation(summary = "Busca livros por título, autor ou palavra-chave | role: [ADMIN, USER]", tags = "Book")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Livros encontrados com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
+    @GetMapping("/search")
+    public List<BookDTO> searchBooks(
+            @RequestParam(required = false) String text,
+            @RequestParam(required = false, defaultValue = "all") String type
+    ) {
+        return service.searchBooks(text, type);
+    }
+
     @Operation(summary = "Retorna um livro por ID | role: [ADMIN, USER]", tags = "Book")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Livro encontrado com sucesso"),
