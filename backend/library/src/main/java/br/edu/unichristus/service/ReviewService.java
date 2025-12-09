@@ -164,12 +164,21 @@ public class ReviewService {
         }
         var reviews = repository.findByBookId(bookId);
 
-        if (reviews.isEmpty()) { // se existir o livro, mas não existir avaliação pra ele
-            throw new CommonsException(HttpStatus.NOT_FOUND,
-                    "unichristus.review.findbybookid.notfound",
-                    "Avaliação não encontrada para o livro fornecido!");
-        }
         return MapperUtil.parseListObjects(reviews, ReviewDTO.class);
+    }
+
+    public Double getAverageRatingForBook(Long bookId) {
+        List<ReviewDTO> reviews = findReviewsByBookId(bookId);
+
+        if (reviews.isEmpty()) {
+            return 0.0; // Or throw an exception if preferred
+        }
+
+        double sumOfRatings = reviews.stream()
+                .mapToDouble(ReviewDTO::getRating)
+                .sum();
+
+        return sumOfRatings / reviews.size();
     }
 
     public List<ReviewDTO> findAll() {
