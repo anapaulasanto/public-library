@@ -14,15 +14,22 @@ public class BookDTO {
     private String author;
     private int year;
     private String isbn;
-    private String categoryName;
+    private String description;
+    private String palavrasChaves;
+    private Long categoryId;
+    private String capa;
 
 
-    public BookDTO(Long id, String title, String author, int year, String isbn) {
+    public BookDTO(Long id, String title, String author, int year, String isbn, String description, String palavrasChaves, Long categoryId, String capa) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.year = year;
         this.isbn = isbn;
+        this.description = description;
+        this.palavrasChaves = palavrasChaves;
+        this.categoryId = categoryId;
+        this.capa = capa;
     }
 
     public BookDTO() {
@@ -68,39 +75,63 @@ public class BookDTO {
         this.isbn = isbn;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public String getDescription() {
+        return description;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPalavrasChaves() {
+        return palavrasChaves;
+    }
+
+    public void setPalavrasChaves(String palavrasChaves) {
+        this.palavrasChaves = palavrasChaves;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getCapa() {
+        return capa;
+    }
+
+    public void setCapa(String capa) {
+        this.capa = capa;
     }
 
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Book book)) return false;
-        return Objects.equals(id, book.getId()) &&
-                Objects.equals(title, book.getTitle()) &&
-                Objects.equals(author, book.getAuthor()) &&
-                Objects.equals(year, book.getYear()) &&
-                Objects.equals(isbn, book.getIsbn());
+        if (!(o instanceof BookDTO bookDTO)) return false;
+        return year == bookDTO.year && Objects.equals(id, bookDTO.id) && Objects.equals(title, bookDTO.title) && Objects.equals(author, bookDTO.author) && Objects.equals(isbn, bookDTO.isbn) && Objects.equals(description, bookDTO.description) && Objects.equals(palavrasChaves, bookDTO.palavrasChaves) && Objects.equals(categoryId, bookDTO.categoryId) && Objects.equals(capa, bookDTO.capa);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, year, isbn);
+        return Objects.hash(id, title, author, year, isbn, description, palavrasChaves, categoryId, capa);
     }
 
     @Override
     public String toString() {
-        return "Book{" +
+        return "BookDTO{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", year=" + year +
                 ", isbn='" + isbn + '\'' +
+                ", description='" + description + '\'' +
+                ", palavrasChaves='" + palavrasChaves + '\'' +
+                ", categoryId=" + categoryId +
+                ", capa='" + capa + '\'' +
                 '}';
     }
 }

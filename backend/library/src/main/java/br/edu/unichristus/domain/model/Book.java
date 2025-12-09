@@ -21,6 +21,10 @@ public class Book {
     @Column(unique = true)
     private String isbn;
 
+    private String description;
+    private String palavrasChaves;
+    private String capa;
+
     // Relacionamento N livros : 1 categoria
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -28,12 +32,15 @@ public class Book {
     private Category category;
 
 
-    public Book(Long id, String title, String author, int year, String isbn) {
+    public Book(Long id, String title, String author, int year, String isbn, String description, String palavrasChaves, String capa) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.year = year;
         this.isbn = isbn;
+        this.description = description;
+        this.palavrasChaves = palavrasChaves;
+        this.capa = capa;
     }
 
     public Book() {
@@ -79,6 +86,30 @@ public class Book {
         this.isbn = isbn;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPalavrasChaves() {
+        return palavrasChaves;
+    }
+
+    public void setPalavrasChaves(String palavrasChaves) {
+        this.palavrasChaves = palavrasChaves;
+    }
+
+    public String getCapa() {
+        return capa;
+    }
+
+    public void setCapa(String capa) {
+        this.capa = capa;
+    }
+
     public void setCategory(Category category) {
         this.category = category;
     }
@@ -91,16 +122,12 @@ public class Book {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Book book)) return false;
-        return Objects.equals(id, book.id) &&
-                Objects.equals(title, book.title) &&
-                Objects.equals(author, book.author) &&
-                Objects.equals(year, book.year) &&
-                Objects.equals(isbn, book.isbn);
+        return year == book.year && Objects.equals(id, book.id) && Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(isbn, book.isbn) && Objects.equals(description, book.description) && Objects.equals(palavrasChaves, book.palavrasChaves) && Objects.equals(capa, book.capa) && Objects.equals(category, book.category);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, year, isbn);
+        return Objects.hash(id, title, author, year, isbn, description, palavrasChaves, capa, category);
     }
 
     @Override
@@ -111,6 +138,10 @@ public class Book {
                 ", author='" + author + '\'' +
                 ", year=" + year +
                 ", isbn='" + isbn + '\'' +
+                ", description='" + description + '\'' +
+                ", palavrasChaves='" + palavrasChaves + '\'' +
+                ", capa='" + capa + '\'' +
+                ", category=" + category +
                 '}';
     }
 
