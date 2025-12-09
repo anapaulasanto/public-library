@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deleteBook, fetchBooks, getBookById, getReviewsByBook, updateBook } from "../../services/book/index.js";
+import { deleteBook, fetchBooks, getBookById, getReviewsByBook, updateBook, createBook } from "../../services/book/index.js";
 
 export const useBooksAdmin = () => {
     return useQuery({
@@ -42,6 +42,8 @@ export const useDeleteBook = (bookId) => {
 
     return {
         handleDeleteBook: mutation.mutateAsync,
+        isSuccess: mutation.isSuccess,
+        isError: mutation.isError,
         error: mutation.error
     }
 }
@@ -63,6 +65,28 @@ export const useEditBook = (bookId) => {
 
     return {
         handleEditBook: mutation.mutateAsync,
+        isSuccess: mutation.isSuccess,
+        isError: mutation.isError,
+        error: mutation.error
+    };
+}
+
+export const useAddBook = () => {
+    const queryClient = useQueryClient();
+
+    const mutation = useMutation({
+        mutationFn: (bookData) => createBook(bookData),
+        onSuccess: () => {
+            console.log("Livro criado com sucesso");
+            queryClient.invalidateQueries({ queryKey: ['booksAdmin'] });
+        },
+        onError: (error) => {
+            console.log("Erro ao criar livro", error);
+        }
+    });
+
+    return {
+        handleAddBook: mutation.mutateAsync,
         isSuccess: mutation.isSuccess,
         isError: mutation.isError,
         error: mutation.error

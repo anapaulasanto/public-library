@@ -1,13 +1,32 @@
 import { useForm } from "react-hook-form";
-import { FaPlus, FaBook, FaUser, FaHashtag, FaLayerGroup, FaCopy, FaCalendar, FaAlignLeft, FaImage } from "react-icons/fa";
+import { FaPlus, FaBook, FaUser, FaHashtag, FaLayerGroup, FaCalendar, FaAlignLeft, FaImage } from "react-icons/fa";
+import { useAddBook } from "../../../../../hooks/book/index.js";
+import { ModalSucess } from "../../../../ModalSucess/index.jsx";
+import { ModalError } from "../../../../ModalError/index.jsx";
 
-export const ModalAddBook = ({ modalId, h1, p, onAddBook }) => {
+export const ModalAddBook = ({ modalId, h1, p }) => {
     const { register, handleSubmit, reset } = useForm();
+    const { handleAddBook, isSuccess, isError, error } = useAddBook();
 
-    const onSubmit = (data) => {
-        onAddBook(data); // Chama a função do componente pai
-        reset(); // Limpa o formulário
-        document.getElementById(modalId).close(); // Fecha o modal
+    const onSubmit = async (data) => {
+        try {
+            // Transformar os dados para o formato esperado pela API
+            const bookData = {
+                title: data.title,
+                author: data.author,
+                year: parseInt(data.year),
+                isbn: data.isbn,
+                img: data.img || null,
+                description: data.description || null,
+                categoryName: data.category
+            };
+
+            await handleAddBook(bookData);
+            reset();
+            document.getElementById(modalId).close();
+        } catch (error) {
+            console.error("Erro ao adicionar livro:", error);
+        }
     };
 
     return (
@@ -86,6 +105,22 @@ export const ModalAddBook = ({ modalId, h1, p, onAddBook }) => {
                         </form>
                     </div>
                 </div>
+
+                {isSuccess && (
+                    <ModalSucess
+                        modalId="modal_success_add_book"
+                        h1="Livro adicionado!"
+                        p="O livro foi criado com sucesso."
+                    />
+                )}
+
+                {isError && (
+                    <ModalError
+                        modalId="modal_error_add_book"
+                        h1="Erro ao adicionar livro"
+                        p={error?.message || "Ocorreu um erro ao tentar criar o livro."}
+                    />
+                )}
             </dialog>
         </div>
     )

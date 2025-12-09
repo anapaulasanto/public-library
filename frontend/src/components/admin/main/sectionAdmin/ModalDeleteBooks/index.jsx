@@ -12,16 +12,22 @@ export const ModalDeleteBooks = ({ modalId, bookId }) => {
 
     useEffect(() => {
         if (isSuccess) {
+            document.getElementById(modalId).close();
             const modalSuccess = document.getElementById(modalIdSucess);
-            modalSuccess.showModal();
+            modalSuccess?.showModal();
         } else if (isError) {
+            document.getElementById(modalId).close();
             const modalError = document.getElementById(modalIdError);
-            modalError.showModal();
+            modalError?.showModal();
         }
-    }, [isSuccess, isError, modalIdSucess, modalIdError]);
+    }, [isSuccess, isError, modalIdSucess, modalIdError, modalId]);
 
-    const handleDelete = () => {
-        handleDeleteBook();
+    const handleDelete = async () => {
+        try {
+            await handleDeleteBook();
+        } catch (error) {
+            console.error("Erro ao deletar livro:", error);
+        }
     };
 
     return (

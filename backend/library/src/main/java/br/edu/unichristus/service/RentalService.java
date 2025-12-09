@@ -41,7 +41,23 @@ public class RentalService {
                     "unichristus.rental.findrentalsbybookid.notfound",
                     "Aluguel não encontrado para o livro fornecido!");
         }
-        return MapperUtil.parseListObjects(rentals, RentalDTO.class);
+        
+        List<RentalDTO> rentalDTOs = MapperUtil.parseListObjects(rentals, RentalDTO.class);
+        rentalDTOs.forEach(dto -> {
+            rentals.stream()
+                .filter(r -> r.getId().equals(dto.getId()))
+                .findFirst()
+                .ifPresent(rental -> {
+                    if (rental.getBook() != null) {
+                        dto.setBookTitle(rental.getBook().getTitle());
+                        dto.setBookImg(rental.getBook().getImg());
+                    }
+                    if (rental.getUser() != null) {
+                        dto.setUserName(rental.getUser().getName());
+                    }
+                });
+        });
+        return rentalDTOs;
     }
 
     // Listar rentals de um mesmo user
@@ -187,6 +203,22 @@ public class RentalService {
                     "unichristus.rental.findbyuserid.notfound",
                     "Aluguel não encontrado para o usuário fornecido!");
         }
-        return MapperUtil.parseListObjects(rentals, RentalDTO.class);
+        
+        List<RentalDTO> rentalDTOs = MapperUtil.parseListObjects(rentals, RentalDTO.class);
+        rentalDTOs.forEach(dto -> {
+            rentals.stream()
+                .filter(r -> r.getId().equals(dto.getId()))
+                .findFirst()
+                .ifPresent(rental -> {
+                    if (rental.getBook() != null) {
+                        dto.setBookTitle(rental.getBook().getTitle());
+                        dto.setBookImg(rental.getBook().getImg());
+                    }
+                    if (rental.getUser() != null) {
+                        dto.setUserName(rental.getUser().getName());
+                    }
+                });
+        });
+        return rentalDTOs;
     }
 }

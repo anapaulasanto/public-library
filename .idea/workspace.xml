@@ -5,11 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c18daa89-d018-4d01-9bb2-afbdf027f4a4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/domain/dto/book/BookDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/domain/dto/book/BookDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/domain/model/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/domain/model/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/service/BookService/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/service/BookService/BookService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/library/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/domain/dto/rental/RentalDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/domain/dto/rental/RentalDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/service/RentalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/service/RentalService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalAddBook/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalAddBook/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalDeleteBooks/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/ModalDeleteBooks/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/TableCategory/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/TableCategory/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/hooks/book/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/hooks/book/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/services/book/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/book/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

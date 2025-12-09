@@ -21,7 +21,7 @@ export const CardBook = () => {
             <div
                 key={book.id}
                 onClick={() => handleBookClick(book)}
-                className="card bg-neutral-200/20 border border-neutral-300 shadow-sm h-[600px] hover:shadow-2xl w-[19%] cursor-pointer transition-all duration-200 hover:scale-105 gap-2 2xl:h-[810px] 2xl:w-[19%]"
+                className="card bg-neutral-200/20 border border-neutral-300 shadow-sm min-h-[660px] hover:shadow-2xl w-[19%] cursor-pointer transition-all duration-200 hover:scale-105 gap-2 2xl:min-h-[780px] 2xl:w-[22%]"
             >
                 <figure className="w-full h-fit">
                     <img
@@ -47,6 +47,11 @@ export const CardBook = () => {
                     <div className="overflow-hidden text-xs max-w-full leading-5 mb-4">
                         <p className="line-clamp-3 text-slate-500">{book.description || 'Sem descrição.'}</p>
                     </div>
+                    <button
+                        onClick={() => handleBookClick(book)}
+                        className="btn bg-sky-700 text-white rounded-lg hover:bg-sky-800">
+                        Ver livro
+                    </button>
                 </div>
             </div>
         ))

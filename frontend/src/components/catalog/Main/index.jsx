@@ -8,8 +8,7 @@ export const MainBooks = () => {
     return (
         <main className="py-3">
             <InputSearch />
-            <div className="flex w-[95%] mx-auto">
-                {/* <Aside /> */}
+            <div className="flex 2xl:w-[88%] mx-auto">
                 <CardBook />
             </div>
             <Pagination />

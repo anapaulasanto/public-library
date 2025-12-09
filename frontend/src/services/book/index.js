@@ -7,6 +7,13 @@ export const fetchBooks = async () => {
     return data;
 }
 
+// =========== CREATE BOOK =============
+export const createBook = async (bookData) => {
+    const { data } = await axios.post("api/v1/book", bookData);
+    console.log("Livro criado: ", data);
+    return data;
+}
+
 // =========== DELETE BOOKS =============
 export const deleteBook = async (bookId) => {
     const { data } = await axios.delete(`api/v1/book/${bookId}`);

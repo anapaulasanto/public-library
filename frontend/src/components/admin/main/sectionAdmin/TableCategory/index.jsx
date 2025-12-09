@@ -31,7 +31,7 @@ export const TableCategory = () => {
                 <tbody>
                     {categories?.map((category) => (
                         <tr key={category.id}>
-                            <td className="font-semibold">{category.categoryName}</td>
+                            <td className="font-semibold ">{category.categoryName}</td>
                             <td className="max-w-md">
                                 {category.description || 'Sem descrição'}
                             </td>

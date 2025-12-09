@@ -1,10 +1,9 @@
 package br.edu.unichristus.domain.dto.rental;
 
+import java.util.Objects;
+
 import br.edu.unichristus.domain.model.Rental;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Column;
-
-import java.util.Objects;
 
 public class RentalDTO {
     @Schema(hidden = true)
@@ -17,6 +16,7 @@ public class RentalDTO {
     private String userName;
     private Long bookId;
     private String bookTitle;
+    private String bookImg;
 
 
     public RentalDTO(Long id, String rentalDate, String returnDate, String status, String notes) {
@@ -95,6 +95,14 @@ public class RentalDTO {
 
     public void setBookTitle(String bookTitle) {
         this.bookTitle = bookTitle;
+    }
+
+    public String getBookImg() {
+        return bookImg;
+    }
+
+    public void setBookImg(String bookImg) {
+        this.bookImg = bookImg;
     }
 
     public void setNotes(String notes) {

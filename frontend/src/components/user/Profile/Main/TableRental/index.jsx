@@ -24,48 +24,85 @@ export const TableRental = () => {
         dialog?.showModal();
     }, [modalId]);
 
-    const renderedRentals = useMemo(() => (
-        rental?.map((r) => (
-            <div
-                key={r.bookId}
-                className="flex gap-3 h-50 border border-gray-200 rounded-xl hover:shadow-2xl hover:h-51 hover:duration-150 ease-out"
-            >
-                <img
-                    src={imgCard}
-                    alt=""
-                    className="w-1/3 rounded-l-xl hover:cursor-pointer"
-                    onClick={() => onClickRental(r.bookTitle, r.bookId)}
-                />
-                <div className="flex flex-col justify-between flex-1 py-2 pr-2">
-                    <div className="flex items-start justify-between">
-                        <h1
-                            className="font-semibold text-xl pt-2 hover:cursor-pointer"
-                            onClick={() => onClickRental(r.bookTitle, r.bookId)}
+    const isRentalActive = useCallback((returnDate) => {
+        if (!returnDate) return false;
+        
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        const [day, month, year] = returnDate.split('/');
+        const returnDateObj = new Date(year, month - 1, day);
+        returnDateObj.setHours(0, 0, 0, 0);
+        
+        return returnDateObj > today;
+    }, []);
+
+    const renderedRentals = useMemo(() => {
+        if (!rental) return null;
+        
+        // Ordenar: aluguéis ativos primeiro, depois inativos
+        const sortedRentals = [...rental].sort((a, b) => {
+            const isActiveA = isRentalActive(a.returnDate);
+            const isActiveB = isRentalActive(b.returnDate);
+            
+            if (isActiveA && !isActiveB) return -1;
+            if (!isActiveA && isActiveB) return 1;
+            return 0;
+        });
+
+        return sortedRentals.map((r) => {
+            const isActive = isRentalActive(r.returnDate);
+            
+            return (
+                <div
+                    key={r.bookId}
+                    className={`flex gap-3 h-50 border border-gray-200 rounded-xl ${
+                        isActive 
+                            ? 'hover:shadow-2xl hover:h-51 hover:duration-150 ease-out' 
+                            : 'opacity-60 bg-gray-100'
+                    }`}
+                >
+                    <img
+                        src={r.bookImg || imgCard}
+                        alt=""
+                        className={`w-1/4 rounded-l-xl ${isActive ? 'hover:cursor-pointer' : 'grayscale'}`}
+                        onClick={() => isActive && onClickRental(r.bookTitle, r.bookId)}
+                    />
+                    <div className="flex flex-col justify-between flex-1 py-2 pr-2">
+                        <div className="flex items-start justify-between">
+                            <h1
+                                className={`font-semibold text-xl pt-2 ${isActive ? 'hover:cursor-pointer' : ''}`}
+                                onClick={() => isActive && onClickRental(r.bookTitle, r.bookId)}
+                            >
+                                {r.bookTitle}
+                            </h1>
+                        </div>
+                        <div className="flex flex-col items-start gap-2 w-full mt-2">
+                            <div className={`flex items-center gap-2 ${
+                                isActive ? 'bg-green-500' : 'bg-red-500'
+                            } text-white rounded-xl py-1 px-4`}>
+                                <FaRegClock size={12} />
+                                <p className="text-xs">
+                                    {isActive ? `Entrega: ${r.returnDate}` : `Aluguel expirado: ${r.returnDate}`}
+                                </p>
+                            </div>
+                            <div className="flex gap-1 items-center text-xs text-gray-500">
+                                <FaRegCalendarAlt size={12} />
+                                <p>Data do aluguel: {r.rentalDate}</p>
+                            </div>
+                        </div>
+                        <button
+                            type="button"
+                            className="btn btn-sm rounded-lg"
+                            onClick={() => { openRentalInfo(r) }}
                         >
-                            {r.bookTitle}
-                        </h1>
+                            Visualizar aluguel
+                        </button>
                     </div>
-                    <div className="flex flex-col items-start gap-2 w-full mt-2">
-                        <div className="flex items-center gap-2 bg-green-500 text-white rounded-xl py-1 px-4">
-                            <FaRegClock size={12} />
-                            <p className="text-xs">Entrega: {r.returnDate}</p>
-                        </div>
-                        <div className="flex gap-1 items-center text-xs text-gray-500">
-                            <FaRegCalendarAlt size={12} />
-                            <p>Data do aluguel: {r.rentalDate}</p>
-                        </div>
-                    </div>
-                    <button
-                        type="button"
-                        className="btn btn-xs rounded-lg"
-                        onClick={() => { openRentalInfo(r) }}
-                    >
-                        Visualizar aluguel
-                    </button>
                 </div>
-            </div>
-        ))
-    ), [rental, onClickRental, openRentalInfo]);
+            );
+        });
+    }, [rental, onClickRental, openRentalInfo, isRentalActive]);
 
     if (isLoading) {
         return (
