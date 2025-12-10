@@ -14,13 +14,13 @@ export const ModalAddCategory = ({ modalId, h1, p }) => {
     useEffect(() => {
         if (isSuccess) {
             const modalSuccess = document.getElementById(modalIdSucess);
-            if (modalSuccess) modalSuccess.showModal();
+            if (modalSuccess && !modalSuccess.open) modalSuccess.showModal();
             reset(); // Limpa o formulário após sucesso
         } else if (isError) {
             const modalError = document.getElementById(modalIdError);
-            if (modalError) modalError.showModal();
+            if (modalError && !modalError.open) modalError.showModal();
         }
-    }, [isSuccess, isError, reset]);
+    }, [isSuccess, isError, reset, modalIdSucess, modalIdError]);
 
     const onSubmit = async (data) => {
         await handleAddCategory(data);
@@ -43,7 +43,7 @@ export const ModalAddCategory = ({ modalId, h1, p }) => {
                     </div>
 
                     <div className="modal-action w-full">
-                        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-start w-full gap-8">
+                        <form method="dialog" onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-start w-full gap-8">
                             {/* Seção Informações Básicas */}
                             <div className="flex flex-col gap-2 pt-4">
                                 <h4 className="font-semibold">Informações da Categoria</h4>

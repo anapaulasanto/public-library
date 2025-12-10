@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { fetchRentalsByUser, saveRental } from "../../services/rental";
+import { fetchRentalsByUser, saveRental, checkUpcomingReturns } from "../../services/rental";
 import { use } from "react";
 
 export const useSaveRental = () => {
@@ -41,5 +41,15 @@ export const useFetchRentalsByUser = (userId) => {
         queryKey: ['rentals', userId],
         queryFn: () => fetchRentalsByUser(userId),
         enabled: !!userId,
+    })
+}
+
+export const useCheckUpcomingReturns = (userId) => {
+    return useQuery({
+        queryKey: ['upcomingReturns', userId],
+        queryFn: () => checkUpcomingReturns(userId),
+        enabled: !!userId,
+        refetchOnMount: true,
+        refetchOnWindowFocus: false,
     })
 }

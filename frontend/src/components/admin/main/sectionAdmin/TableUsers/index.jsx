@@ -17,6 +17,13 @@ export const TableUsers = () => {
         return <div className="mt-10 text-red-500">Erro ao carregar os usuarios.</div>;
     }
 
+    // Ordenar usuários por data de criação (mais recentes primeiro)
+    const sortedUsers = users ? [...users].sort((a, b) => {
+        const dateA = new Date(a.createdAt);
+        const dateB = new Date(b.createdAt);
+        return dateB - dateA; // Ordem decrescente (mais recentes primeiro)
+    }) : [];
+
     return (
         <div className="overflow-auto h-[400px] mt-10 border border-neutral-200 rounded-xl">
 
@@ -32,7 +39,7 @@ export const TableUsers = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((user) => (
+                    {sortedUsers.map((user) => (
                         <tr key={user.id}>
                             <td>{user.id}</td>
                             <td>

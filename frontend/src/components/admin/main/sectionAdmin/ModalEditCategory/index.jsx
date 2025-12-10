@@ -19,20 +19,20 @@ export const ModalEditCategory = ({ modalId, h1, p, categoryName, description, c
     useEffect(() => {
         if (isSuccess) {
             const modal = document.getElementById(modalIdSucess);
-            if (modal) {
+            if (modal && !modal.open) {
                 modal.showModal();
             }
         }
-    }, [isSuccess]);
+    }, [isSuccess, modalIdSucess]);
 
     useEffect(() => {
         if (isError) {
-            const modal = document.getElementById('modalIdError');
-            if (modal) {
+            const modal = document.getElementById(modalIdError);
+            if (modal && !modal.open) {
                 modal.showModal();
             }
         }
-    }, [isError]);
+    }, [isError, modalIdError]);
 
     const handleOpenModal = () => {
         // Reseta os dados do formulário quando o modal é aberto
@@ -49,18 +49,16 @@ export const ModalEditCategory = ({ modalId, h1, p, categoryName, description, c
         const { name, value } = e.target;
         setFormData(prev => ({
             ...prev,
-            [name]: value
+            [name]: name === 'categoryCode' || name === 'categoryPopularity' 
+                ? parseInt(value) || 0 
+                : value
         }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            await handleEditCategory(formData);
-            document.getElementById(modalId).close();
-        } catch (error) {
-            console.error("Erro ao editar categoria:", error);
-        }
+        await handleEditCategory(formData);
+        document.getElementById(modalId).close();
     };
     return (
         <div>

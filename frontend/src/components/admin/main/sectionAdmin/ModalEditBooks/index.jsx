@@ -32,7 +32,7 @@ export const ModalEditBooks = ({ modalId, h1, p, cover, title, author, category,
     useEffect(() => {
         if (isSuccess) {
             const modal = document.getElementById('modal_success_edit_book');
-            if (modal) {
+            if (modal && !modal.open) {
                 modal.showModal();
             }
         }
@@ -41,7 +41,7 @@ export const ModalEditBooks = ({ modalId, h1, p, cover, title, author, category,
     useEffect(() => {
         if (isError) {
             const modal = document.getElementById('modal_error_edit_book');
-            if (modal) {
+            if (modal && !modal.open) {
                 modal.showModal();
             }
         }
@@ -57,12 +57,8 @@ export const ModalEditBooks = ({ modalId, h1, p, cover, title, author, category,
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            await handleEditBook(formData);
-            document.getElementById(modalId).close();
-        } catch (error) {
-            console.error("Erro ao editar livro:", error);
-        }
+        await handleEditBook(formData);
+        document.getElementById(modalId).close();
     };
     return (
         <div>
@@ -75,7 +71,7 @@ export const ModalEditBooks = ({ modalId, h1, p, cover, title, author, category,
                     </div>
 
                     <div className="modal-action w-full">
-                        <form method="dialog" className="flex flex-col justify-start w-full gap-6">
+                        <form method="dialog" onSubmit={handleSubmit} className="flex flex-col justify-start w-full gap-6">
 
                             {/* Seção Capa do Livro */}
                             <div className="flex flex-col gap-2 pt-4">
@@ -181,7 +177,6 @@ export const ModalEditBooks = ({ modalId, h1, p, cover, title, author, category,
                                 <button
                                     type="submit"
                                     className="btn bg-sky-700 px-10 text-white rounded-xl"
-                                    onClick={handleSubmit}
                                 >
                                     Salvar alterações
                                 </button>

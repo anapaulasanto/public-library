@@ -8,6 +8,27 @@ import { nameToSlug } from "../../../../../utils/index.js";
 import { useCallback, useMemo, useState } from "react";
 import { ModalInfoRental } from "../../../../modalInfoRental";
 
+// Função para formatar data para padrão brasileiro (dd/MM/yyyy)
+const formatDateToBr = (dateStr) => {
+    if (!dateStr) return '';
+    
+    // Remove timestamp se existir (yyyy-MM-dd HH:mm:ss -> yyyy-MM-dd)
+    const dateOnly = dateStr.split(' ')[0];
+    
+    // Se já está em formato dd/MM/yyyy, retorna como está
+    if (dateOnly.includes('/')) {
+        return dateOnly;
+    }
+    
+    // Se está em formato yyyy-MM-dd, converte para dd/MM/yyyy
+    if (dateOnly.includes('-')) {
+        const [year, month, day] = dateOnly.split('-');
+        return `${day}/${month}/${year}`;
+    }
+    
+    return dateOnly;
+};
+
 export const TableRental = () => {
     const { data: rental, isLoading, isError } = useUserRentals();
     const navigate = useNavigate();
@@ -30,11 +51,24 @@ export const TableRental = () => {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         
-        const [day, month, year] = returnDate.split('/');
-        const returnDateObj = new Date(year, month - 1, day);
+        // Remove timestamp se existir (yyyy-MM-dd HH:mm:ss -> yyyy-MM-dd)
+        const dateOnly = returnDate.split(' ')[0];
+        
+        let returnDateObj;
+        
+        // Verifica se é formato dd/MM/yyyy ou yyyy-MM-dd
+        if (dateOnly.includes('/')) {
+            const [day, month, year] = dateOnly.split('/');
+            returnDateObj = new Date(year, month - 1, day);
+        } else {
+            // Formato yyyy-MM-dd
+            returnDateObj = new Date(dateOnly);
+        }
+        
         returnDateObj.setHours(0, 0, 0, 0);
         
-        return returnDateObj > today;
+        // Aluguel é ativo se a data de devolução for HOJE ou FUTURA
+        return returnDateObj >= today;
     }, []);
 
     const renderedRentals = useMemo(() => {
@@ -83,12 +117,12 @@ export const TableRental = () => {
                             } text-white rounded-xl py-1 px-4`}>
                                 <FaRegClock size={12} />
                                 <p className="text-xs">
-                                    {isActive ? `Entrega: ${r.returnDate}` : `Aluguel expirado: ${r.returnDate}`}
+                                    {isActive ? `Entrega: ${formatDateToBr(r.returnDate)}` : `Aluguel expirado: ${formatDateToBr(r.returnDate)}`}
                                 </p>
                             </div>
                             <div className="flex gap-1 items-center text-xs text-gray-500">
                                 <FaRegCalendarAlt size={12} />
-                                <p>Data do aluguel: {r.rentalDate}</p>
+                                <p>Data do aluguel: {formatDateToBr(r.rentalDate)}</p>
                             </div>
                         </div>
                         <button
@@ -135,8 +169,8 @@ export const TableRental = () => {
                 modalId={modalId}
                 bookTitle={selectedRental?.bookTitle}
                 userName={selectedRental?.userName || 'Você'}
-                rentalDate={selectedRental?.rentalDate}
-                returnDate={selectedRental?.returnDate}
+                rentalDate={formatDateToBr(selectedRental?.rentalDate)}
+                returnDate={formatDateToBr(selectedRental?.returnDate)}
             />
         </>
     );

@@ -19,7 +19,7 @@ export const useAddCategory = () => {
     });
 
     return {
-        handleAddCategory: mutation.mutate,
+        handleAddCategory: mutation.mutateAsync,
         isSuccess: mutation.isSuccess,
         isError: mutation.isError,
         error: mutation.error?.message
@@ -39,7 +39,7 @@ export const useDeleteCategory = (categoryId) => {
     });
 
     return {
-        handleDeleteCategory: mutation.mutate,
+        handleDeleteCategory: mutation.mutateAsync,
         isSuccess: mutation.isSuccess,
         isError: mutation.isError,
         error: mutation.error?.message
@@ -58,7 +58,7 @@ export const useEditCategory = (categoryId) => {
     });
 
     return {
-        handleEditCategory: mutation.mutate,
+        handleEditCategory: mutation.mutateAsync,
         isSuccess: mutation.isSuccess,
         isError: mutation.isError,
         error: mutation.error?.message
