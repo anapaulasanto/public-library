@@ -4,6 +4,7 @@ import { BookContext } from "../../../context/bookContext";
 import { SectionTableBooks } from "../main/sectionAdmin/SectionTableBooks";
 import { SectionTableUsers } from "../main/sectionAdmin/SectionTableUsers";
 import { SectionTableCategory } from "../main/sectionAdmin/SectionTableCategory";
+import { SectionNotifications } from "../main/sectionAdmin/SectionNotifications";
 import { LuBookA } from "react-icons/lu";
 import { LuUsers } from "react-icons/lu";
 import { IoPricetagsOutline } from "react-icons/io5";
@@ -33,6 +34,7 @@ export const AdminDashboard = () => {
             {activeTab === 'livros' && <SectionTableBooks />}
             {activeTab === 'usuarios' && <SectionTableUsers />}
             {activeTab === 'categorias' && <SectionTableCategory />}
+            {activeTab === 'notificacoes' && <SectionNotifications />}
         </>
     )
 }

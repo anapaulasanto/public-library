@@ -1,0 +1,123 @@
+.section-notifications {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.notifications-header {
+    margin-bottom: 2rem;
+}
+
+.notifications-header h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.notifications-header p {
+    color: #666;
+    font-size: 1rem;
+}
+
+.notifications-content {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.notification-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.card-icon {
+    width: 48px;
+    height: 48px;
+    color: #4CAF50;
+}
+
+.notification-card h3 {
+    font-size: 1.4rem;
+    color: #333;
+    margin: 0;
+}
+
+.notification-card > p {
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.notification-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f5f5f5;
+    border-radius: 8px;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-label {
+    font-weight: 600;
+    color: #555;
+}
+
+.info-value {
+    color: #333;
+    font-weight: 500;
+}
+
+.btn-send-notifications {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 0.875rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-send-notifications:hover:not(:disabled) {
+    background: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.btn-send-notifications:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.btn-send-notifications:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+    .section-notifications {
+        padding: 1rem;
+    }
+
+    .notification-card {
+        min-width: 100%;
+    }
+
+    .notifications-header h2 {
+        font-size: 1.5rem;
+    }
+}
