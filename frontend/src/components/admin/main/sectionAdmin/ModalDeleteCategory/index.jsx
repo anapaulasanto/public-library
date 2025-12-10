@@ -12,13 +12,23 @@ export const ModalDeleteCategory = ({ modalId, categoryId, categoryName }) => {
 
     useEffect(() => {
         if (isSuccess) {
-            const modalSuccess = document.getElementById(modalIdSucess);
-            modalSuccess.showModal();
+            document.getElementById(modalId).close();
+            setTimeout(() => {
+                const modalSuccess = document.getElementById(modalIdSucess);
+                if (modalSuccess && !modalSuccess.open) {
+                    modalSuccess.showModal();
+                }
+            }, 150);
         } else if (isError) {
-            const modalError = document.getElementById(modalIdError);
-            modalError.showModal();
+            document.getElementById(modalId).close();
+            setTimeout(() => {
+                const modalError = document.getElementById(modalIdError);
+                if (modalError && !modalError.open) {
+                    modalError.showModal();
+                }
+            }, 150);
         }
-    }, [isSuccess, isError, modalIdSucess, modalIdError]);
+    }, [isSuccess, isError, modalIdSucess, modalIdError, modalId]);
 
     const handleDelete = async () => {
         await handleDeleteCategory();
@@ -50,6 +60,7 @@ export const ModalDeleteCategory = ({ modalId, categoryId, categoryName }) => {
                                 Cancelar
                             </button>
                             <button
+                                type="button"
                                 className="btn bg-sky-700 text-white rounded-lg"
                                 onClick={handleDelete}
                             >

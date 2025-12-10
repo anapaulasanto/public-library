@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c18daa89-d018-4d01-9bb2-afbdf027f4a4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/library/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/library/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/LibraryApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/java/br/edu/unichristus/LibraryApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/library/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/library/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/TableUsers/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/main/sectionAdmin/TableUsers/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/user/Profile/Header/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/user/Profile/Header/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/user/Profile/Main/TableRental/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/user/Profile/Main/TableRental/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/hooks/rental/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/hooks/rental/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/layout/user/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/layout/user/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/services/rental/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/rental/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,17 +45,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.LibraryApplication.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;ana&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Arquivos/Documents/.pesquisa/public-library&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.LibraryApplication.executor": "Run",
+    "Maven.publiclibrary [spring-boot:run].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "ana",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Arquivos/Documents/.pesquisa/public-library"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="LibraryApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="br.edu.unichristus.LibraryApplication" />

@@ -13,12 +13,20 @@ export const ModalDeleteBooks = ({ modalId, bookId }) => {
     useEffect(() => {
         if (isSuccess) {
             document.getElementById(modalId).close();
-            const modalSuccess = document.getElementById(modalIdSucess);
-            modalSuccess?.showModal();
+            setTimeout(() => {
+                const modalSuccess = document.getElementById(modalIdSucess);
+                if (modalSuccess && !modalSuccess.open) {
+                    modalSuccess.showModal();
+                }
+            }, 150);
         } else if (isError) {
             document.getElementById(modalId).close();
-            const modalError = document.getElementById(modalIdError);
-            modalError?.showModal();
+            setTimeout(() => {
+                const modalError = document.getElementById(modalIdError);
+                if (modalError && !modalError.open) {
+                    modalError.showModal();
+                }
+            }, 150);
         }
     }, [isSuccess, isError, modalIdSucess, modalIdError, modalId]);
 
@@ -48,6 +56,7 @@ export const ModalDeleteBooks = ({ modalId, bookId }) => {
                                 Cancelar
                             </button>
                             <button
+                                type="button"
                                 className="btn bg-sky-700 text-white rounded-lg"
                                 onClick={handleDelete}
                             >

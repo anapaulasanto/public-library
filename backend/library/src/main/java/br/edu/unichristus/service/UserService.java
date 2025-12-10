@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.edu.unichristus.domain.dto.user.UserDTO;
@@ -19,6 +20,9 @@ public class UserService {
 
     @Autowired
     private UserRepository repository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public UserLowDTO save(UserDTO user){
         if(repository.findByEmail(user.getEmail()).isPresent()){
@@ -64,7 +68,12 @@ public class UserService {
 
         userEntity.setName(userDTO.getName());
         userEntity.setEmail(userDTO.getEmail());
-        userEntity.setPassword(userDTO.getPassword());
+        
+        // Só atualiza a senha se uma nova senha foi fornecida
+        if (userDTO.getPassword() != null && !userDTO.getPassword().isBlank()) {
+            userEntity.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        }
+        // Se password é null ou vazio, mantém a senha atual (não faz nada)
 
         var updatedUser = repository.save(userEntity);
         return MapperUtil.parseObject(updatedUser, UserLowDTO.class);
