@@ -33,8 +33,14 @@ public class BookController {
     private FileStorageService fileStorageService;
 
     @Operation(summary = "Cadastra um novo livro | role: [ADMIN]", tags = "Book")
-    @PostMapping(consumes = "multipart/form-data")
-    public BookDTO save(@RequestPart("book") BookDTO book, @RequestPart("file") MultipartFile file){
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public BookDTO save(@RequestBody BookDTO book){
+        return service.save(book);
+    }
+
+    @Operation(summary = "Envia/atualiza capa de um livro | role: [ADMIN]", tags = "Book")
+    @PostMapping(value = "/{id}/cover", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public BookDTO uploadCover(@PathVariable Long id, @RequestParam("file") MultipartFile file){
         String fileName = fileStorageService.storeFile(file);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -42,8 +48,7 @@ public class BookController {
                 .path(fileName)
                 .toUriString();
 
-        book.setCapa(fileDownloadUri);
-        return service.save(book);
+        return service.updateCover(id, fileDownloadUri);
     }
 
     @GetMapping("/downloadFile/{fileName:.+}")

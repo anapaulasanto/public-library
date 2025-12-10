@@ -11,6 +11,7 @@ import java.util.List;
 public interface RentalRepository extends JpaRepository<Rental, Long> {
     List<Rental> findByUserId(Long userId);
     List<Rental> findByBookId(Long bookId);
+    List<Rental> findByStatus(String status);
 
     @Query("SELECT r FROM Rental r WHERE r.returnDate < :currentDate AND r.status = 'active'")
     List<Rental> findOverdueRentals(@Param("currentDate") LocalDate currentDate);

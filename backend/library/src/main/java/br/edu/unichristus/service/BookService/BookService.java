@@ -106,6 +106,22 @@ public class BookService {
         return updatedDTO;
     }
 
+    public BookDTO updateCover(Long id, String coverUrl) {
+        var existingBook = repository.findById(id)
+                .orElseThrow(() -> new CommonsException(HttpStatus.NOT_FOUND,
+                        "unichristus.book.cover.notfound",
+                        "Livro para atualização de capa não encontrado."));
+
+        existingBook.setCapa(coverUrl);
+
+        var updatedBook = repository.save(existingBook);
+        BookDTO dto = MapperUtil.parseObject(updatedBook, BookDTO.class);
+        if (updatedBook.getCategory() != null) {
+            dto.setCategoryId(updatedBook.getCategory().getId());
+        }
+        return dto;
+    }
+
 
     public List<BookDTO> findAll() {
         var listBooks = repository.findAll();
