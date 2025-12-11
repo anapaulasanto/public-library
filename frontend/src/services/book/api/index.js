@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const fetchBooksApi = async (query) => {
-    const { text, type } = query;
+    const { text, type, page = 1, maxResults = 8 } = query;
     let key = 'AIzaSyC3yvvAv-g6uIAEbAuo1b-S05CffD1SFfM';
     let search = "bestseller&download=epub&filter=partial";
     
@@ -15,7 +15,12 @@ export const fetchBooksApi = async (query) => {
         search = `subject:${formattedText}`;
     }
 
-    const url = `https://www.googleapis.com/books/v1/volumes?q=${search}&maxResults=8&key=${key}`;
+    const startIndex = (page - 1) * maxResults;
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${search}&startIndex=${startIndex}&maxResults=${maxResults}&key=${key}`;
     const { data } = await axios.get(url, { withCredentials: false });
-    return data.items || [];
+    
+    return {
+        items: data.items || [],
+        totalItems: data.totalItems || 0
+    };
 }
