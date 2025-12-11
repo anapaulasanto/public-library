@@ -2,6 +2,8 @@ import React, { useContext, useMemo, useState } from "react";
 import { AuthContext } from "../../../../../context/AuthContext";
 import { useFetchRentalsByUser } from "../../../../../hooks/rental";
 import { useSaveReview } from "../../../../../hooks/review";
+import { ModalSucess } from "../../../../ModalSucess";
+import { ModalError } from "../../../../ModalError";
 
 export const SectionWriteReview = ({ book }) => {
     const { user, isLogged } = useContext(AuthContext);
@@ -10,6 +12,9 @@ export const SectionWriteReview = ({ book }) => {
     
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [showErrorModal, setShowErrorModal] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const hasRentedBook = useMemo(() => {
         if (!rentals || !book) return false;
@@ -34,7 +39,9 @@ export const SectionWriteReview = ({ book }) => {
         e.preventDefault();
         
         if (!rating) {
-            alert("Por favor, selecione uma nota");
+            setErrorMessage("Por favor, selecione uma nota antes de publicar.");
+            setShowErrorModal(true);
+            document.getElementById("modal_error_review").showModal();
             return;
         }
 
@@ -52,10 +59,13 @@ export const SectionWriteReview = ({ book }) => {
             setRating(0);
             setComment("");
             
-            alert("Avaliação publicada com sucesso!");
+            setShowSuccessModal(true);
+            document.getElementById("modal_success_review").showModal();
         } catch (error) {
             console.error("Erro ao publicar avaliação:", error);
-            alert("Erro ao publicar avaliação. Tente novamente.");
+            setErrorMessage("Erro ao publicar avaliação. Tente novamente.");
+            setShowErrorModal(true);
+            document.getElementById("modal_error_review").showModal();
         }
     };
 
@@ -134,6 +144,18 @@ export const SectionWriteReview = ({ book }) => {
                     </button>
                 </form>
             </div>
+            
+            <ModalSucess 
+                modalId="modal_success_review"
+                h1="Avaliação publicada com sucesso!"
+                p="Sua avaliação foi registrada e será exibida para outros usuários."
+            />
+            
+            <ModalError 
+                modalId="modal_error_review"
+                h1="Erro ao publicar avaliação"
+                p={errorMessage}
+            />
         </div>
     )
 };

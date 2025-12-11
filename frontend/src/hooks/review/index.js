@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { fetchReviews, saveReview } from "../../services/review/index.js";
+import { fetchReviews, saveReview, deleteReview, updateReview } from "../../services/review/index.js";
 
 export const useSaveReview = () => {
     const queryClient = useQueryClient();
@@ -28,4 +28,52 @@ export const useReviews = () => {
         queryKey: ['reviewsBook'],
         queryFn: fetchReviews,
     })
+}
+
+export const useDeleteReview = (reviewId) => {
+    const queryClient = useQueryClient();
+
+    const mutation = useMutation({
+        mutationFn: () => deleteReview(reviewId),
+
+        onSuccess: () => {
+            console.log("Avaliação excluída com sucesso");
+            queryClient.invalidateQueries({ queryKey: ['reviewsBook'] });
+        },
+
+        onError: (error) => {
+            console.log("Erro ao excluir avaliação", error);
+        }
+    });
+
+    return {
+        handleDeleteReview: mutation.mutateAsync,
+        isSuccess: mutation.isSuccess,
+        isError: mutation.isError,
+        error: mutation.error
+    };
+}
+
+export const useUpdateReview = (reviewId) => {
+    const queryClient = useQueryClient();
+
+    const mutation = useMutation({
+        mutationFn: (reviewData) => updateReview(reviewId, reviewData),
+
+        onSuccess: () => {
+            console.log("Avaliação atualizada com sucesso");
+            queryClient.invalidateQueries({ queryKey: ['reviewsBook'] });
+        },
+
+        onError: (error) => {
+            console.log("Erro ao atualizar avaliação", error);
+        }
+    });
+
+    return {
+        handleUpdateReview: mutation.mutateAsync,
+        isSuccess: mutation.isSuccess,
+        isError: mutation.isError,
+        error: mutation.error
+    };
 }
