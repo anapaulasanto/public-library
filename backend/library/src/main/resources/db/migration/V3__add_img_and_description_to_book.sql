@@ -1,0 +1,5 @@
+ALTER TABLE tb_book
+ADD COLUMN img VARCHAR(500);
+
+ALTER TABLE tb_book
+ADD COLUMN description VARCHAR(2000);
