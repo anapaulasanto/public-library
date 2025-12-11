@@ -20,21 +20,21 @@ export const ModalRentalNotification = ({ rentals, modalId }) => {
         if (!dateStr) return 0;
         
         const dateOnly = dateStr.split(' ')[0];
-        let returnDate;
+        let year, month, day;
         
         if (dateOnly.includes('/')) {
-            const [day, month, year] = dateOnly.split('/');
-            returnDate = new Date(year, month - 1, day);
+            [day, month, year] = dateOnly.split('/');
         } else {
-            returnDate = new Date(dateOnly);
+            [year, month, day] = dateOnly.split('-');
         }
         
+        // Criar datas no formato UTC para evitar problemas de fuso horário
+        const returnDate = new Date(Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(day)));
         const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        returnDate.setHours(0, 0, 0, 0);
+        const todayUTC = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()));
         
-        const diffTime = returnDate - today;
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        const diffTime = returnDate - todayUTC;
+        const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
         
         return diffDays;
     };
