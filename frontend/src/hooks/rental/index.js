@@ -41,6 +41,8 @@ export const useFetchRentalsByUser = (userId) => {
         queryKey: ['rentals', userId],
         queryFn: () => fetchRentalsByUser(userId),
         enabled: !!userId,
+        staleTime: 1000 * 60 * 2, // 2 minutos
+        cacheTime: 1000 * 60 * 5, // 5 minutos
     })
 }
 
@@ -51,5 +53,7 @@ export const useCheckUpcomingReturns = (userId) => {
         enabled: !!userId,
         refetchOnMount: true,
         refetchOnWindowFocus: false,
+        staleTime: 1000 * 60 * 1, // 1 minuto - notificações precisam ser frescas
+        cacheTime: 1000 * 60 * 3, // 3 minutos
     })
 }

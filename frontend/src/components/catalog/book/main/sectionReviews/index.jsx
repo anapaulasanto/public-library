@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useCallback } from "react";
 import userImg from "../../../../../assets/user.jpg"
 import { StarRating } from "../starRating";
 import { Loading } from "../../../../Loading";
@@ -9,15 +9,15 @@ import { useDeleteReview, useUpdateReview } from "../../../../../hooks/review";
 import { ModalSucess } from "../../../../ModalSucess";
 import { ModalError } from "../../../../ModalError";
 
-export const SectionReviews = ({ reviews, isLoading, isError }) => {
+export const SectionReviews = ({ reviews, isLoading, isError, bookId }) => {
     const { user } = useContext(AuthContext);
     const [reviewToDelete, setReviewToDelete] = useState(null);
     const [reviewToEdit, setReviewToEdit] = useState(null);
     const [editRating, setEditRating] = useState(0);
     const [editComment, setEditComment] = useState("");
     
-    const { handleDeleteReview } = useDeleteReview(reviewToDelete);
-    const { handleUpdateReview } = useUpdateReview(reviewToEdit);
+    const { handleDeleteReview } = useDeleteReview(reviewToDelete, bookId);
+    const { handleUpdateReview } = useUpdateReview(reviewToEdit, bookId);
     
     const handleOpenEditModal = (review) => {
         setReviewToEdit(review.id);
@@ -82,17 +82,17 @@ export const SectionReviews = ({ reviews, isLoading, isError }) => {
         }
     };
     
-    const canDeleteReview = (review) => {
+    const canDeleteReview = useCallback((review) => {
         if (!user) return false;
         // Apenas o autor da avaliação pode excluir (não admin)
         return review.userId === user.id;
-    };
+    }, [user]);
     
-    const canEditReview = (review) => {
+    const canEditReview = useCallback((review) => {
         if (!user) return false;
         // Apenas o autor da avaliação pode editar (não admin)
         return review.userId === user.id;
-    };
+    }, [user]);
     
     if (isLoading) {
         return <div className="my-40"><Loading /></div>;

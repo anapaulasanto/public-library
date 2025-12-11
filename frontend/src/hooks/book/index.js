@@ -5,6 +5,8 @@ export const useBooksAdmin = () => {
     return useQuery({
         queryKey: ['booksAdmin'],
         queryFn:  fetchBooks,
+        staleTime: 1000 * 60 * 3, // 3 minutos
+        cacheTime: 1000 * 60 * 10, // 10 minutos
     })
 }
 
@@ -13,6 +15,8 @@ export const useBookId = (id) => {
         queryKey: ['book', id],
         queryFn: () => getBookById(id),
         enabled: !!id,
+        staleTime: 1000 * 60 * 5, // 5 minutos
+        cacheTime: 1000 * 60 * 15, // 15 minutos
     })
 }
 
@@ -22,6 +26,8 @@ export const useReviewesBook = (id) => {
         queryFn: () => getReviewsByBook(id),
         enabled: !!id,
         retry: false,
+        staleTime: 1000 * 60 * 2, // 2 minutos
+        cacheTime: 1000 * 60 * 5, // 5 minutos
     })
 }
 
@@ -98,5 +104,7 @@ export const useSearchBooks = (searchText, searchType) => {
         queryKey: ['searchBooks', searchText, searchType],
         queryFn: () => searchBooks(searchText, searchType),
         enabled: false, // Não executa automaticamente
+        staleTime: 1000 * 60 * 5, // 5 minutos
+        cacheTime: 1000 * 60 * 10, // 10 minutos
     });
 }

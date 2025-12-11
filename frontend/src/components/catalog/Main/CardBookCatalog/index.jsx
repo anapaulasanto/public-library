@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useEffect, useState } from "react";
+import React, { useCallback, useMemo, useEffect, useState, memo } from "react";
 import { CiCalendar } from "react-icons/ci";
 import { useNavigate } from "react-router-dom"
 import { nameToSlug } from "../../../../utils/index.js";
@@ -7,7 +7,7 @@ import { Loading } from "../../../Loading/index.jsx";
 import NoImg from "../../../../assets/no-img.png";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
-export const CardBook = ({ searchParams }) => {
+export const CardBook = memo(({ searchParams }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const booksPerPage = 8;
 
@@ -38,12 +38,18 @@ export const CardBook = ({ searchParams }) => {
     const isLoading = searchParams?.text ? isLoadingSearch : isLoadingAll;
     const isError = searchParams?.text ? isErrorSearch : isErrorAll;
 
-    // Cálculos de paginação
-    const totalBooks = books?.length || 0;
-    const totalPages = Math.ceil(totalBooks / booksPerPage);
-    const startIndex = (currentPage - 1) * booksPerPage;
-    const endIndex = startIndex + booksPerPage;
-    const currentBooks = books?.slice(startIndex, endIndex) || [];
+    // Cálculos de paginação memoizados
+    const paginationData = useMemo(() => {
+        const totalBooks = books?.length || 0;
+        const totalPages = Math.ceil(totalBooks / booksPerPage);
+        const startIndex = (currentPage - 1) * booksPerPage;
+        const endIndex = startIndex + booksPerPage;
+        const currentBooks = books?.slice(startIndex, endIndex) || [];
+        
+        return { totalBooks, totalPages, startIndex, endIndex, currentBooks };
+    }, [books, currentPage, booksPerPage]);
+    
+    const { totalBooks, totalPages, startIndex, endIndex, currentBooks } = paginationData;
 
     const handleBookClick = useCallback((book) => {
         navigate(`/catalog/book/${nameToSlug(book.title)}/${book.id}`, {
@@ -51,12 +57,12 @@ export const CardBook = ({ searchParams }) => {
         });
     }, [navigate]);
 
-    const handlePageChange = (newPage) => {
+    const handlePageChange = useCallback((newPage) => {
         setCurrentPage(newPage);
         window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
+    }, []);
 
-    const renderPaginationButtons = () => {
+    const paginationButtons = useMemo(() => {
         const buttons = [];
         const maxButtons = 5;
         let startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
@@ -83,7 +89,7 @@ export const CardBook = ({ searchParams }) => {
         }
 
         return buttons;
-    };
+    }, [currentPage, totalPages, handlePageChange]);
 
     const renderedBooks = useMemo(() => (
         currentBooks?.map((book) => (
@@ -171,7 +177,7 @@ export const CardBook = ({ searchParams }) => {
 
                         {/* Números das páginas */}
                         <div className="flex gap-2">
-                            {renderPaginationButtons()}
+                            {paginationButtons}
                         </div>
 
                         {/* Botão Próximo */}
@@ -198,4 +204,4 @@ export const CardBook = ({ searchParams }) => {
             )}
         </div>
     )
-};
+});

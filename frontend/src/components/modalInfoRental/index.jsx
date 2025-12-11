@@ -54,11 +54,6 @@ export const ModalInfoRental = ({ modalId, bookTitle, userName, rentalDate, retu
                                 <span className="text-sm font-medium">{returnDate}</span>
                             </div>
                         </div>
-
-                        {/* Aviso */}
-                        <div className="bg-sky-50 text-sky-800 text-xs rounded-xl px-4 py-3 mt-5">
-                            Lembre-se de devolver o livro na data indicada para evitar multas
-                        </div>
                     </div>
                 </div>
             </dialog>

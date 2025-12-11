@@ -17,7 +17,7 @@ export const Main = ({ book }) => {
                 isLoading={isLoading} 
             />
             <SectionWriteReview book={book} />
-            <SectionReviews reviews={reviews} isError={isError} isLoading={isLoading} />
+            <SectionReviews reviews={reviews} isError={isError} isLoading={isLoading} bookId={book.id} />
         </div>
     )
 };

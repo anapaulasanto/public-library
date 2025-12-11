@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchReviews, saveReview, deleteReview, updateReview } from "../../services/review/index.js";
 
-export const useSaveReview = () => {
+export const useSaveReview = (bookId) => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
@@ -10,6 +10,9 @@ export const useSaveReview = () => {
         onSuccess: () => {
             console.log("Avaliação publicada com sucesso");
             queryClient.invalidateQueries({ queryKey: ['reviewsBook'] });
+            if (bookId) {
+                queryClient.invalidateQueries({ queryKey: ['book', bookId] });
+            }
         },
 
         onError: (error) => {
@@ -30,7 +33,7 @@ export const useReviews = () => {
     })
 }
 
-export const useDeleteReview = (reviewId) => {
+export const useDeleteReview = (reviewId, bookId) => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
@@ -39,6 +42,9 @@ export const useDeleteReview = (reviewId) => {
         onSuccess: () => {
             console.log("Avaliação excluída com sucesso");
             queryClient.invalidateQueries({ queryKey: ['reviewsBook'] });
+            if (bookId) {
+                queryClient.invalidateQueries({ queryKey: ['book', bookId] });
+            }
         },
 
         onError: (error) => {
@@ -54,7 +60,7 @@ export const useDeleteReview = (reviewId) => {
     };
 }
 
-export const useUpdateReview = (reviewId) => {
+export const useUpdateReview = (reviewId, bookId) => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
@@ -63,6 +69,9 @@ export const useUpdateReview = (reviewId) => {
         onSuccess: () => {
             console.log("Avaliação atualizada com sucesso");
             queryClient.invalidateQueries({ queryKey: ['reviewsBook'] });
+            if (bookId) {
+                queryClient.invalidateQueries({ queryKey: ['book', bookId] });
+            }
         },
 
         onError: (error) => {

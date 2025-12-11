@@ -8,7 +8,7 @@ import { ModalError } from "../../../../ModalError";
 export const SectionWriteReview = ({ book }) => {
     const { user, isLogged } = useContext(AuthContext);
     const { data: rentals } = useFetchRentalsByUser(user?.id);
-    const { handleSaveReview } = useSaveReview();
+    const { handleSaveReview } = useSaveReview(book.id);
     
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");

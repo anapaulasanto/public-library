@@ -1,16 +1,18 @@
-import React from "react";
+import React, { memo, useMemo } from "react";
 import { CiCalendar, CiClock1, CiShare1 } from "react-icons/ci";
 import { Link } from "react-router-dom"
 import NoImg  from "../../../../assets/no-img.png"
 
-export const CardBookApi = ({ book }) => {
-    const date = book.volumeInfo.publishedDate;
-    const year = date ? date.substring(0, 4) : 'Data desconhecida';
-    const info = book.volumeInfo;
+export const CardBookApi = memo(({ book }) => {
+    const { year, info } = useMemo(() => {
+        const date = book.volumeInfo.publishedDate;
+        const year = date ? date.substring(0, 4) : 'Data desconhecida';
+        const info = book.volumeInfo;
+        return { year, info };
+    }, [book]);
 
     return (
         <div
-            key={book.id}
             className="card bg-neutral-200/20 border border-neutral-300 shadow-sm h-[650px] hover:shadow-2xl w-[19%] cursor-pointer transition-all duration-200 hover:scale-105 gap-2 2xl:h-[810px] 2xl:w-[19%]"
         >
             <figure className="w-full h-full">
@@ -41,6 +43,7 @@ export const CardBookApi = ({ book }) => {
                     <Link
                         to={info.previewLink || '#'}
                         target="_blank"
+                        rel="noopener noreferrer"
                         className="bg-sky-700 text-white px-6 py-2 rounded-lg flex items-center gap-2 text-sm font-semibold hover:bg-sky-800 transition"
                         aria-label="Abrir prévia do livro"
                     >
@@ -50,6 +53,7 @@ export const CardBookApi = ({ book }) => {
                     <Link
                         to={info.infoLink || '#'}
                         target="_blank"
+                        rel="noopener noreferrer"
                         className="bg-white px-7 py-2 border border-gray-300 rounded-lg flex items-center gap-2 text-sm font-semibold hover:bg-gray-100 transition"
                         aria-label="Abrir informações do livro"
                     >
@@ -60,4 +64,4 @@ export const CardBookApi = ({ book }) => {
             </div>
         </div>
     )
-};
+});

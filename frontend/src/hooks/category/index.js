@@ -5,6 +5,8 @@ export const useCategoryCatalog = () => {
     return useQuery({
         queryKey: ['categoryCatalog'],
         queryFn: fetchCategory,
+        staleTime: 1000 * 60 * 10, // 10 minutos - categorias mudam raramente
+        cacheTime: 1000 * 60 * 30, // 30 minutos
     })
 }
 

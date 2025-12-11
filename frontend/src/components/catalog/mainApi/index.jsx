@@ -28,7 +28,7 @@ export const MainBooksApi = memo(() => {
         ))
     ), [books]); 
 
-    const renderPaginationButtons = () => {
+    const paginationButtons = useMemo(() => {
         const buttons = [];
         const maxButtons = 5;
         let startPage = Math.max(1, query.page - Math.floor(maxButtons / 2));
@@ -55,7 +55,7 @@ export const MainBooksApi = memo(() => {
         }
 
         return buttons;
-    };
+    }, [query.page, totalPages, handlePageChange]);
 
     return (
         <div className="flex flex-col items-center justify-center gap-6 my-10 w-full">
@@ -101,7 +101,7 @@ export const MainBooksApi = memo(() => {
 
                                         {/* Números das páginas */}
                                         <div className="flex gap-2">
-                                            {renderPaginationButtons()}
+                                            {paginationButtons}
                                         </div>
 
                                         {/* Botão Próximo */}

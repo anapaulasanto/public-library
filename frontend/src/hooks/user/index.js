@@ -6,6 +6,8 @@ export const useAllUsers = () => {
     return useQuery({
         queryKey: ['users'],
         queryFn: fetchAllUsers,
+        staleTime: 1000 * 60 * 5, // 5 minutos
+        cacheTime: 1000 * 60 * 10, // 10 minutos
     });
 };
 
@@ -19,6 +21,8 @@ export const useUserRentals = () => {
         queryFn: () => fetchUserRentals(userId),
         retry: false,
         enabled: !!userId,
+        staleTime: 1000 * 60 * 2, // 2 minutos
+        cacheTime: 1000 * 60 * 5, // 5 minutos
     });
 };
 
@@ -32,6 +36,8 @@ export const useUserReviews = () => {
         queryFn: () => fetchUserReviews(userId),
         retry: false,
         enabled: !!userId,
+        staleTime: 1000 * 60 * 3, // 3 minutos
+        cacheTime: 1000 * 60 * 8, // 8 minutos
     })
 }
 
