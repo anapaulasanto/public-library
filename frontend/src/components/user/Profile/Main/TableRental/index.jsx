@@ -12,10 +12,12 @@ export const TableRental = () => {
     const { data: rental, isLoading, isError } = useUserRentals();
     const navigate = useNavigate();
     const [selectedRental, setSelectedRental] = useState(null);
-    const modalId = 'modal_info_rental';
+    const modalId = "modal_info_rental";
 
     const onClickRental = useCallback((bookTitle, bookId) => {
-        navigate(`/catalog/book/${nameToSlug(bookTitle)}/${bookId}`, { state: { bookId } });
+        navigate(`/catalog/book/${nameToSlug(bookTitle)}/${bookId}`, {
+            state: { bookId },
+        });
     }, [navigate]);
 
     const openRentalInfo = useCallback((r) => {
@@ -24,8 +26,10 @@ export const TableRental = () => {
         dialog?.showModal();
     }, [modalId]);
 
-    const renderedRentals = useMemo(() => (
-        rental?.map((r) => (
+    const renderedRentals = useMemo(() => {
+        if (!Array.isArray(rental)) return null;
+
+        return rental.map((r) => (
             <div
                 key={r.bookId}
                 className="flex gap-3 h-50 border border-gray-200 rounded-xl hover:shadow-2xl hover:h-51 hover:duration-150 ease-out"
@@ -36,6 +40,7 @@ export const TableRental = () => {
                     className="w-1/3 rounded-l-xl hover:cursor-pointer"
                     onClick={() => onClickRental(r.bookTitle, r.bookId)}
                 />
+
                 <div className="flex flex-col justify-between flex-1 py-2 pr-2">
                     <div className="flex items-start justify-between">
                         <h1
@@ -45,40 +50,46 @@ export const TableRental = () => {
                             {r.bookTitle}
                         </h1>
                     </div>
+
                     <div className="flex flex-col items-start gap-2 w-full mt-2">
                         <div className="flex items-center gap-2 bg-green-500 text-white rounded-xl py-1 px-4">
                             <FaRegClock size={12} />
                             <p className="text-xs">Entrega: {r.returnDate}</p>
                         </div>
+
                         <div className="flex gap-1 items-center text-xs text-gray-500">
                             <FaRegCalendarAlt size={12} />
                             <p>Data do aluguel: {r.rentalDate}</p>
                         </div>
                     </div>
+
                     <button
                         type="button"
                         className="btn btn-xs rounded-lg"
-                        onClick={() => { openRentalInfo(r) }}
+                        onClick={() => openRentalInfo(r)}
                     >
                         Visualizar aluguel
                     </button>
                 </div>
             </div>
-        ))
-    ), [rental, onClickRental, openRentalInfo]);
+        ));
+    }, [rental, onClickRental, openRentalInfo]);
 
     if (isLoading) {
-        return (
-            <Loading />
-        )
+        return <Loading />;
     }
 
     if (isError) {
         return (
-            <section className="flex flex-col items-center justify-center h-full ">
+            <section className="flex flex-col items-center justify-center h-full">
                 <img src={bookIcon} alt="Icone de livro" />
-                <p className="font-semibold text-xl mb-3">Nenhum aluguel ativo</p>
-                <p className="text-gray-500">Você ainda não possui livros alugados no momento.</p>
+                <p className="font-semibold text-xl mb-3">
+                    Nenhum aluguel ativo
+                </p>
+                <p className="text-gray-500">
+                    Você ainda não possui livros alugados no momento.
+                </p>
+
                 <Link
                     className="bg-gradient text-white font-semibold shadow rounded-xl w-full h-10 flex items-center mx-auto justify-center mt-10 gap-2 text-sm hover:cursor-pointer hover:shadow-xl lg:w-1/7"
                     to="/catalog/books"
@@ -94,13 +105,14 @@ export const TableRental = () => {
             <div className="grid grid-cols-1 pb-12 gap-10 mt-10 lg:grid-cols-2 max-h-[500px] overflow-y-auto">
                 {renderedRentals}
             </div>
+
             <ModalInfoRental
                 modalId={modalId}
                 bookTitle={selectedRental?.bookTitle}
-                userName={selectedRental?.userName || 'Você'}
+                userName={selectedRental?.userName || "Você"}
                 rentalDate={selectedRental?.rentalDate}
                 returnDate={selectedRental?.returnDate}
             />
         </>
     );
-}
+};

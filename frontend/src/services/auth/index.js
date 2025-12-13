@@ -1,7 +1,15 @@
 import axios from "axios";
 
+// base do backend
+const API_URL = "http://localhost:8081";
+
+// ==================== LOGIN ====================
 export const loginUser = async (credentials) => {
-    const { data } = await axios.post('/auth/login', credentials);
+    const { data } = await axios.post(
+        `${API_URL}/auth/login`,
+        credentials,
+        { withCredentials: true } // NECESSÁRIO para cookie JWT
+    );
     return data;
 };
 
@@ -9,43 +17,59 @@ export const loginAdmin = async (credentials) => {
     return loginUser(credentials);
 };
 
+// ==================== REGISTER ====================
 export const registerUser = async (userData) => {
-    const { data } = await axios.post('/auth/register', userData); //userData = { name, email, password }(role será 'USER' por padrão no backend)
-    return data; // Retorna { id, name, email, role, ... }
+    const { data } = await axios.post(
+        `${API_URL}/auth/register`,
+        userData,
+        { withCredentials: true } // NECESSÁRIO para cookie JWT
+    );
+    return data; // { id, name, email, role, ... }
 };
 
 export const registerAdmin = async (adminData) => {
     const payload = {
         ...adminData,
-        role: 'ADMIN'
-    }
+        role: "ADMIN",
+    };
 
-    const { data } = await axios.post('/auth/register', payload); //adminData = { name, email, password, role: 'ADMIN' }
+    const { data } = await axios.post(
+        `${API_URL}/auth/register`,
+        payload,
+        { withCredentials: true } // NECESSÁRIO para cookie JWT
+    );
+
     console.log("Passou pelo registro de admin no service", data);
-    
-    return data; // Retorna { id, name, email, role, ... }
+    return data;
 };
 
-// --- Gerenciamento da sessão --- 
-
+// ==================== SESSÃO ====================
 export const checkAuthStatus = async () => {
     try {
-        const { data } = await axios.get('/auth/logged');
+        const { data } = await axios.get(
+            `${API_URL}/auth/logged`,
+            { withCredentials: true } // Lê o cookie JWT
+        );
         console.log(data);
-        return data; // Retorna { id, name, email, role, ... }
-        
+        return data;
+
     } catch (error) {
-        if (error.response && (error.response.status === 401 || error.response.status === 403)) {
-            return null; // Não é um erro, é um estado válido (não autenticado).
-            
+        if (
+            error.response &&
+            (error.response.status === 401 || error.response.status === 403)
+        ) {
+            return null; // usuário não autenticado
         }
         throw error;
     }
 };
 
 export const logoutUser = async () => {
-    const { data } = await axios.post('/auth/logout');
+    const { data } = await axios.post(
+        `${API_URL}/auth/logout`,
+        {},
+        { withCredentials: true }
+    );
     console.log(data);
-    
     return data;
 };
