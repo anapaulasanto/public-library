@@ -1,62 +1,93 @@
-# 📚 Public Library
+# 📚 Sistema de Gerenciamento de Biblioteca (Library Management System)
 
-Bem-vindo à **Public Library**, uma aplicação Java robusta e moderna para gerenciamento de biblioteca de livros. Aqui, usuários podem cadastrar livros, categorias, avaliações, aluguéis e muito mais — tudo isso com integração à API do Google Books para uma experiência completa e inteligente. 🔍✨
+ **Status:** Concluído
 
----
+## Sobre o Projeto
 
-## 🚀 Tecnologias Utilizadas
+Este projeto é uma solução Full Stack para gerenciamento de bibliotecas, desenvolvido com foco na experiência do usuário e na robustez dos dados. O objetivo foi criar uma plataforma onde administradores podem gerenciar o acervo e usuários podem alugar livros, realizar leituras e interagir com a comunidade através de avaliações.
 
-- **Java 17+**
-- **Spring Boot**
-- **JPA + Hibernate**
-- **PostgreSQL**
-- **Maven**
-- **Google Books API**
-- **Exceções customizadas com mensagens amigáveis**
+O diferencial deste sistema é a integração híbrida: ele gerencia livros cadastrados internamente e também consome dados externos da **Google Books API**, oferecendo um catálogo vasto e dinâmico.
 
 ---
 
-## 🧠 Funcionalidades
+## 🛠 Tech Stack
 
-### 👤 Usuários
-- Criar, editar, deletar e listar usuários da biblioteca.
-- Cada usuário pode alugar livros e deixar avaliações.
+### **Backend**
+* **Java & Spring Boot:** Para construir uma API RESTful segura e eficiente.
+* **Spring Security & JWT:** Implementação de autenticação robusta e controle de sessão stateless.
+* **Hibernate/JPA:** Para ORM e persistência de dados.
+* **MySQL:** Banco de dados relacional.
+* **JavaMailSender:** Para notificações automáticas via e-mail.
 
-### 📖 Livros
-- CRUD completo de livros.
-- Caso o livro não seja encontrado, a aplicação tem a opção de consultar a [API do Google Books](https://developers.google.com/books), disponibilizando um pdf do livro escolhido.
-- Suporte a categorias e avaliações por usuários.
-
-### 🏷️ Categorias
-- Cadastro e gerenciamento de categorias literárias (ex: Romance, Fantasia, Biografia).
-- Cada livro está associado a uma categoria.
-
-### 🔄 Aluguéis
-- Registro de aluguéis de livros com controle de datas (retirada e devolução).
-- Status do aluguel (pendente, devolvido, atrasado, reservado).
-
-### 🌟 Avaliações
-- Usuários podem avaliar livros com comentários e notas de 0 a 5.
-- Exibe avaliações por usuários e por livros.
-
-### 🚨 Tratamento de Erros
-- Todas as rotas possuem tratamento elegante de exceções.
-- Mensagens amigáveis e informativas para facilitar a depuração e o uso da API.
+### **Frontend**
+* **React.js:** Criação de interfaces reativas e componentizadas.
+* **Tailwind CSS:** Estilização utilitária para agilidade.
+* **DaisyUI:** Biblioteca de componentes para UI (User Interface) elegante e consistente.
 
 ---
 
-## 🌐 Integração com Google Books
+## 🚀 Funcionalidades Principais
 
-Não encontrou o livro que deseja? Sem problemas!  
-A aplicação dá a opção de consultar a **Google Books API**, podendo buscar por título do livro, pelo nome do autor ou pelo assunto.
-A API irá retornar diversas informações sobre o livro - e o mais legal, disponibiliza um pdf do livro escolhido! 
+### 🔐 Autenticação e Segurança
+* **Login e Cadastro:** Sistema completo de registro e login de usuários.
+* **Segurança JWT:** Autenticação via JSON Web Token com encriptação de senha.
+* **Gestão de Sessão:** Persistência de sessão utilizando cookies e funcionalidade de Logout seguro.
+* **Regras de Senha:** Validação robusta (mínimo de 8 dígitos, letras maiúsculas e minúsculas).
+
+### 📚 Gestão de Acervo (Catálogo)
+* **Busca Híbrida:** Pesquisa de livros por título, autor, categoria ou palavra-chave, unificando resultados do banco de dados local e da **Google Books API**.
+* **Detalhamento:** Exibição rica de capas, descrições, categorias e médias de avaliação.
+* **Painel Administrativo:** Dashboard exclusivo para o admin criar, atualizar e excluir livros e categorias.
+
+### 📖 Área do Leitor e Aluguéis
+* **Perfil do Usuário:** Página dedicada onde o usuário visualiza seus aluguéis e dados da conta.
+* **Sistema de Leitura:** Interface para acessar e ler o livro digitalmente após o aluguel.
+* **Controle de Prazos:** Lógica de negócio que define um prazo de leitura de 15 dias.
+* **Notificações Inteligentes:**
+    * Alerta visual na interface sobre o prazo.
+    * **Envio de e-mail** automático notificando o usuário 3 dias antes da data de devolução.
+
+### ⭐ Avaliações e Social
+* **Sistema de Review:** Usuários podem avaliar livros com notas e comentários.
+* **Cálculo de Média:** O sistema calcula e exibe automaticamente a média das avaliações de cada obra.
+* **Gestão de Comentários:** Liberdade para o usuário editar ou excluir suas próprias avaliações.
 
 ---
 
-## 🛠️ Como rodar o projeto localmente
+## 🧩 Arquitetura e Decisões de Projeto
 
-1. **Clone o repositório:**
+### Integração com Google Books API
+Um dos desafios técnicos foi "hidratar" o nosso banco de dados. Para não dependermos apenas de inserções manuais, o backend busca informações na API do Google quando uma pesquisa é realizada, enriquecendo a experiência do usuário final sem sobrecarregar o banco local desnecessariamente.
+
+### Sistema de Notificações
+A retenção e o cumprimento de prazos são cruciais. Implementamos um *job* no backend que verifica diariamente os prazos de devolução e dispara e-mails preventivos, garantindo que o usuário não perca a data de entrega.
+
+---
+
+## 👥 Autores
+
+Este projeto foi desenvolvido colaborativamente por:
+
+* **Ana Paula** - *Foco: Frontend Architecture, UI/UX (DaisyUI), Integração com API, Funcionalidades de Usuário e Admin*
+* **Lívia** - *Foco: Backend Security, Auth (JWT), Session Management*
+* **Mari** - *Foco: Backend Logic (Books, Google API), Business Rules (Prazos/Notificações)*
+
+---
+
+### Como rodar o projeto
 
 ```bash
-git clone https://github.com/seu-usuario/public-library.git
-cd public-library
+# Clone este repositório
+$ git clone [https://link-do-seu-repositorio.com](https://link-do-seu-repositorio.com)
+
+# Acesse a pasta do projeto no terminal/cmd
+$ cd nome-do-projeto
+
+# Instale as dependências do Frontend
+$ cd frontend
+$ npm install
+
+# Execute a aplicação Frontend
+$ npm start
+
+# O servidor inciará na porta:3000 - acesse <http://localhost:3000>
