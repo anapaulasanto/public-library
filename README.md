@@ -1,6 +1,6 @@
 # 📚 Sistema de Gerenciamento de Biblioteca (Library Management System)
 
- **Status:** Concluído
+![Demonstração da Aplicação](banner.gif)
 
 ## Sobre o Projeto
 
